@@ -30,6 +30,8 @@ jobs:
       - run: pip install -r scraper/requirements.txt
       - name: Scrape venues
         run: python scraper/scrape.py --out site --debug-dir debug
+      - name: Stamp asset URLs so browsers fetch fresh CSS and JS
+        run: sed -i "s/__VERSION__/${GITHUB_SHA::7}-${GITHUB_RUN_NUMBER}/g" site/index.html
       - name: Keep raw pages for debugging
         if: always()
         uses: actions/upload-artifact@v5

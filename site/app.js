@@ -108,6 +108,7 @@ function renderFilters() {
 
 function renderDayFilters() {
   const nav = document.getElementById("day-filters");
+  if (!nav) return;
   nav.replaceChildren();
   for (const d of WEEKDAYS) {
     const btn = el("button", { type: "button", "aria-pressed": String(activeDays.has(d)) }, d);
