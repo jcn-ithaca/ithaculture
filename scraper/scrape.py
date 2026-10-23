@@ -37,6 +37,7 @@ MONTHS = {m: i for i, m in enumerate(
      "jul", "aug", "sep", "oct", "nov", "dec"], start=1)}
 
 DEBUG_DIR = None
+DIAG = []
 
 
 def now():
@@ -353,12 +354,12 @@ def scrape_state():
     horizon = today + dt.timedelta(days=DAYS_AHEAD)
     # TEMP diagnostics
     tix = [a for a in soup.find_all("a", href=True) if "tixr" in a["href"]]
-    print(f"  state: {len(tix)} tixr links", file=sys.stderr)
+    DIAG.append(f"state: {len(tix)} tixr links")
     for a in tix[:6]:
-        print(f"  state link: {a['href']!r} text={a.get_text(' ', strip=True)[:60]!r}", file=sys.stderr)
+        DIAG.append(f"state link: {a['href']!r} text={a.get_text(' ', strip=True)[:60]!r}")
     if tix:
         strs = [" ".join(x.split()) for x in tix[0].find_all_next(string=True, limit=80)]
-        print("  state strings: " + repr([x for x in strs if x][:40]), file=sys.stderr)
+        DIAG.append("state strings: " + repr([x for x in strs if x][:40]))
     titles = []
     for a in soup.find_all("a", href=True):
         text = a.get_text(" ", strip=True)
@@ -480,6 +481,8 @@ def main():
     for e in events:
         print(f"  {e['start'][:16]}  {e['venue']:<20}  {e['title']}")
     print(f"wrote {len(events)} events")
+    for line in DIAG:
+        print("DIAG " + line)
     if not any(v["ok"] for v in venues):
         sys.exit("every venue failed")
 
