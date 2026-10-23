@@ -14,6 +14,7 @@ websites every morning and published at
 | Cinemapolis | Today's showtimes from https://www.cinemapolis.org/now-showing |
 | Hangar Theatre | The Events Calendar REST API at https://hangartheatre.org/wp-json/tribe/events/v1/events |
 | State Theatre | Event list on https://stateofithaca.org/events/ (titles link to Tixr) |
+| Buffalo Street Books | Paged list at https://buffalostreetbooks.com/upcoming-events |
 
 ## How it works
 
