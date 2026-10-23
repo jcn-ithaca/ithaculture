@@ -43,10 +43,18 @@ def now():
     return dt.datetime.now(TZ)
 
 
-def fetch(url, name=None, attempts=3):
+BROWSER_HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/130.0 Safari/537.36"),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+
+def fetch(url, name=None, attempts=3, headers=None):
     for i in range(attempts):
         try:
-            r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
+            r = requests.get(url, headers=headers or {"User-Agent": UA}, timeout=30)
             r.raise_for_status()
             break
         except requests.RequestException:
@@ -416,7 +424,9 @@ def scrape_bsb():
     horizon = today + dt.timedelta(days=DAYS_AHEAD)
     found = {}
     for page in range(10):
-        soup = BeautifulSoup(fetch(f"{BSB_URL}?page={page}", f"bsb-{page}.html").text, "html.parser")
+        # The site's firewall rejects non-browser user agents.
+        url = BSB_URL if page == 0 else f"{BSB_URL}?page={page}"
+        soup = BeautifulSoup(fetch(url, f"bsb-{page}.html", headers=BROWSER_HEADERS).text, "html.parser")
         links = [a for a in soup.find_all("a", href=True)
                  if BSB_EVENT_RE.search(a["href"]) and a.get_text(strip=True)]
         hrefs = {a["href"] for a in links}
