@@ -92,13 +92,20 @@ function render() {
   }
 }
 
+function venueLink(name) {
+  const v = data.venues.find((x) => x.name === name);
+  return v
+    ? el("a", { class: "venue", href: v.url, target: "_blank", rel: "noopener" }, name)
+    : el("span", { class: "venue" }, name);
+}
+
 function eventCard(e) {
   const title = e.url ? el("a", { href: e.url, target: "_blank", rel: "noopener" }, e.title) : e.title;
   return el("article", { class: "ev", style: venueStyle(e.venue) },
     el("div", { class: "time" }, e.all_day ? "All day" : timeLabel(e.startDate)),
     el("div", { class: "title" }, title),
     el("div", { class: "meta" },
-      el("span", { class: "venue" }, e.venue),
+      venueLink(e.venue),
       e.description ? ` · ${e.description}` : null));
 }
 

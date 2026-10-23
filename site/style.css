@@ -71,6 +71,8 @@ a { color: inherit; }
 .ev .title a:hover { text-decoration: underline; }
 .ev .meta { grid-column: 2; font-size: 0.9rem; color: var(--muted); }
 .ev .venue { color: var(--venue); font-weight: 600; }
+a.venue { text-decoration: none; }
+a.venue:hover { text-decoration: underline; }
 .films .title { font-weight: 600; }
 .films .times { font-variant-numeric: tabular-nums; }
 .empty { color: var(--muted); }
