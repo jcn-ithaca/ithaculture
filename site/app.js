@@ -4,6 +4,7 @@ const VENUE_COLORS = {
   "K-HOUSE": "--v-khouse",
   "Cinemapolis": "--v-cinema",
   "Hangar Theatre": "--v-hangar",
+  "State Theatre": "--v-state",
 };
 const TZ = "America/New_York";
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

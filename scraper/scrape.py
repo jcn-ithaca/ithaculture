@@ -337,12 +337,68 @@ def scrape_hangar():
     return out
 
 
+# --- State Theatre ----------------------------------------------------------
+
+STATE_URL = "https://stateofithaca.org/events/"
+STATE_TIX = "tixr.com/groups/stateofithaca/events/"
+MONTH_DAY_RE = re.compile(r"^\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\.?\s+(\d{1,2})\s*$")
+
+
+def scrape_state():
+    """The events page is a hand-built Elementor list. Each event has a title
+    linking to its Tixr page, then a 'Nov 09' date line and a line like
+    'All Ages  Doors: 7:00 PM | Show: 8:00 PM'. Years are omitted."""
+    soup = BeautifulSoup(fetch(STATE_URL, "state.html").text, "html.parser")
+    today = now().date()
+    horizon = today + dt.timedelta(days=DAYS_AHEAD)
+    titles = []
+    for a in soup.find_all("a", href=True):
+        text = a.get_text(" ", strip=True)
+        if STATE_TIX in a["href"] and text and text.upper() not in {"TICKETS", "BUY TICKETS"}:
+            if not titles or titles[-1][0] != a["href"]:
+                titles.append((a["href"], text, a))
+    if not titles:
+        raise RuntimeError("no Tixr event links found on the events page")
+    hrefs = {h for h, _, _ in titles}
+    out = []
+    for href, title, a in titles:
+        date = doors = show = None
+        extra = []
+        for s in a.find_all_next(string=True, limit=60):
+            parent = s.find_parent("a", href=True)
+            if parent is not None and parent["href"] in hrefs and parent["href"] != href:
+                break  # reached the next event
+            text = " ".join(s.split())
+            if not text or text == title:
+                continue
+            m = MONTH_DAY_RE.match(text)
+            if m and date is None:
+                date = infer_year(MONTHS[m.group(1).lower()], int(m.group(2)), today)
+                continue
+            if "Show:" in text and show is None:
+                show = parse_clock(text.split("Show:", 1)[1])
+            if "Doors:" in text and doors is None:
+                doors = parse_clock(text.split("Doors:", 1)[1].split("|")[0])
+            if text.lower().startswith("with ") and len(extra) < 1:
+                extra.append(text)
+        if date is None or not (today <= date <= horizon):
+            continue
+        clock = show or doors or (20, 0)
+        start = dt.datetime.combine(date, dt.time(*clock), TZ)
+        if doors and show:
+            extra.append(f"Doors {dt.time(*doors):%-I:%M %p}")
+        out.append(event("State Theatre", title, start, url=href,
+                         description=" · ".join(extra)))
+    return out
+
+
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
     ("Liquid State Brewing", LIQUID_URL, scrape_liquid),
     ("K-HOUSE", KHOUSE_URL, scrape_khouse),
     ("Cinemapolis", CINEMAPOLIS_URL, scrape_cinemapolis),
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
+    ("State Theatre", STATE_URL, scrape_state),
 ]
 
 
