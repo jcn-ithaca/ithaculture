@@ -15,6 +15,7 @@ import json
 import pathlib
 import re
 import sys
+import time
 import traceback
 from zoneinfo import ZoneInfo
 
@@ -24,6 +25,7 @@ import requests
 from bs4 import BeautifulSoup
 
 TZ = ZoneInfo("America/New_York")
+PUBLISHED_JSON = "https://jcn-ithaca.github.io/ithaculture/events.json"
 DAYS_AHEAD = 42
 UA = (
     "Mozilla/5.0 (compatible; ithaculture/1.0; "
@@ -41,9 +43,16 @@ def now():
     return dt.datetime.now(TZ)
 
 
-def fetch(url, name=None):
-    r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
-    r.raise_for_status()
+def fetch(url, name=None, attempts=3):
+    for i in range(attempts):
+        try:
+            r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
+            r.raise_for_status()
+            break
+        except requests.RequestException:
+            if i == attempts - 1:
+                raise
+            time.sleep(5 * (i + 1))
     if DEBUG_DIR and name:
         (DEBUG_DIR / name).write_bytes(r.content)
     return r
@@ -376,6 +385,7 @@ def main():
         DEBUG_DIR.mkdir(parents=True, exist_ok=True)
 
     events, venues = [], []
+    previous = None
     for name, url, fn in VENUES:
         try:
             found = fn()
@@ -386,6 +396,15 @@ def main():
             traceback.print_exc()
             venues.append({"name": name, "url": url, "ok": False, "error": str(e)})
             print(f"{name}: FAILED ({e})")
+            # Keep the venue's last published listings rather than dropping it.
+            if previous is None:
+                try:
+                    previous = requests.get(PUBLISHED_JSON, timeout=30).json()
+                except Exception:
+                    previous = {}
+            kept = [ev for ev in previous.get("events", []) if ev["venue"] == name]
+            events.extend(kept)
+            print(f"{name}: kept {len(kept)} events from the last published run")
 
     today = now().date()
     events = [e for e in events if dt.datetime.fromisoformat(e["start"]).date() >= today]
