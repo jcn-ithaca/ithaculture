@@ -43,18 +43,10 @@ def now():
     return dt.datetime.now(TZ)
 
 
-BROWSER_HEADERS = {
-    "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-                   "(KHTML, like Gecko) Chrome/130.0 Safari/537.36"),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9",
-}
-
-
-def fetch(url, name=None, attempts=3, headers=None):
+def fetch(url, name=None, attempts=3):
     for i in range(attempts):
         try:
-            r = requests.get(url, headers=headers or {"User-Agent": UA}, timeout=30)
+            r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
             r.raise_for_status()
             break
         except requests.RequestException:
@@ -408,61 +400,6 @@ def scrape_state():
     return out
 
 
-# --- Buffalo Street Books ---------------------------------------------------
-
-BSB_URL = "https://buffalostreetbooks.com/upcoming-events"
-BSB_EVENT_RE = re.compile(r"/event/(\d{4})-(\d{2})-(\d{2})/[^/?#]+")
-BSB_TIME_RE = re.compile(r"Time:\s*(\d{1,2}:\d{2}\s*[ap]m)(?:\s*-\s*(\d{1,2}:\d{2}\s*[ap]m))?", re.I)
-
-
-def scrape_bsb():
-    """IndieCommerce (Drupal) list, paged with ?page=N. Each event links to
-    /event/YYYY-MM-DD/slug and is followed by 'Date: Fri, 10/23/2026' and
-    'Time: 4:30pm' or 'Time: 11:00am - 5:00pm'. A sidebar teaser repeats the
-    next event without a Date: label, so only blocks with 'Date:' count."""
-    today = now().date()
-    horizon = today + dt.timedelta(days=DAYS_AHEAD)
-    found = {}
-    for page in range(10):
-        # The site's firewall rejects non-browser user agents.
-        url = BSB_URL if page == 0 else f"{BSB_URL}?page={page}"
-        soup = BeautifulSoup(fetch(url, f"bsb-{page}.html", headers=BROWSER_HEADERS).text, "html.parser")
-        links = [a for a in soup.find_all("a", href=True)
-                 if BSB_EVENT_RE.search(a["href"]) and a.get_text(strip=True)]
-        hrefs = {a["href"] for a in links}
-        new = 0
-        for a in links:
-            url = requests.compat.urljoin(BSB_URL, a["href"])
-            if url in found:
-                continue
-            parts = []
-            for t in a.find_all_next(string=True, limit=40):
-                parent = t.find_parent("a", href=True)
-                if parent is not None and parent["href"] in hrefs and parent["href"] != a["href"]:
-                    break
-                parts.append(" ".join(t.split()))
-            block = " ".join(x for x in parts if x)
-            if "Date:" not in block:
-                continue
-            y, mo, d = map(int, BSB_EVENT_RE.search(a["href"]).groups())
-            found[url] = (a.get_text(" ", strip=True), dt.date(y, mo, d), BSB_TIME_RE.search(block))
-            new += 1
-        if not new or not soup.find("a", attrs={"rel": "next"}) and not soup.select_one("li.pager__item--next a"):
-            break
-    if not found:
-        raise RuntimeError("no dated events found on the upcoming-events pages")
-    out = []
-    for url, (title, d, m) in found.items():
-        if not (today <= d <= horizon):
-            continue
-        start = dt.datetime.combine(d, dt.time(*(parse_clock(m.group(1)) if m else (0, 0))), TZ)
-        end = None
-        if m and m.group(2):
-            end = dt.datetime.combine(d, dt.time(*parse_clock(m.group(2))), TZ)
-        out.append(event("Buffalo Street Books", title, start, end=end, all_day=not m, url=url))
-    return out
-
-
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
     ("Liquid State Brewing", LIQUID_URL, scrape_liquid),
@@ -470,9 +407,6 @@ VENUES = [
     ("Cinemapolis", CINEMAPOLIS_URL, scrape_cinemapolis),
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
     ("State Theatre", STATE_URL, scrape_state),
-    # Buffalo Street Books 403s requests from GitHub's runners (and other cloud
-    # IPs), so scrape_bsb is parked until there's a way to reach it.
-    # ("Buffalo Street Books", BSB_URL, scrape_bsb),
 ]
 
 

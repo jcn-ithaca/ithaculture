@@ -12,7 +12,6 @@
   --v-cinema: #b5482a;
   --v-hangar: #8a6d00;
   --v-state: #6a3fb5;
-  --v-bsb: #a3324f;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -29,7 +28,6 @@
     --v-cinema: #ff8a65;
     --v-hangar: #e6c25a;
     --v-state: #b79cff;
-    --v-bsb: #f28aa4;
   }
 }
 * { box-sizing: border-box; }
