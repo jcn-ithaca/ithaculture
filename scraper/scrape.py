@@ -470,7 +470,9 @@ VENUES = [
     ("Cinemapolis", CINEMAPOLIS_URL, scrape_cinemapolis),
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
     ("State Theatre", STATE_URL, scrape_state),
-    ("Buffalo Street Books", BSB_URL, scrape_bsb),
+    # Buffalo Street Books 403s requests from GitHub's runners (and other cloud
+    # IPs), so scrape_bsb is parked until there's a way to reach it.
+    # ("Buffalo Street Books", BSB_URL, scrape_bsb),
 ]
 
 
