@@ -224,7 +224,10 @@ def scrape_khouse():
         else:
             start = s.astimezone(TZ)
             end = en.astimezone(TZ) if isinstance(en, dt.datetime) else None
-        out.append(event("K-HOUSE", str(e.get("SUMMARY", "Untitled")), start,
+        summary = str(e.get("SUMMARY", "Untitled"))
+        if summary.lower().startswith("private"):
+            continue
+        out.append(event("K-HOUSE", summary, start,
                          end=end, all_day=all_day, url=KHOUSE_URL,
                          description=str(e.get("DESCRIPTION", ""))))
     return out
@@ -235,16 +238,28 @@ def scrape_khouse():
 CINEMAPOLIS_URL = "https://www.cinemapolis.org/now-showing"
 
 
+def film_title(texts):
+    """Film links read like 'PRIMETIME — FINAL WEEK! -' or 'Primetime'.
+    Prefer a mixed-case version and drop promo suffixes."""
+    texts = [re.split(r"\s+[—–]\s+", t)[0].strip(" -–—") for t in texts]
+    texts = [t for t in texts if t]
+    mixed = [t for t in texts if not t.isupper()]
+    if mixed:
+        return mixed[0]
+    return texts[0].title().replace("'S ", "'s ").replace("’S ", "’s ") if texts else ""
+
+
 def scrape_cinemapolis():
     """The now-showing page lists today's showtimes as checkout links:
     /checkout/showing/<film-slug>/<id>/ with text like '8:00PM'."""
     soup = BeautifulSoup(fetch(CINEMAPOLIS_URL, "cinemapolis.html").text, "html.parser")
-    titles = {}
+    names = {}
     for a in soup.find_all("a", href=re.compile(r"/movie/[^/]+/?")):
         slug = re.search(r"/movie/([^/]+)", a["href"]).group(1)
         text = a.get_text(" ", strip=True)
-        if text and slug not in titles:
-            titles[slug] = text
+        if text:
+            names.setdefault(slug, []).append(text)
+    titles = {slug: film_title(texts) for slug, texts in names.items()}
     today = now().date()
     out, seen = [], set()
     for a in soup.find_all("a", href=re.compile(r"/checkout/showing/[^/]+/\d+")):
