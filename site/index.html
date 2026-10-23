@@ -11,14 +11,20 @@
 <header>
   <h1>Ithaculture</h1>
   <p class="tagline">What's on in Ithaca, gathered from venue websites every morning.</p>
-  <nav class="filters" id="filters" aria-label="Filter by venue"></nav>
-  <nav class="filters days" id="day-filters" aria-label="Filter by day of the week"></nav>
-  <p class="actions">
-    <a href="ithaculture.ics">Subscribe (.ics)</a>
-    <span id="updated"></span>
-  </p>
 </header>
-<main id="agenda"><p class="empty">Loading events…</p></main>
+<div class="layout">
+  <aside class="panel">
+    <h2 class="panel-label">Venues</h2>
+    <nav class="filters" id="filters" aria-label="Filter by venue"></nav>
+    <h2 class="panel-label">Days</h2>
+    <nav class="filters days" id="day-filters" aria-label="Filter by day of the week"></nav>
+    <p class="actions">
+      <a href="ithaculture.ics">Subscribe (.ics)</a>
+      <span id="updated"></span>
+    </p>
+  </aside>
+  <main id="agenda"><p class="empty">Loading events…</p></main>
+</div>
 <footer>
   <p id="sources"></p>
   <p>Listings are copied automatically and may change; check the venue before you go.
