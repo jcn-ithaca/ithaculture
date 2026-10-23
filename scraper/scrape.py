@@ -292,7 +292,8 @@ def scrape_hangar():
     times only in the description."""
     today = now().date()
     horizon = today + dt.timedelta(days=DAYS_AHEAD)
-    url = f"{HANGAR_API}?per_page=50&start_date={today.isoformat()}&end_date={horizon.isoformat()}"
+    # No end_date: the API drops events that end after it, which hides long runs.
+    url = f"{HANGAR_API}?per_page=50&start_date={today.isoformat()}"
     items, page = [], 1
     while url:
         data = fetch(url, f"hangar-{page}.json").json()
@@ -305,6 +306,8 @@ def scrape_hangar():
         desc = BeautifulSoup(e.get("description") or "", "html.parser").get_text(" ")
         start = dt.datetime.fromisoformat(e["start_date"]).replace(tzinfo=TZ)
         end = dt.datetime.fromisoformat(e["end_date"]).replace(tzinfo=TZ)
+        if start.date() > horizon:
+            continue
         if not e.get("all_day"):
             out.append(event("Hangar Theatre", title, start,
                              end=end if end > start else None,
