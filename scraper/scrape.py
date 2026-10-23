@@ -351,6 +351,14 @@ def scrape_state():
     soup = BeautifulSoup(fetch(STATE_URL, "state.html").text, "html.parser")
     today = now().date()
     horizon = today + dt.timedelta(days=DAYS_AHEAD)
+    # TEMP diagnostics
+    tix = [a for a in soup.find_all("a", href=True) if "tixr" in a["href"]]
+    print(f"  state: {len(tix)} tixr links", file=sys.stderr)
+    for a in tix[:6]:
+        print(f"  state link: {a['href']!r} text={a.get_text(' ', strip=True)[:60]!r}", file=sys.stderr)
+    if tix:
+        strs = [" ".join(x.split()) for x in tix[0].find_all_next(string=True, limit=80)]
+        print("  state strings: " + repr([x for x in strs if x][:40]), file=sys.stderr)
     titles = []
     for a in soup.find_all("a", href=True):
         text = a.get_text(" ", strip=True)
