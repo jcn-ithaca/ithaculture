@@ -30,6 +30,30 @@ function venueStyle(name) {
   return v ? `--venue: var(${v})` : "";
 }
 
+// Filter choices are remembered per browser. We store what the visitor hid,
+// so a newly added venue shows up by default.
+const STORE_KEY = "ithaculture.filters";
+
+function loadHidden() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+    return { venues: saved.venues || [], days: saved.days || [] };
+  } catch {
+    return { venues: [], days: [] };
+  }
+}
+
+function saveHidden() {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify({
+      venues: data.venues.map((v) => v.name).filter((n) => !active.has(n)),
+      days: WEEKDAYS.filter((d) => !activeDays.has(d)),
+    }));
+  } catch {
+    // Storage blocked (private mode etc.): filters still work for this visit.
+  }
+}
+
 let data = null;
 let active = new Set();
 let activeDays = new Set(WEEKDAYS);
@@ -100,6 +124,7 @@ function renderFilters() {
     const btn = el("button", { type: "button", "aria-pressed": String(active.has(v.name)), style: venueStyle(v.name) }, v.name);
     btn.addEventListener("click", () => {
       active.has(v.name) ? active.delete(v.name) : active.add(v.name);
+      saveHidden();
       renderFilters();
       render();
     });
@@ -115,6 +140,7 @@ function renderDayFilters() {
     const btn = el("button", { type: "button", "aria-pressed": String(activeDays.has(d)) }, d);
     btn.addEventListener("click", () => {
       activeDays.has(d) ? activeDays.delete(d) : activeDays.add(d);
+      saveHidden();
       renderDayFilters();
       render();
     });
@@ -139,7 +165,9 @@ fetch("events.json", { cache: "no-cache" })
   .then((r) => r.json())
   .then((json) => {
     data = json;
-    active = new Set(data.venues.map((v) => v.name));
+    const hidden = loadHidden();
+    active = new Set(data.venues.map((v) => v.name).filter((n) => !hidden.venues.includes(n)));
+    activeDays = new Set(WEEKDAYS.filter((d) => !hidden.days.includes(d)));
     renderFilters();
     renderDayFilters();
     renderMeta();
