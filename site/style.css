@@ -45,6 +45,8 @@ a { color: inherit; }
   border: 1px solid var(--line); background: var(--card); color: var(--fg);
   cursor: pointer;
 }
+.filters.days { margin-top: 8px; gap: 6px; }
+.filters.days button { padding: 4px 10px; }
 .filters button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .actions { font-size: 0.9rem; color: var(--muted); display: flex; gap: 16px; flex-wrap: wrap; }
 .day { margin: 24px 0; }

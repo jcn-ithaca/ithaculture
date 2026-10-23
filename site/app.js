@@ -5,7 +5,9 @@ const VENUE_COLORS = {
   "Cinemapolis": "--v-cinema",
 };
 const TZ = "America/New_York";
+const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+const weekday = (d) => d.toLocaleDateString("en-US", { timeZone: TZ, weekday: "short" });
 const dayKey = (d) => d.toLocaleDateString("en-CA", { timeZone: TZ });
 const dayLabel = (d) =>
   d.toLocaleDateString("en-US", { timeZone: TZ, weekday: "long", month: "long", day: "numeric" });
@@ -29,13 +31,14 @@ function venueStyle(name) {
 
 let data = null;
 let active = new Set();
+let activeDays = new Set(WEEKDAYS);
 
 function render() {
   const main = document.getElementById("agenda");
   main.replaceChildren();
-  const events = data.events.filter((e) => active.has(e.venue));
+  const events = data.events.filter((e) => active.has(e.venue) && activeDays.has(weekday(new Date(e.start))));
   if (!events.length) {
-    main.append(el("p", { class: "empty" }, "No upcoming events for the selected venues."));
+    main.append(el("p", { class: "empty" }, "No upcoming events for the selected venues and days."));
     return;
   }
   const days = new Map();
@@ -46,7 +49,7 @@ function render() {
     days.get(key).items.push({ ...e, startDate: start });
   }
   for (const { date, items } of days.values()) {
-    const wd = date.toLocaleDateString("en-US", { timeZone: TZ, weekday: "short" });
+    const wd = weekday(date);
     const section = el("section", { class: "day" + (["Fri", "Sat", "Sun"].includes(wd) ? " weekend" : "") },
       el("h2", {}, dayLabel(date)));
     // Films are grouped into one card per title so a day isn't swamped by showtimes.
@@ -103,6 +106,20 @@ function renderFilters() {
   }
 }
 
+function renderDayFilters() {
+  const nav = document.getElementById("day-filters");
+  nav.replaceChildren();
+  for (const d of WEEKDAYS) {
+    const btn = el("button", { type: "button", "aria-pressed": String(activeDays.has(d)) }, d);
+    btn.addEventListener("click", () => {
+      activeDays.has(d) ? activeDays.delete(d) : activeDays.add(d);
+      renderDayFilters();
+      render();
+    });
+    nav.append(btn);
+  }
+}
+
 function renderMeta() {
   const updated = new Date(data.generated_at);
   document.getElementById("updated").textContent =
@@ -122,6 +139,7 @@ fetch("events.json", { cache: "no-cache" })
     data = json;
     active = new Set(data.venues.map((v) => v.name));
     renderFilters();
+    renderDayFilters();
     renderMeta();
     render();
   })
