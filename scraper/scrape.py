@@ -329,6 +329,8 @@ def main():
             "venues": venues, "events": events}
     (out_dir / "events.json").write_text(json.dumps(data, indent=1))
     write_ics(events, out_dir / "ithaculture.ics")
+    for e in events:
+        print(f"  {e['start'][:16]}  {e['venue']:<20}  {e['title']}")
     print(f"wrote {len(events)} events")
     if not any(v["ok"] for v in venues):
         sys.exit("every venue failed")
