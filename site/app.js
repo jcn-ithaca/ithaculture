@@ -3,6 +3,7 @@ const VENUE_COLORS = {
   "Liquid State Brewing": "--v-liquid",
   "K-HOUSE": "--v-khouse",
   "Cinemapolis": "--v-cinema",
+  "Hangar Theatre": "--v-hangar",
 };
 const TZ = "America/New_York";
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

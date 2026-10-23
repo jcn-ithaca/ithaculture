@@ -12,6 +12,7 @@ websites every morning and published at
 | Liquid State Brewing | https://www.liquidstatebeer.com/upcoming-events, with start times from each event page |
 | K-HOUSE Karaoke & Arts Hub | The venue's public Google Calendar feed |
 | Cinemapolis | Today's showtimes from https://www.cinemapolis.org/now-showing |
+| Hangar Theatre | The Events Calendar REST API at https://hangartheatre.org/wp-json/tribe/events/v1/events |
 
 ## How it works
 

@@ -10,6 +10,7 @@ Usage: python scraper/scrape.py [--out site] [--debug-dir debug]
 import argparse
 import datetime as dt
 import hashlib
+import html
 import json
 import pathlib
 import re
@@ -279,11 +280,57 @@ def scrape_cinemapolis():
     return out
 
 
+# --- Hangar Theatre ---------------------------------------------------------
+
+HANGAR_URL = "https://hangartheatre.org/buy-tickets/"
+HANGAR_API = "https://hangartheatre.org/wp-json/tribe/events/v1/events"
+
+
+def scrape_hangar():
+    """The site runs The Events Calendar, whose REST API returns structured
+    events. Multi-day shows come back as all-day ranges with performance
+    times only in the description."""
+    today = now().date()
+    horizon = today + dt.timedelta(days=DAYS_AHEAD)
+    url = f"{HANGAR_API}?per_page=50&start_date={today.isoformat()}&end_date={horizon.isoformat()}"
+    items, page = [], 1
+    while url:
+        data = fetch(url, f"hangar-{page}.json").json()
+        items.extend(data.get("events", []))
+        url = data.get("next_rest_url")
+        page += 1
+    out = []
+    for e in items:
+        title = html.unescape(e["title"])
+        desc = BeautifulSoup(e.get("description") or "", "html.parser").get_text(" ")
+        start = dt.datetime.fromisoformat(e["start_date"]).replace(tzinfo=TZ)
+        end = dt.datetime.fromisoformat(e["end_date"]).replace(tzinfo=TZ)
+        if not e.get("all_day"):
+            out.append(event("Hangar Theatre", title, start,
+                             end=end if end > start else None,
+                             url=e.get("url"), description=desc))
+            continue
+        days = (end.date() - start.date()).days + 1
+        if days <= 7:
+            # Short runs: list the show on each day it plays.
+            for i in range(days):
+                d = dt.datetime.combine(start.date() + dt.timedelta(i), dt.time(0, 0), TZ)
+                out.append(event("Hangar Theatre", title, d, all_day=True,
+                                 url=e.get("url"), description=desc))
+        else:
+            # Long runs (classes, residencies): one entry on the first day.
+            span = f"Runs {start:%b %-d} – {end:%b %-d}. "
+            out.append(event("Hangar Theatre", title, start, all_day=True,
+                             url=e.get("url"), description=span + desc))
+    return out
+
+
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
     ("Liquid State Brewing", LIQUID_URL, scrape_liquid),
     ("K-HOUSE", KHOUSE_URL, scrape_khouse),
     ("Cinemapolis", CINEMAPOLIS_URL, scrape_cinemapolis),
+    ("Hangar Theatre", HANGAR_URL, scrape_hangar),
 ]
 
 

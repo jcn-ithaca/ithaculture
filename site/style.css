@@ -10,6 +10,7 @@
   --v-liquid: #2a5db5;
   --v-khouse: #a03ca0;
   --v-cinema: #b5482a;
+  --v-hangar: #8a6d00;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -24,6 +25,7 @@
     --v-liquid: #7fa8ff;
     --v-khouse: #e08ae0;
     --v-cinema: #ff8a65;
+    --v-hangar: #e6c25a;
   }
 }
 * { box-sizing: border-box; }
