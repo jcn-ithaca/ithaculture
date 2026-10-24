@@ -17,6 +17,7 @@ import re
 import sys
 import time
 import traceback
+import xml.etree.ElementTree as ET
 from zoneinfo import ZoneInfo
 
 import icalendar
@@ -399,6 +400,61 @@ def scrape_state():
         raise RuntimeError(f"found {len(titles)} events but could not read any dates")
     return out
 
+VISIT_URL = "https://www.visitithaca.com/events/live-music/"
+VISIT_RSS = "https://www.visitithaca.com/event/rss/"
+# Visit Ithaca's events API refuses GitHub's servers, but its RSS feed works.
+# The feed only covers today and tomorrow, so that's all this source can show.
+# Venues we already scrape directly are skipped to avoid duplicates.
+VISIT_SKIP = ("bike bar", "liquid state", "k-house", "khouse", "cinemapolis",
+              "hangar", "state theatre", "state theater", "state of ithaca")
+
+
+def visit_detail(url):
+    """Pull the venue and start time out of the JSON an event page logs."""
+    page = fetch(url).text
+    m = re.search(r'console\.log\((\{"_id".*?\})\);', page, re.S)
+    data = {}
+    if m:
+        try:
+            data = json.loads(m.group(1))
+        except ValueError:
+            pass
+    if not data:
+        for key in ("location", "startTime", "endTime"):
+            km = re.search(rf'"{key}":"([^"]*)"', page)
+            if km:
+                data[key] = km.group(1)
+    return data
+
+
+def scrape_visitithaca():
+    root = ET.fromstring(fetch(VISIT_RSS, "visitithaca.xml").content)
+    items = root.findall("./channel/item")
+    if not items:
+        raise ValueError("RSS feed had no items")
+    out = []
+    for item in items:
+        cats = [" ".join(html.unescape(c.text or "").split()) for c in item.findall("category")]
+        if "Live Music" not in cats:
+            continue
+        title = html.unescape(item.findtext("title") or "")
+        url = item.findtext("link")
+        day = dt.datetime.strptime(item.findtext("pubDate")[:16], "%a, %d %b %Y").date()
+        time.sleep(2)  # robots.txt asks for a 2 second crawl delay
+        info = visit_detail(url)
+        where = " ".join((info.get("location") or "").split())
+        if any(k in f"{where} {title}".lower() for k in VISIT_SKIP):
+            continue
+        st = info.get("startTime")
+        if st:
+            h, mi = map(int, st.split(":")[:2])
+            start = dt.datetime.combine(day, dt.time(h, mi), TZ)
+            out.append(event("Visit Ithaca", title, start, url=url, description=f"at {where}" if where else ""))
+        else:
+            out.append(event("Visit Ithaca", title, dt.datetime.combine(day, dt.time(0), TZ),
+                             all_day=True, url=url, description=f"at {where}" if where else ""))
+    return out
+
 
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
@@ -407,6 +463,7 @@ VENUES = [
     ("Cinemapolis", CINEMAPOLIS_URL, scrape_cinemapolis),
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
     ("State Theatre", STATE_URL, scrape_state),
+    ("Visit Ithaca", VISIT_URL, scrape_visitithaca),
 ]
 
 
@@ -472,6 +529,11 @@ def main():
 
     today = now().date()
     events = [e for e in events if dt.datetime.fromisoformat(e["start"]).date() >= today]
+    # Drop Visit Ithaca listings that a venue scraper already found that day.
+    norm = lambda t: re.sub(r"[^a-z0-9]", "", t.lower())
+    seen = {(e["start"][:10], norm(e["title"])) for e in events if e["venue"] != "Visit Ithaca"}
+    events = [e for e in events
+              if e["venue"] != "Visit Ithaca" or (e["start"][:10], norm(e["title"])) not in seen]
     events.sort(key=lambda e: (e["start"], e["venue"], e["title"]))
     data = {"generated_at": now().isoformat(timespec="seconds"),
             "venues": venues, "events": events}

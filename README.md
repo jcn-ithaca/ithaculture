@@ -14,6 +14,7 @@ websites every morning and published at
 | Cinemapolis | Today's showtimes from https://www.cinemapolis.org/now-showing |
 | Hangar Theatre | The Events Calendar REST API at https://hangartheatre.org/wp-json/tribe/events/v1/events |
 | State Theatre | Event list on https://stateofithaca.org/events/ (titles link to Tixr) |
+| Visit Ithaca | Live Music items in the RSS feed at https://www.visitithaca.com/event/rss/ (covers only today and tomorrow; venue and time come from each event page; venues above are skipped) |
 
 ## How it works
 
