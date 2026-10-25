@@ -1,10 +1,15 @@
 import re, requests
 s = requests.Session(); s.headers.update({"User-Agent": "Mozilla/5.0 (compatible; ithaculture/1.0; +https://jcn-ithaca.github.io/ithaculture/)"})
-p = s.get("https://www.cinemapolis.org/now-showing", timeout=30).text
-print("len", len(p))
-for pat in [r"(?i)data-date[^>]{0,200}", r"(?i)<(?:button|a)[^>]*(?:date|day)[^>]*>.{0,120}", r"(?i)admin-ajax[^\"']{0,200}", r"(?i)wp-json[^\"']{0,150}", r"(?i)ajax[_-]?url[^,;]{0,200}", r"(?i)action\s*[:=]\s*['\"][a-z_]+['\"]", r"(?i)\?date=[^\"']{0,60}", r"(?i)showtimes?[-_]date[^\"' ]{0,80}"]:
-    ms = list(dict.fromkeys(re.findall(pat, p, re.S)))[:8]
-    for m in ms: print("P", pat[:22], "::", re.sub(r"\s+", " ", m)[:300])
-for src in re.findall(r'<script[^>]+src="([^"]+)"', p): print("SCRIPT", src)
-i = p.find("checkout/showing")
-print("AROUND-FIRST-SHOWING", re.sub(r"\s+", " ", p[max(0,i-4000):i+300]))
+base = "https://www.cinemapolis.org"
+p = s.get(base + "/now-showing", timeout=30).text
+srcs = re.findall(r'<script[^>]*\ssrc=["\']?([^"\' >]+)', p)
+print("SRCS", srcs)
+i = p.find("Showtime Quick Selector"); print("QS", re.sub(r"\s+"," ", p[i:i+300]))
+for src in srcs:
+    if "acsb" in src: continue
+    u = requests.compat.urljoin(base + "/", src)
+    js = s.get(u, timeout=30).text
+    print("JS", u, len(js))
+    for pat in [r"graphql[^\"'`]{0,80}", r"[\"'`](/?api/[^\"'`]{0,120})", r"https?://[a-z0-9.-]+/[^\"'`\s]{0,80}", r"showings?By[A-Za-z]*", r"[\"'`][^\"'`]*(?:showing|showtime)[^\"'`]*[\"'`]"]:
+        ms = list(dict.fromkeys(re.findall(pat, js)))[:25]
+        for m in ms: print("  ", pat[:14], "::", m[:200])
