@@ -113,19 +113,30 @@ function eventCard(e) {
       e.description ? ` · ${e.description}` : null));
 }
 
+// One collapsible line per day: the summary counts films and showtimes,
+// and opening it lists each film with its times (each links to tickets).
 function filmCard(films) {
   const list = el("div", { class: "films" });
+  let count = 0;
   for (const [title, shows] of films) {
-    const times = shows.map((s) => timeLabel(s.startDate)).join(", ");
-    list.append(el("div", {}, el("span", { class: "title" }, title), " ",
-      el("span", { class: "times" }, times)));
+    const times = el("span", { class: "times" });
+    shows.forEach((s, i) => {
+      if (i) times.append(", ");
+      times.append(s.url
+        ? el("a", { href: s.url, target: "_blank", rel: "noopener" }, timeLabel(s.startDate))
+        : timeLabel(s.startDate));
+      count++;
+    });
+    list.append(el("div", { class: "film" }, el("span", { class: "title" }, title), " ", times));
   }
-  return el("article", { class: "ev", style: venueStyle("Cinemapolis") },
-    el("div", { class: "time" }, "Films"),
-    list,
-    el("div", { class: "meta" },
-      el("a", { class: "venue", href: "https://www.cinemapolis.org/now-showing", target: "_blank", rel: "noopener" }, "Cinemapolis"),
-      " · today's showtimes"));
+  const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+  return el("details", { class: "ev filmday", style: venueStyle("Cinemapolis") },
+    el("summary", {},
+      el("span", { class: "time" }, "Films"),
+      el("span", { class: "title" }, plural(films.size, "film"), " · ", plural(count, "showtime")),
+      el("span", { class: "meta" },
+        el("a", { class: "venue", href: "https://www.cinemapolis.org/now-showing", target: "_blank", rel: "noopener" }, "Cinemapolis"))),
+    list);
 }
 
 function renderFilters() {

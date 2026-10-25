@@ -260,7 +260,61 @@ def film_title(texts):
     return texts[0].title().replace("'S ", "'s ").replace("’S ", "’s ") if texts else ""
 
 
+CINEMAPOLIS_GQL = "https://www.cinemapolis.org/graphql"
+# The site is an Indy Systems app. Its day buttons call this GraphQL query with
+# the cinema's site and circuit ids (baked into the site's app.js).
+CINEMAPOLIS_HEADERS = {"client-type": "consumer", "site-id": "30", "circuit-id": "31"}
+CINEMAPOLIS_QUERY = "query($d:String){ showingsForDate(date:$d){ data { id time movie { name } } } }"
+CINEMAPOLIS_DAYS = 7
+
+
+def slugify(name):
+    return re.sub(r"[^a-z0-9]+", "-", re.sub(r"['’]", "", name.lower())).strip("-")
+
+
 def scrape_cinemapolis():
+    """Showtimes for the next week from the site's GraphQL API, falling back to
+    today's showtimes on the now-showing page if the API stops answering."""
+    try:
+        return cinemapolis_api()
+    except Exception as e:
+        print(f"Cinemapolis API failed ({e}); using today's page", file=sys.stderr)
+        return cinemapolis_page()
+
+
+def cinemapolis_api():
+    today = now().date()
+    out, seen = [], set()
+    for i in range(CINEMAPOLIS_DAYS):
+        day = (today + dt.timedelta(days=i)).isoformat()
+        for attempt in range(3):
+            try:
+                r = requests.post(CINEMAPOLIS_GQL, timeout=30,
+                                  headers={"User-Agent": UA, **CINEMAPOLIS_HEADERS},
+                                  json={"query": CINEMAPOLIS_QUERY, "variables": {"d": day}})
+                r.raise_for_status()
+                body = r.json()
+                break
+            except (requests.RequestException, ValueError):
+                if attempt == 2:
+                    raise
+                time.sleep(5 * (attempt + 1))
+        if body.get("errors") or not body.get("data"):
+            raise RuntimeError(str(body.get("errors") or body.get("error"))[:200])
+        for s in body["data"]["showingsForDate"]["data"]:
+            if s["id"] in seen:
+                continue
+            seen.add(s["id"])
+            title = s["movie"]["name"]
+            start = dt.datetime.fromisoformat(s["time"].replace("Z", "+00:00")).astimezone(TZ)
+            url = f"https://www.cinemapolis.org/checkout/showing/{slugify(title)}/{s['id']}/"
+            out.append(event("Cinemapolis", title, start, url=url, kind="film"))
+    if not out:
+        raise RuntimeError("API returned no showtimes for the week")
+    return out
+
+
+def cinemapolis_page():
     """The now-showing page lists today's showtimes as checkout links:
     /checkout/showing/<film-slug>/<id>/ with text like '8:00PM'."""
     soup = BeautifulSoup(fetch(CINEMAPOLIS_URL, "cinemapolis.html").text, "html.parser")

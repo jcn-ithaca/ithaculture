@@ -87,11 +87,22 @@ a.venue { text-decoration: none; }
 a.venue:hover { text-decoration: underline; }
 .films .title { font-weight: 600; }
 .films .times { font-variant-numeric: tabular-nums; }
+.films .times a { color: inherit; }
+details.filmday { display: block; }
+details.filmday summary {
+  display: grid; grid-template-columns: 5.5rem 1fr; gap: 4px 12px;
+  cursor: pointer; list-style: none;
+}
+details.filmday summary::-webkit-details-marker { display: none; }
+details.filmday summary .title::after { content: " ▸"; color: var(--muted); }
+details.filmday[open] summary .title::after { content: " ▾"; }
+details.filmday .films { margin: 8px 0 0 calc(5.5rem + 12px); display: grid; gap: 4px; }
 .empty { color: var(--muted); }
 .warn { color: var(--accent); }
 footer { padding-bottom: 40px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: 32px; }
 @media (max-width: 480px) {
-  .ev { grid-template-columns: 4.5rem 1fr; }
+  .ev, details.filmday summary { grid-template-columns: 4.5rem 1fr; }
+  details.filmday .films { margin-left: 0; }
 }
 
 /* Wide screens: filters move into a sticky side panel left of the agenda. */
