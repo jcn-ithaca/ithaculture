@@ -527,7 +527,6 @@ def scrape_trees_up():
     return out
 
 ICG_URL = "https://www.ithacachildrensgarden.org/icg-events/"
-ICG_HOME = "https://www.ithacachildrensgarden.org/"
 # The garden's calendar plugin is empty; each event has its own /portfolio/
 # page with the date typed in, e.g. "October 17, 2026 | 1PM – 4PM".
 ICG_DATE_RE = re.compile(
@@ -535,20 +534,25 @@ ICG_DATE_RE = re.compile(
 
 
 def scrape_icg():
+    # The events page (body plus its Events menu) links every event; the home
+    # page also links news stories, so it isn't used.
     links = []
-    for i, page_url in enumerate([ICG_URL, ICG_HOME]):
-        soup = BeautifulSoup(fetch(page_url, f"icg{i}.html").text, "html.parser")
-        for a in soup.select('a[href*="/portfolio/"]'):
-            href = a["href"].split("#")[0]
-            if href not in links:
-                links.append(href)
+    soup = BeautifulSoup(fetch(ICG_URL, "icg.html").text, "html.parser")
+    for a in soup.select('a[href*="/portfolio/"]'):
+        href = a["href"].split("#")[0]
+        if href not in links:
+            links.append(href)
     if not links:
         raise ValueError("no event pages linked from the events page")
     today = now().date()
     out = []
     for url in links:
         time.sleep(1)
-        soup = BeautifulSoup(fetch(url).text, "html.parser")
+        try:
+            soup = BeautifulSoup(fetch(url).text, "html.parser")
+        except requests.RequestException as e:
+            print(f"Ithaca Children's Garden: skipped {url} ({e})", file=sys.stderr)
+            continue
         h1 = soup.find("h1")
         title = h1.get_text(" ", strip=True) if h1 else (soup.title.string or "").split("–")[0]
         lines = [" ".join(t.split()) for t in soup.get_text("\n").split("\n")]
