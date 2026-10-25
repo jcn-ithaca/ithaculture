@@ -1,10 +1,15 @@
-import re, json, requests, datetime as dt
-s = requests.Session(); s.headers.update({"User-Agent": "Mozilla/5.0 (compatible; ithaculture/1.0; +https://jcn-ithaca.github.io/ithaculture/)"})
+import json, requests, datetime as dt
+s = requests.Session(); s.headers.update({"User-Agent": "Mozilla/5.0 (compatible; ithaculture/1.0; +https://jcn-ithaca.github.io/ithaculture/)", "client-type": "consumer"})
 base = "https://www.cinemapolis.org"
-p = s.get(base + "/now-showing", timeout=30).text
-for m in re.findall(r"<script>(.{0,600}?)</script>", p, re.S)[:6]: print("INLINE", re.sub(r"\s+"," ", m)[:600])
-for m in re.findall(r"<meta[^>]+>", p)[:30]: print("META", m[:200])
-js = s.get(base + "/js/app.ba25aaca.js", timeout=30).text
-for pat in [r"(?i)[\"'](?:x-)?site-?id[\"']", r"(?i)[\"']client-?type[\"']", r"(?i)[\"']circuit-?id[\"']", r"headers:\{[^}]{0,200}", r"siteId:D", r"(?i)getSiteId|currentSiteId|site_id"]:
-    for m in list(re.finditer(pat, js))[:4]:
-        print("JS", pat[:18], "::", js[max(0,m.start()-300):m.start()+300].replace("\n"," ")); print("--")
+d2 = (dt.date.today() + dt.timedelta(days=2)).isoformat()
+def gql(q, v=None, h=None):
+    r = s.post(base + "/graphql", json={"query": q, "variables": v or {}}, headers=h or {}, timeout=30)
+    print("GQL", q[:70], "::", r.status_code, r.text[:900].replace("\n", " ")); print("--")
+    return r
+gql('query($d:String){ showingsForDate(date:$d){ data { id time movie { name } } } }', {"d": d2})
+gql('{ __type(name:"Query"){ fields { name } } }')
+gql('{ configuration { currentSite { id circuitId name } } }')
+gql('{ currentSite { id circuitId name } }')
+gql('{ site { id circuitId name } }')
+gql('{ ShowingList: __type(name:"ShowingList"){ fields { name } } }')
+gql('{ __type(name:"Showing"){ fields { name } } }')
