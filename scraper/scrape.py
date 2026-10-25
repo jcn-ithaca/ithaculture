@@ -455,6 +455,76 @@ def scrape_visitithaca():
                              all_day=True, url=url, description=f"at {where}" if where else ""))
     return out
 
+TUT_URL = "https://www.treesuptompkins.org/get-involved"
+TUT_PAGES = ["https://www.treesuptompkins.org/", TUT_URL]
+# Trees Up Tompkins types its work days as free text on a Wix site, e.g.
+# "Wed. Nov. 11 @ 10 AM" or "Sunday 8/23 @ 10 AM - 12 PM".
+WD = r"\b(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*\.?,?\s+"
+TUT_NAMED_RE = re.compile(WD + r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+(\d{1,2})\b")
+TUT_NUM_RE = re.compile(WD + r"(\d{1,2})/(\d{1,2})\b")
+TUT_AT_RE = re.compile(r"^\s*@\s*(\d{1,2})(?::(\d{2}))?\s*([AaPp]\.?[Mm]\.?)?")
+
+
+def tut_clock(rest):
+    """Read the '@ 10 AM' / '@4:30' / '@ 10-12' after a date; None if no time."""
+    m = TUT_AT_RE.match(rest)
+    if not m:
+        return None, rest
+    hour, minute = int(m.group(1)), int(m.group(2) or 0)
+    if m.group(3):
+        hour = hour % 12 + (12 if m.group(3)[0].lower() == "p" else 0)
+    elif hour < 8:
+        hour += 12  # "@4:30" for a volunteer work day means afternoon
+    rest = rest[m.end():]
+    # Drop an end time such as "- 12 PM" or "-12".
+    rest = re.sub(r"^\s*[-–]\s*\d{1,2}(?::\d{2})?\s*(?:[AaPp]\.?[Mm]\.?)?", "", rest)
+    return (hour, minute), rest
+
+
+def scrape_trees_up():
+    today = now().date()
+    out, seen = [], set()
+    for i, page_url in enumerate(TUT_PAGES):
+        soup = BeautifulSoup(fetch(page_url, f"treesup{i}.html").text, "html.parser")
+        lines = [" ".join(t.split()) for t in soup.get_text("\n").split("\n")]
+        lines = [t for t in lines if t]
+        for n, line in enumerate(lines):
+            m = TUT_NAMED_RE.search(line)
+            if m:
+                month, day = MONTHS[m.group(1).lower()], int(m.group(2))
+            else:
+                m = TUT_NUM_RE.search(line)
+                if not m:
+                    continue
+                month, day = int(m.group(1)), int(m.group(2))
+            try:
+                date = infer_year(month, day, today)
+            except ValueError:
+                continue
+            if not date or date < today:
+                continue
+            clock, rest = tut_clock(line[m.end():])
+            rest = rest.strip(" -–:|")
+            following = []
+            for t in lines[n + 1:n + 4]:
+                if TUT_NAMED_RE.search(t) or TUT_NUM_RE.search(t):
+                    break
+                following.append(t.strip(" -–"))
+            title = rest or (following.pop(0) if following else "Volunteer work day")
+            description = " · ".join(t for t in following[:2] if not t.lower().startswith("click"))
+            key = (date, title.lower())
+            if key in seen:
+                continue
+            seen.add(key)
+            if clock:
+                start = dt.datetime.combine(date, dt.time(*clock), TZ)
+                out.append(event("Trees Up Tompkins", title, start, url=TUT_URL, description=description))
+            else:
+                start = dt.datetime.combine(date, dt.time(0), TZ)
+                out.append(event("Trees Up Tompkins", title, start, all_day=True, url=TUT_URL,
+                                 description=description))
+    return out
+
 
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
@@ -464,6 +534,7 @@ VENUES = [
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
     ("State Theatre", STATE_URL, scrape_state),
     ("Visit Ithaca", VISIT_URL, scrape_visitithaca),
+    ("Trees Up Tompkins", TUT_URL, scrape_trees_up),
 ]
 
 

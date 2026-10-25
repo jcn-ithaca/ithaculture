@@ -6,6 +6,7 @@ const VENUE_COLORS = {
   "Hangar Theatre": "--v-hangar",
   "State Theatre": "--v-state",
   "Visit Ithaca": "--v-visit",
+  "Trees Up Tompkins": "--v-trees",
 };
 const TZ = "America/New_York";
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
