@@ -511,7 +511,8 @@ def scrape_trees_up():
                     break
                 following.append(t.strip(" -–"))
             title = rest or (following.pop(0) if following else "Volunteer work day")
-            description = " · ".join(t for t in following[:2] if not t.lower().startswith("click"))
+            # Wix splits sentences across elements, so rejoin with spaces.
+            description = " ".join(t for t in following[:2] if not t.lower().startswith("click"))
             key = (date, title.lower())
             if key in seen:
                 continue
