@@ -14,6 +14,7 @@
   --v-state: #6a3fb5;
   --v-visit: #1f7a8c;
   --v-trees: #4a7a1f;
+  --v-icg: #c0398a;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -32,6 +33,7 @@
     --v-state: #b79cff;
     --v-visit: #6fd3e0;
     --v-trees: #a6d86f;
+    --v-icg: #f08cc8;
   }
 }
 * { box-sizing: border-box; }

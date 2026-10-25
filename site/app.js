@@ -7,6 +7,7 @@ const VENUE_COLORS = {
   "State Theatre": "--v-state",
   "Visit Ithaca": "--v-visit",
   "Trees Up Tompkins": "--v-trees",
+  "Ithaca Children's Garden": "--v-icg",
 };
 const TZ = "America/New_York";
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

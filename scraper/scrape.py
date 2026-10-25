@@ -526,6 +526,56 @@ def scrape_trees_up():
                                  description=description))
     return out
 
+ICG_URL = "https://www.ithacachildrensgarden.org/icg-events/"
+ICG_HOME = "https://www.ithacachildrensgarden.org/"
+# The garden's calendar plugin is empty; each event has its own /portfolio/
+# page with the date typed in, e.g. "October 17, 2026 | 1PM – 4PM".
+ICG_DATE_RE = re.compile(
+    r"\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+(\d{1,2}),?\s+(20\d\d)\b")
+
+
+def scrape_icg():
+    links = []
+    for i, page_url in enumerate([ICG_URL, ICG_HOME]):
+        soup = BeautifulSoup(fetch(page_url, f"icg{i}.html").text, "html.parser")
+        for a in soup.select('a[href*="/portfolio/"]'):
+            href = a["href"].split("#")[0]
+            if href not in links:
+                links.append(href)
+    if not links:
+        raise ValueError("no event pages linked from the events page")
+    today = now().date()
+    out = []
+    for url in links:
+        time.sleep(1)
+        soup = BeautifulSoup(fetch(url).text, "html.parser")
+        h1 = soup.find("h1")
+        title = h1.get_text(" ", strip=True) if h1 else (soup.title.string or "").split("–")[0]
+        lines = [" ".join(t.split()) for t in soup.get_text("\n").split("\n")]
+        lines = [t for t in lines if t]
+        seen = set()
+        for n, line in enumerate(lines):
+            m = ICG_DATE_RE.search(line)
+            if not m:
+                continue
+            try:
+                date = dt.date(int(m.group(3)), MONTHS[m.group(1).lower()], int(m.group(2)))
+            except ValueError:
+                continue
+            if date < today or date in seen:
+                continue
+            seen.add(date)
+            clock = parse_clock(line[m.end():])
+            if not clock and n + 1 < len(lines) and not ICG_DATE_RE.search(lines[n + 1]):
+                clock = parse_clock(lines[n + 1])
+            if clock:
+                start = dt.datetime.combine(date, dt.time(*clock), TZ)
+                out.append(event("Ithaca Children's Garden", title, start, url=url))
+            else:
+                start = dt.datetime.combine(date, dt.time(0), TZ)
+                out.append(event("Ithaca Children's Garden", title, start, all_day=True, url=url))
+    return out
+
 
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
@@ -536,6 +586,7 @@ VENUES = [
     ("State Theatre", STATE_URL, scrape_state),
     ("Visit Ithaca", VISIT_URL, scrape_visitithaca),
     ("Trees Up Tompkins", TUT_URL, scrape_trees_up),
+    ("Ithaca Children's Garden", ICG_URL, scrape_icg),
 ]
 
 

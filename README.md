@@ -16,6 +16,7 @@ websites every morning and published at
 | State Theatre | Event list on https://stateofithaca.org/events/ (titles link to Tixr) |
 | Visit Ithaca | Live Music items in the RSS feed at https://www.visitithaca.com/event/rss/ (covers only today and tomorrow; venue and time come from each event page; venues above are skipped) |
 | Trees Up Tompkins | Work days typed on https://www.treesuptompkins.org/ and /get-involved (Wix text; dates like "Wed. Nov. 11 @ 10 AM" or "Sunday 8/23 @ 10 AM") |
+| Ithaca Children's Garden | Each event page under /portfolio/ linked from https://www.ithacachildrensgarden.org/icg-events/ (dates typed like "October 17, 2026 \| 1PM – 4PM"; the site's Events Calendar plugin is empty) |
 
 ## How it works
 
