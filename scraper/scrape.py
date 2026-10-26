@@ -653,10 +653,11 @@ def find_key(obj, key):
 
 def scrape_brewers():
     page = fetch(BREWERS_URL, "brewers.html").text
-    m = re.search(r"window\.__APOLLO_STATE__\s*=\s*(\{.*?\})\s*;?\s*</script>", page, re.S)
+    m = re.search(r"window\.__APOLLO_STATE__\s*=\s*", page)
     if not m:
         raise ValueError("no embedded event data on the page")
-    state = json.loads(m.group(1))
+    # Other assignments follow the object in the same script, so decode just it.
+    state, _ = json.JSONDecoder().raw_decode(page, m.end())
     out, seen = [], set()
     for events in find_key(state, "calendarEvents"):
         for ev in events or []:
