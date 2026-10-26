@@ -520,9 +520,19 @@ def scrape_visitithaca():
 MUSE_FILE = pathlib.Path(__file__).resolve().parent.parent / "data" / "muse.json"
 # Shown on the page as "Misc", with no venue link.
 MUSE_VENUE = "Misc"
-# Venues with their own scraper; Muse listings there are left to that scraper.
-MUSE_SKIP = VISIT_SKIP + ("trees up", "children's garden", "childrens garden",
-                          "children’s garden")
+# How Muse names the venues we scrape directly. Muse listings there are kept,
+# but only checked for duplicates against that venue's own listings.
+MUSE_VENUES = {
+    "Bike Bar": ("bike bar",),
+    "Liquid State Brewing": ("liquid state",),
+    "K-HOUSE": ("k-house", "khouse"),
+    "Cinemapolis": ("cinemapolis",),
+    "Hangar Theatre": ("hangar",),
+    "State Theatre": ("state theatre", "state theater", "state of ithaca"),
+    "Brewer's Kitchen & Taproom": ("brewers kitchen", "brewer's kitchen", "brewer’s kitchen"),
+    "Trees Up Tompkins": ("trees up",),
+    "Ithaca Children's Garden": ("children's garden", "childrens garden", "children’s garden"),
+}
 
 
 def muse_time(text):
@@ -536,14 +546,65 @@ def scrape_muse():
     out = []
     for item in json.loads(MUSE_FILE.read_text()).get("events", []):
         where = " ".join((item.get("where") or "").split())
-        if any(k in where.lower() for k in MUSE_SKIP):
-            continue
         all_day = len(item["start"]) == 10
         desc = " · ".join(x for x in (f"at {where}" if where else "", item.get("description") or "") if x)
-        out.append(event(MUSE_VENUE, item["title"], muse_time(item["start"]),
-                         end=muse_time(item["end"]) if item.get("end") else None,
-                         all_day=all_day, url=item.get("url"), description=desc))
+        ev = event(MUSE_VENUE, item["title"], muse_time(item["start"]),
+                   end=muse_time(item["end"]) if item.get("end") else None,
+                   all_day=all_day, url=item.get("url"), description=desc)
+        ev["where"] = where
+        out.append(ev)
     return out
+
+
+# --- Loose duplicate matching for the roundups (Muse, Visit Ithaca) ---------
+
+# Words that don't tell two listings apart.
+FILLER = set("""a an and the of with w at in on for to by from featuring feat ft
+presents presenting live music night open mic show party annual
+ithaca brewing company co inc bar nightclub theatre theater""".split())
+ALIASES = {"bros": "brothers", "bro": "brother", "&": "and", "dj's": "dj"}
+
+
+def title_words(text, drop=()):
+    words = re.findall(r"[a-z0-9&']+", text.lower().replace("’", "'"))
+    words = [ALIASES.get(w, w).strip("'") for w in words]
+    return {w for w in words if w and w not in FILLER and w not in drop
+            and not re.fullmatch(r"\d+(st|nd|rd|th)?", w)}
+
+
+def same_listing(a, b, drop=()):
+    """True if two titles on the same day look like the same event: they share
+    two distinctive words, or every distinctive word of one is in the other."""
+    wa, wb = title_words(a, drop), title_words(b, drop)
+    if not wa or not wb:
+        return False
+    shared = len(wa & wb)
+    return shared >= 2 or shared == min(len(wa), len(wb))
+
+
+def muse_home(where):
+    w = where.lower()
+    return next((name for name, keys in MUSE_VENUES.items() if any(k in w for k in keys)), None)
+
+
+def drop_roundup_duplicates(events, roundups):
+    """Drop roundup listings (in order) that a venue scraper, or an earlier
+    roundup, already has that day. A roundup listing at a venue we scrape is
+    only compared with that venue's listings."""
+    kept = [e for e in events if e["venue"] not in roundups]
+    for r in roundups:
+        for e in [e for e in events if e["venue"] == r]:
+            day = e["start"][:10]
+            home = muse_home(e.get("where", ""))
+            # Not against its own roundup: a play can have two showings a day.
+            pool = [k for k in kept if k["start"][:10] == day and k["venue"] != r
+                    and (home is None or k["venue"] == home)]
+            drop = title_words(f"{e.get('where', '')} {home or ''}")
+            if not any(same_listing(e["title"], k["title"], drop | title_words(k["venue"])) for k in pool):
+                kept.append(e)
+    for e in kept:
+        e.pop("where", None)
+    return kept
 
 
 TUT_URL = "https://www.treesuptompkins.org/get-involved"
@@ -792,16 +853,7 @@ def main():
 
     today = now().date()
     events = [e for e in events if dt.datetime.fromisoformat(e["start"]).date() >= today]
-    # Drop listings from the roundups (Muse, then Visit Ithaca) that a venue
-    # scraper, or an earlier roundup, already has that day.
-    norm = lambda t: re.sub(r"[^a-z0-9]", "", t.lower())
-    roundups = [MUSE_VENUE, "Visit Ithaca"]
-    seen = {(e["start"][:10], norm(e["title"])) for e in events if e["venue"] not in roundups}
-    for r in roundups:
-        mine = [e for e in events if e["venue"] == r]
-        keep = [e for e in mine if (e["start"][:10], norm(e["title"])) not in seen]
-        events = [e for e in events if e["venue"] != r] + keep
-        seen |= {(e["start"][:10], norm(e["title"])) for e in keep}
+    events = drop_roundup_duplicates(events, [MUSE_VENUE, "Visit Ithaca"])
     events.sort(key=lambda e: (e["start"], e["venue"], e["title"]))
     data = {"generated_at": now().isoformat(timespec="seconds"),
             "venues": venues, "events": events}
