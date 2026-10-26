@@ -510,6 +510,41 @@ def scrape_visitithaca():
                              all_day=True, url=url, description=f"at {where}" if where else ""))
     return out
 
+# --- Muse (email lists) ----------------------------------------------------
+
+# Muse emails local event lists on Mondays and Thursdays. A scheduled Claude
+# task reads them from Joseph's inbox and writes the events to data/muse.json:
+# {"updated": ..., "emails": [...], "events": [{"title", "where", "start"
+# (local "YYYY-MM-DDTHH:MM", or "YYYY-MM-DD" for all day), "end", "url",
+# "description"}]}. Nothing is fetched here; this just reads that file.
+MUSE_FILE = pathlib.Path(__file__).resolve().parent.parent / "data" / "muse.json"
+MUSE_URL = "https://github.com/jcn-ithaca/ithaculture/blob/main/data/muse.json"
+# Venues with their own scraper; Muse listings there are left to that scraper.
+MUSE_SKIP = VISIT_SKIP + ("trees up", "children's garden", "childrens garden",
+                          "children’s garden")
+
+
+def muse_time(text):
+    d = dt.datetime.fromisoformat(text)
+    return d.replace(tzinfo=TZ) if d.tzinfo is None else d.astimezone(TZ)
+
+
+def scrape_muse():
+    if not MUSE_FILE.exists():
+        return []
+    out = []
+    for item in json.loads(MUSE_FILE.read_text()).get("events", []):
+        where = " ".join((item.get("where") or "").split())
+        if any(k in where.lower() for k in MUSE_SKIP):
+            continue
+        all_day = len(item["start"]) == 10
+        desc = " · ".join(x for x in (f"at {where}" if where else "", item.get("description") or "") if x)
+        out.append(event("Muse", item["title"], muse_time(item["start"]),
+                         end=muse_time(item["end"]) if item.get("end") else None,
+                         all_day=all_day, url=item.get("url"), description=desc))
+    return out
+
+
 TUT_URL = "https://www.treesuptompkins.org/get-involved"
 TUT_PAGES = ["https://www.treesuptompkins.org/", TUT_URL]
 # Trees Up Tompkins types its work days as free text on a Wix site, e.g.
@@ -687,6 +722,7 @@ VENUES = [
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
     ("State Theatre", STATE_URL, scrape_state),
     ("Brewer's Kitchen & Taproom", BREWERS_URL, scrape_brewers),
+    ("Muse", MUSE_URL, scrape_muse),
     ("Visit Ithaca", VISIT_URL, scrape_visitithaca),
     ("Trees Up Tompkins", TUT_URL, scrape_trees_up),
     ("Ithaca Children's Garden", ICG_URL, scrape_icg),
@@ -755,11 +791,16 @@ def main():
 
     today = now().date()
     events = [e for e in events if dt.datetime.fromisoformat(e["start"]).date() >= today]
-    # Drop Visit Ithaca listings that a venue scraper already found that day.
+    # Drop listings from the roundups (Muse, then Visit Ithaca) that a venue
+    # scraper, or an earlier roundup, already has that day.
     norm = lambda t: re.sub(r"[^a-z0-9]", "", t.lower())
-    seen = {(e["start"][:10], norm(e["title"])) for e in events if e["venue"] != "Visit Ithaca"}
-    events = [e for e in events
-              if e["venue"] != "Visit Ithaca" or (e["start"][:10], norm(e["title"])) not in seen]
+    roundups = ["Muse", "Visit Ithaca"]
+    seen = {(e["start"][:10], norm(e["title"])) for e in events if e["venue"] not in roundups}
+    for r in roundups:
+        mine = [e for e in events if e["venue"] == r]
+        keep = [e for e in mine if (e["start"][:10], norm(e["title"])) not in seen]
+        events = [e for e in events if e["venue"] != r] + keep
+        seen |= {(e["start"][:10], norm(e["title"])) for e in keep}
     events.sort(key=lambda e: (e["start"], e["venue"], e["title"]))
     data = {"generated_at": now().isoformat(timespec="seconds"),
             "venues": venues, "events": events}

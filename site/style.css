@@ -16,6 +16,7 @@
   --v-trees: #4a7a1f;
   --v-icg: #c0398a;
   --v-brewers: #9a5a1a;
+  --v-muse: #b53a4a;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -36,6 +37,7 @@
     --v-trees: #a6d86f;
     --v-icg: #f08cc8;
     --v-brewers: #e8a860;
+    --v-muse: #ff8f9c;
   }
 }
 * { box-sizing: border-box; }

@@ -15,6 +15,7 @@ websites every morning and published at
 | Hangar Theatre | The Events Calendar REST API at https://hangartheatre.org/wp-json/tribe/events/v1/events |
 | State Theatre | Event list on https://stateofithaca.org/events/ (titles link to Tixr) |
 | Brewer's Kitchen & Taproom | Event data embedded in https://brewersithaca.com/template-page (a Toast Sites page; times are UTC in the data) |
+| Muse | Event lists Muse emails on Mondays and Thursdays (subject starts "Muse:"). A scheduled Claude task reads them from Joseph's Gmail and commits the events to `data/muse.json`, which the scraper merges. Listings at venues above are skipped, and same-day same-title duplicates are dropped |
 | Visit Ithaca | Live Music items in the RSS feed at https://www.visitithaca.com/event/rss/ (covers only today and tomorrow; venue and time come from each event page; venues listed above are skipped) |
 | Trees Up Tompkins | Work days typed on https://www.treesuptompkins.org/ and /get-involved (Wix text; dates like "Wed. Nov. 11 @ 10 AM" or "Sunday 8/23 @ 10 AM") |
 | Ithaca Children's Garden | Each event page under /portfolio/ linked from https://www.ithacachildrensgarden.org/icg-events/ (dates typed like "October 17, 2026 \| 1PM – 4PM"; the site's Events Calendar plugin is empty) |
