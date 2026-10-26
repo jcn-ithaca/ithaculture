@@ -1,5 +1,11 @@
 {
- "updated": null,
- "emails": [],
- "events": []
+ "updated": "2026-10-26T01:10:00Z",
+ "emails": [
+  {"id": "1a175b8c05a34490", "subject": "Muse: Ithaca nightlife this week (test)", "date": "2026-10-26T01:00:04Z"}
+ ],
+ "events": [
+  {"title": "Morton Feldman: Triadic Memories, Jack Yarbrough", "where": "Barnes Hall, Cornell University", "start": "2026-10-27T19:30", "end": null, "url": null, "description": "Construction is affecting parking near Barnes Hall; allow extra time."},
+  {"title": "Halloween Eve Ball", "where": "Bike Bar Ithaca, 314 E State St", "start": "2026-10-28T19:00", "end": null, "url": null, "description": ""},
+  {"title": "Sierra Duo", "where": "Barnes Hall, Cornell University", "start": "2026-10-29T19:30", "end": null, "url": null, "description": ""}
+ ]
 }
