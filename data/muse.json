@@ -1,11 +1,22 @@
 {
- "updated": "2026-10-26T01:10:00Z",
+ "updated": "2026-10-26T14:30:00Z",
  "emails": [
-  {"id": "1a175b8c05a34490", "subject": "Muse: Ithaca nightlife this week (test)", "date": "2026-10-26T01:00:04Z"}
+  {"id": "1a175b8c05a34490", "subject": "Muse: Ithaca nightlife this week (test)", "date": "2026-10-26T01:00:04Z"},
+  {"id": "1a1784fb5cd808c7", "subject": "Muse: Ithaca nightlife this week (Oct 26-Nov 1)", "date": "2026-10-26T13:04:12Z"}
  ],
  "events": [
-  {"title": "Morton Feldman: Triadic Memories, Jack Yarbrough", "where": "Barnes Hall, Cornell University", "start": "2026-10-27T19:30", "end": null, "url": null, "description": "Construction is affecting parking near Barnes Hall; allow extra time."},
+  {"title": "NAMI Finger Lakes Night of Light Dessert Gala", "where": "Library Place, 105 W Court St", "start": "2026-10-27T18:30", "end": "2026-10-27T21:00", "url": null, "description": "Evening with dancing with DJ Anthony. Check the venue page for tickets."},
+  {"title": "Morton Feldman Triadic Memories performed by Jack Yarbrough", "where": "Barnes Hall, Cornell University", "start": "2026-10-27T19:30", "end": null, "url": null, "description": "Construction is affecting parking near Barnes Hall; allow extra time."},
+  {"title": "Trivia Tuesdays", "where": "Moonies Bar and Nightclub, 114 E State St", "start": "2026-10-27T21:30", "end": null, "url": null, "description": "Weekly listing; check the venue page to confirm this week."},
   {"title": "Halloween Eve Ball", "where": "Bike Bar Ithaca, 314 E State St", "start": "2026-10-28T19:00", "end": null, "url": null, "description": ""},
-  {"title": "Sierra Duo", "where": "Barnes Hall, Cornell University", "start": "2026-10-29T19:30", "end": null, "url": null, "description": ""}
+  {"title": "The Great Pumpkin Pageant", "where": "Hangar Theatre", "start": "2026-10-29T18:00", "end": null, "url": null, "description": "Doors 5:30 pm. Check the venue page for tickets."},
+  {"title": "Rita Bliss", "where": "First Unitarian Society of Ithaca", "start": "2026-10-29T19:00", "end": null, "url": null, "description": ""},
+  {"title": "Sierra Duo", "where": "Barnes Hall, Cornell University", "start": "2026-10-29T19:30", "end": null, "url": null, "description": ""},
+  {"title": "Fall Creek Brass Band Halloween Party", "where": "Liquid State Brewing Company", "start": "2026-10-30T19:30", "end": null, "url": null, "description": ""},
+  {"title": "Shakespeare Twelfth Night: Mad Love, Mad Music", "where": "Kiplinger Theatre, Schwartz Center, Cornell", "start": "2026-10-30T19:30", "end": null, "url": null, "description": "Free tickets listed; check the Cornell PMA page."},
+  {"title": "Shakespeare Twelfth Night: Mad Love, Mad Music", "where": "Kiplinger Theatre, Schwartz Center, Cornell", "start": "2026-10-31T14:00", "end": null, "url": null, "description": ""},
+  {"title": "Shakespeare Twelfth Night: Mad Love, Mad Music", "where": "Kiplinger Theatre, Schwartz Center, Cornell", "start": "2026-10-31T19:30", "end": null, "url": null, "description": ""},
+  {"title": "Dart Bros get Spooky", "where": "Bike Bar, 314 E State St", "start": "2026-10-31T20:00", "end": null, "url": null, "description": "No cover listed."},
+  {"title": "Liquid State Brewing Co Halloween Dance Party", "where": "Liquid State Brewing Company", "start": "2026-10-31", "end": null, "url": null, "description": "With local DJs. Evening; check the venue page for time."}
  ]
 }
