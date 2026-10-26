@@ -9,7 +9,7 @@ const VENUE_COLORS = {
   "Trees Up Tompkins": "--v-trees",
   "Ithaca Children's Garden": "--v-icg",
   "Brewer's Kitchen & Taproom": "--v-brewers",
-  "Muse": "--v-muse",
+  "Misc": "--v-muse",
 };
 const TZ = "America/New_York";
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -100,7 +100,7 @@ function render() {
 
 function venueLink(name) {
   const v = data.venues.find((x) => x.name === name);
-  return v
+  return v && v.url
     ? el("a", { class: "venue", href: v.url, target: "_blank", rel: "noopener" }, name)
     : el("span", { class: "venue" }, name);
 }
@@ -180,7 +180,7 @@ function renderMeta() {
   sources.append("Sources: ");
   data.venues.forEach((v, i) => {
     if (i) sources.append(" · ");
-    sources.append(el("a", { href: v.url, target: "_blank", rel: "noopener" }, v.name));
+    sources.append(v.url ? el("a", { href: v.url, target: "_blank", rel: "noopener" }, v.name) : v.name);
     if (!v.ok) sources.append(el("span", { class: "warn" }, " (couldn't be read today)"));
   });
 }
