@@ -8,6 +8,7 @@ const VENUE_COLORS = {
   "Visit Ithaca": "--v-visit",
   "Trees Up Tompkins": "--v-trees",
   "Ithaca Children's Garden": "--v-icg",
+  "Brewer's Kitchen & Taproom": "--v-brewers",
 };
 const TZ = "America/New_York";
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

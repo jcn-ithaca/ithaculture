@@ -460,7 +460,8 @@ VISIT_RSS = "https://www.visitithaca.com/event/rss/"
 # The feed only covers today and tomorrow, so that's all this source can show.
 # Venues we already scrape directly are skipped to avoid duplicates.
 VISIT_SKIP = ("bike bar", "liquid state", "k-house", "khouse", "cinemapolis",
-              "hangar", "state theatre", "state theater", "state of ithaca")
+              "hangar", "state theatre", "state theater", "state of ithaca",
+              "brewers kitchen", "brewer's kitchen", "brewer’s kitchen")
 
 
 def visit_detail(url):
@@ -634,6 +635,48 @@ def scrape_icg():
                 out.append(event("Ithaca Children's Garden", title, start, all_day=True, url=url))
     return out
 
+BREWERS_URL = "https://brewersithaca.com/template-page"
+# A Toast Sites page; its events come embedded as Apollo state JSON.
+
+
+def find_key(obj, key):
+    """Yield every value stored under `key` anywhere in nested JSON."""
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if k == key:
+                yield v
+            yield from find_key(v, key)
+    elif isinstance(obj, list):
+        for v in obj:
+            yield from find_key(v, key)
+
+
+def scrape_brewers():
+    page = fetch(BREWERS_URL, "brewers.html").text
+    m = re.search(r"window\.__APOLLO_STATE__\s*=\s*(\{.*?\})\s*;?\s*</script>", page, re.S)
+    if not m:
+        raise ValueError("no embedded event data on the page")
+    state = json.loads(m.group(1))
+    out, seen = [], set()
+    for events in find_key(state, "calendarEvents"):
+        for ev in events or []:
+            guid = ev.get("eventGuid")
+            if not ev.get("eventDateTime") or guid in seen:
+                continue
+            seen.add(guid)
+            # Drop the leading emoji the venue puts on every title.
+            title = re.sub(r"^[^\w(\"'“]+", "", ev.get("name") or "").strip()
+            start = dt.datetime.fromisoformat(ev["eventDateTime"].replace("Z", "+00:00")).astimezone(TZ)
+            all_day = not ev.get("displayTime", True)
+            if all_day:
+                start = dt.datetime.combine(start.date(), dt.time(0), TZ)
+            out.append(event("Brewer's Kitchen & Taproom", title, start, all_day=all_day,
+                             url=ev.get("url") or BREWERS_URL,
+                             description=ev.get("description") or ""))
+    if not out and "calendarEvents" not in page:
+        raise ValueError("event list missing from the page data")
+    return out
+
 
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
@@ -642,6 +685,7 @@ VENUES = [
     ("Cinemapolis", CINEMAPOLIS_URL, scrape_cinemapolis),
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
     ("State Theatre", STATE_URL, scrape_state),
+    ("Brewer's Kitchen & Taproom", BREWERS_URL, scrape_brewers),
     ("Visit Ithaca", VISIT_URL, scrape_visitithaca),
     ("Trees Up Tompkins", TUT_URL, scrape_trees_up),
     ("Ithaca Children's Garden", ICG_URL, scrape_icg),
