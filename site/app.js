@@ -141,36 +141,58 @@ function filmCard(films) {
     list);
 }
 
-function renderFilters() {
-  const nav = document.getElementById("filters");
-  nav.replaceChildren();
-  for (const v of data.venues) {
-    const btn = el("button", { type: "button", "aria-pressed": String(active.has(v.name)), style: venueStyle(v.name) }, v.name);
-    btn.addEventListener("click", () => {
-      active.has(v.name) ? active.delete(v.name) : active.add(v.name);
-      saveHidden();
-      renderFilters();
-      render();
+// Each filter is a dropdown of checkboxes. Its summary says what's showing.
+function menuState(selected, all, label) {
+  if (selected.length === all.length) return "All";
+  if (!selected.length) return "None";
+  return selected.length <= 2 ? selected.map(label).join(", ") : `${selected.length} of ${all.length}`;
+}
+
+function buildMenu(menuId, items, chosen, label, extra = {}) {
+  const menu = document.getElementById(menuId);
+  const list = menu.querySelector(".menu-list");
+  const state = menu.querySelector(".menu-state");
+  const sync = () => {
+    state.textContent = menuState(items.filter((i) => chosen.has(i)), items, label);
+    list.querySelectorAll("input").forEach((box) => { box.checked = chosen.has(box.value); });
+    saveHidden();
+    render();
+  };
+  list.replaceChildren();
+  for (const item of items) {
+    const box = el("input", { type: "checkbox", value: item });
+    box.addEventListener("change", () => {
+      box.checked ? chosen.add(item) : chosen.delete(item);
+      sync();
     });
-    nav.append(btn);
+    list.append(el("label", { style: extra.style ? extra.style(item) : "" }, box, " ", label(item)));
   }
+  const bulk = (sel, pick) => {
+    const btn = menu.querySelector(sel);
+    if (btn) btn.onclick = () => { chosen.clear(); items.filter(pick).forEach((i) => chosen.add(i)); sync(); };
+  };
+  bulk("[data-all]", () => true);
+  bulk("[data-none]", () => false);
+  bulk("[data-weekend]", (d) => ["Fri", "Sat", "Sun"].includes(d));
+  state.textContent = menuState(items.filter((i) => chosen.has(i)), items, label);
+  list.querySelectorAll("input").forEach((box) => { box.checked = chosen.has(box.value); });
+}
+
+function renderFilters() {
+  buildMenu("venue-menu", data.venues.map((v) => v.name), active, (n) => n, { style: venueStyle });
 }
 
 function renderDayFilters() {
-  const nav = document.getElementById("day-filters");
-  if (!nav) return;
-  nav.replaceChildren();
-  for (const d of WEEKDAYS) {
-    const btn = el("button", { type: "button", "aria-pressed": String(activeDays.has(d)) }, d);
-    btn.addEventListener("click", () => {
-      activeDays.has(d) ? activeDays.delete(d) : activeDays.add(d);
-      saveHidden();
-      renderDayFilters();
-      render();
-    });
-    nav.append(btn);
-  }
+  buildMenu("day-menu", WEEKDAYS, activeDays, (d) => d);
 }
+
+// Close an open menu when clicking elsewhere or pressing Escape; one open at a time.
+document.addEventListener("click", (e) => {
+  document.querySelectorAll("details.menu[open]").forEach((m) => { if (!m.contains(e.target)) m.open = false; });
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") document.querySelectorAll("details.menu[open]").forEach((m) => { m.open = false; });
+});
 
 function renderMeta() {
   const updated = new Date(data.generated_at);

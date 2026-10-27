@@ -13,16 +13,26 @@
   <p class="tagline">What's on in Ithaca, gathered from venue websites every morning.</p>
 </header>
 <div class="layout">
-  <aside class="panel">
-    <h2 class="panel-label">Venues</h2>
-    <nav class="filters" id="filters" aria-label="Filter by venue"></nav>
-    <h2 class="panel-label">Days</h2>
-    <nav class="filters days" id="day-filters" aria-label="Filter by day of the week"></nav>
-    <p class="actions">
-      <a href="ithaculture.ics">Subscribe (.ics)</a>
-      <span id="updated"></span>
-    </p>
-  </aside>
+  <div class="toolbar">
+    <details class="menu" id="venue-menu">
+      <summary>Venues: <span class="menu-state">All</span></summary>
+      <div class="menu-panel">
+        <div class="menu-bulk"><button type="button" data-all>All</button><button type="button" data-none>None</button></div>
+        <div class="menu-list" id="filters" aria-label="Filter by venue"></div>
+      </div>
+    </details>
+    <details class="menu" id="day-menu">
+      <summary>Days: <span class="menu-state">All</span></summary>
+      <div class="menu-panel">
+        <div class="menu-bulk"><button type="button" data-all>All</button><button type="button" data-none>None</button><button type="button" data-weekend>Weekend</button></div>
+        <div class="menu-list" id="day-filters" aria-label="Filter by day of the week"></div>
+      </div>
+    </details>
+  </div>
+  <p class="actions">
+    <a href="ithaculture.ics">Subscribe (.ics)</a>
+    <span id="updated"></span>
+  </p>
   <main id="agenda"><p class="empty">Loading events…</p></main>
 </div>
 <footer>
