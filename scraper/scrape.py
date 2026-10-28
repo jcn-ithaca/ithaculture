@@ -792,7 +792,9 @@ def scrape_t41():
     out = []
     for card in panel.select(".card-body .card") or [panel]:
         link = card.select_one(".card-header a") or card.find("a")
-        title = link.get_text(" ", strip=True).replace("​", "") if link else "Trivia night"
+        # Game names are themes like "Halloweenies/MUSIC/Pats", so say it's trivia.
+        theme = link.get_text(" ", strip=True).replace("\u200b", "") if link else ""
+        title = f"Trivia: {theme}" if theme else "Trivia night"
         text = " ".join(card.get_text(" ").split())
         m = T41_DATE_RE.search(text)
         if not m:
