@@ -9,6 +9,7 @@ const VENUE_COLORS = {
   "Trees Up Tompkins": "--v-trees",
   "Ithaca Children's Garden": "--v-icg",
   "Brewer's Kitchen & Taproom": "--v-brewers",
+  "Table for One Trivia": "--v-t41",
   "Misc": "--v-muse",
 };
 const TZ = "America/New_York";

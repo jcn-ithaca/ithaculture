@@ -775,6 +775,47 @@ def scrape_brewers():
         raise ValueError("event list missing from the page data")
     return out
 
+T41_URL = "https://www.t41trivia.com/"
+T41_DATE_RE = re.compile(r"\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+(\d{1,2}),\s*(20\d\d)")
+# "from 6:00 - 8 p.m.": the start often borrows its a.m./p.m. from the end.
+T41_TIME_RE = re.compile(
+    r"from\s+(\d{1,2})(?::(\d{2}))?\s*([ap])?\.?m?\.?\s*[-–]\s*\d{1,2}(?::\d{2})?\s*([ap])\.?m\.?", re.I)
+
+
+def scrape_t41():
+    """Table for One Trivia shows only its next game, in a sidebar card."""
+    soup = BeautifulSoup(fetch(T41_URL, "t41.html").text, "html.parser")
+    heading = soup.find(lambda t: t.name in ("h2", "h3") and "next game" in t.get_text().lower())
+    if not heading:
+        raise ValueError("no Next Game panel on the home page")
+    panel = heading.find_parent(class_="card") or heading.parent
+    out = []
+    for card in panel.select(".card-body .card") or [panel]:
+        link = card.select_one(".card-header a") or card.find("a")
+        title = link.get_text(" ", strip=True).replace("​", "") if link else "Trivia night"
+        text = " ".join(card.get_text(" ").split())
+        m = T41_DATE_RE.search(text)
+        if not m:
+            continue
+        date = dt.date(int(m.group(3)), MONTHS[m.group(1).lower()], int(m.group(2)))
+        where = card.select_one('a[href*="/venue/"]')
+        where = where.get_text(" ", strip=True) if where else ""
+        url = requests.compat.urljoin(T41_URL, link["href"]) if link and link.get("href") else T41_URL
+        tm = T41_TIME_RE.search(text)
+        if tm:
+            hour = int(tm.group(1)) % 12 + (12 if (tm.group(3) or tm.group(4)).lower() == "p" else 0)
+            clock = (hour, int(tm.group(2) or 0))
+        else:
+            clock = parse_clock(text[m.end():])
+        desc = f"at {where}" if where else ""
+        if clock:
+            out.append(event("Table for One Trivia", title, dt.datetime.combine(date, dt.time(*clock), TZ),
+                             url=url, description=desc))
+        else:
+            out.append(event("Table for One Trivia", title, dt.datetime.combine(date, dt.time(0), TZ),
+                             all_day=True, url=url, description=desc))
+    return out
+
 
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
@@ -784,6 +825,7 @@ VENUES = [
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
     ("State Theatre", STATE_URL, scrape_state),
     ("Brewer's Kitchen & Taproom", BREWERS_URL, scrape_brewers),
+    ("Table for One Trivia", T41_URL, scrape_t41),
     (MUSE_VENUE, None, scrape_muse),
     ("Visit Ithaca", VISIT_URL, scrape_visitithaca),
     ("Trees Up Tompkins", TUT_URL, scrape_trees_up),
