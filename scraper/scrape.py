@@ -782,8 +782,68 @@ T41_TIME_RE = re.compile(
     r"from\s+(\d{1,2})(?::(\d{2}))?\s*([ap])?\.?m?\.?\s*[-–]\s*\d{1,2}(?::\d{2})?\s*([ap])\.?m\.?", re.I)
 
 
+T41_PLAY = "https://www.t41trivia.com/play/"
+# "<a>Theme</a> at Ithaca Bakery tomorrow, on Thursday, October 29 at 6 p.m.."
+T41_ITEM_RE = re.compile(
+    r"^\s*at\s+(.+?)(?:\s+(?:today|tonight|tomorrow|in\s+[\w ]+?))?,\s*on\s+[A-Za-z]+,\s+"
+    r"([A-Za-z]+)\.?\s+(\d{1,2})(?:,\s*(\d{4}))?(?:\s+at\s+(.+?))?\.*\s*$")
+
+
 def scrape_t41():
-    """Table for One Trivia shows only its next game, in a sidebar card."""
+    """Every game under "Upcoming games" on /play/, plus the home page's Next
+    Game card (which also gives the year) in case the list changes shape."""
+    games = {}
+    try:
+        for e in t41_upcoming():
+            games[e["url"]] = e
+    except Exception as e:
+        print(f"Table for One Trivia: /play/ list failed ({e})", file=sys.stderr)
+    for e in t41_next_game():
+        games.setdefault(e["url"], e)
+    return list(games.values())
+
+
+def t41_title(theme):
+    # Game names are themes like "Halloweenies/MUSIC/Pats", so say it's trivia.
+    theme = theme.replace("\u200b", "").strip()
+    return f"Trivia: {theme}" if theme else "Trivia night"
+
+
+def t41_upcoming():
+    soup = BeautifulSoup(fetch(T41_PLAY, "t41play.html").text, "html.parser")
+    heading = soup.find(lambda t: t.name in ("h2", "h3", "h4") and "upcoming games" in t.get_text().lower())
+    if not heading:
+        raise ValueError("no Upcoming games list")
+    ul = heading.find_next_sibling("ul")
+    today = now().date()
+    out = []
+    for li in ul.find_all("li", recursive=False) if ul else []:
+        link = li.find("a")
+        if not link:
+            continue
+        rest = " ".join("".join(str(x) for x in li.find_all(string=True, recursive=False)).split())
+        m = T41_ITEM_RE.match(rest)
+        if not m or m.group(2)[:3].lower() not in MONTHS:
+            print(f"Table for One Trivia: couldn't read {rest!r}", file=sys.stderr)
+            continue
+        month, day = MONTHS[m.group(2)[:3].lower()], int(m.group(3))
+        date = dt.date(int(m.group(4)), month, day) if m.group(4) else infer_year(month, day, today)
+        when = (m.group(5) or "").lower()
+        clock = (12, 0) if "noon" in when else parse_clock(when.replace(".", ""))
+        url = requests.compat.urljoin(T41_PLAY, link["href"])
+        title = t41_title(link.get_text(" ", strip=True))
+        desc = f"at {m.group(1).strip()}"
+        if clock:
+            out.append(event("Table for One Trivia", title, dt.datetime.combine(date, dt.time(*clock), TZ),
+                             url=url, description=desc))
+        else:
+            out.append(event("Table for One Trivia", title, dt.datetime.combine(date, dt.time(0), TZ),
+                             all_day=True, url=url, description=desc))
+    return out
+
+
+def t41_next_game():
+    """The home page shows the next game in a sidebar card."""
     soup = BeautifulSoup(fetch(T41_URL, "t41.html").text, "html.parser")
     heading = soup.find(lambda t: t.name in ("h2", "h3") and "next game" in t.get_text().lower())
     if not heading:
@@ -792,9 +852,7 @@ def scrape_t41():
     out = []
     for card in panel.select(".card-body .card") or [panel]:
         link = card.select_one(".card-header a") or card.find("a")
-        # Game names are themes like "Halloweenies/MUSIC/Pats", so say it's trivia.
-        theme = link.get_text(" ", strip=True).replace("\u200b", "") if link else ""
-        title = f"Trivia: {theme}" if theme else "Trivia night"
+        title = t41_title(link.get_text(" ", strip=True) if link else "")
         text = " ".join(card.get_text(" ").split())
         m = T41_DATE_RE.search(text)
         if not m:
