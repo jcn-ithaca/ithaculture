@@ -1,22 +1,246 @@
 {
- "updated": "2026-10-26T14:30:00Z",
- "emails": [
-  {"id": "1a175b8c05a34490", "subject": "Muse: Ithaca nightlife this week (test)", "date": "2026-10-26T01:00:04Z"},
-  {"id": "1a1784fb5cd808c7", "subject": "Muse: Ithaca nightlife this week (Oct 26-Nov 1)", "date": "2026-10-26T13:04:12Z"}
- ],
- "events": [
-  {"title": "NAMI Finger Lakes Night of Light Dessert Gala", "where": "Library Place, 105 W Court St", "start": "2026-10-27T18:30", "end": "2026-10-27T21:00", "url": null, "description": "Evening with dancing with DJ Anthony. Check the venue page for tickets."},
-  {"title": "Morton Feldman Triadic Memories performed by Jack Yarbrough", "where": "Barnes Hall, Cornell University", "start": "2026-10-27T19:30", "end": null, "url": null, "description": "Construction is affecting parking near Barnes Hall; allow extra time."},
-  {"title": "Trivia Tuesdays", "where": "Moonies Bar and Nightclub, 114 E State St", "start": "2026-10-27T21:30", "end": null, "url": null, "description": "Weekly listing; check the venue page to confirm this week."},
-  {"title": "Halloween Eve Ball", "where": "Bike Bar Ithaca, 314 E State St", "start": "2026-10-28T19:00", "end": null, "url": null, "description": ""},
-  {"title": "The Great Pumpkin Pageant", "where": "Hangar Theatre", "start": "2026-10-29T18:00", "end": null, "url": null, "description": "Doors 5:30 pm. Check the venue page for tickets."},
-  {"title": "Rita Bliss", "where": "First Unitarian Society of Ithaca", "start": "2026-10-29T19:00", "end": null, "url": null, "description": ""},
-  {"title": "Sierra Duo", "where": "Barnes Hall, Cornell University", "start": "2026-10-29T19:30", "end": null, "url": null, "description": ""},
-  {"title": "Fall Creek Brass Band Halloween Party", "where": "Liquid State Brewing Company", "start": "2026-10-30T19:30", "end": null, "url": null, "description": ""},
-  {"title": "Shakespeare Twelfth Night: Mad Love, Mad Music", "where": "Kiplinger Theatre, Schwartz Center, Cornell", "start": "2026-10-30T19:30", "end": null, "url": null, "description": "Free tickets listed; check the Cornell PMA page."},
-  {"title": "Shakespeare Twelfth Night: Mad Love, Mad Music", "where": "Kiplinger Theatre, Schwartz Center, Cornell", "start": "2026-10-31T14:00", "end": null, "url": null, "description": ""},
-  {"title": "Shakespeare Twelfth Night: Mad Love, Mad Music", "where": "Kiplinger Theatre, Schwartz Center, Cornell", "start": "2026-10-31T19:30", "end": null, "url": null, "description": ""},
-  {"title": "Dart Bros get Spooky", "where": "Bike Bar, 314 E State St", "start": "2026-10-31T20:00", "end": null, "url": null, "description": "No cover listed."},
-  {"title": "Liquid State Brewing Co Halloween Dance Party", "where": "Liquid State Brewing Company", "start": "2026-10-31", "end": null, "url": null, "description": "With local DJs. Evening; check the venue page for time."}
- ]
+  "updated": "2026-10-29T14:30:28Z",
+  "emails": [
+    {
+      "id": "1a175b8c05a34490",
+      "subject": "Muse: Ithaca nightlife this week (test)",
+      "date": "2026-10-26T01:00:04Z"
+    },
+    {
+      "id": "1a1784fb5cd808c7",
+      "subject": "Muse: Ithaca nightlife this week (Oct 26-Nov 1)",
+      "date": "2026-10-26T13:04:12Z"
+    },
+    {
+      "id": "1a187bde502c9116",
+      "subject": "Muse: Ithaca nightlife this weekend (Oct 29-Nov 1)",
+      "date": "2026-10-29T12:58:51Z"
+    }
+  ],
+  "events": [
+    {
+      "title": "The Great Pumpkin Pageant",
+      "where": "Hangar Theatre",
+      "start": "2026-10-29T18:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "The Amalgamators",
+      "where": "Liquid State Brewing",
+      "start": "2026-10-29T18:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Sarah Noell, Eamonn McCarthy, Young Legs, and Andrew Anderson Frankel",
+      "where": "K-HOUSE Room K",
+      "start": "2026-10-29T18:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Rita Bliss",
+      "where": "First Unitarian Society of Ithaca",
+      "start": "2026-10-29T19:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "The Sierra Duo",
+      "where": "Barnes Hall, Cornell University",
+      "start": "2026-10-29T19:30",
+      "end": "",
+      "url": "",
+      "description": "Beethoven for cello and fortepiano."
+    },
+    {
+      "title": "Halloween Benefit Show: Secret Service Men, Raindrop Collector, and Last Minet",
+      "where": "Nocturnal Cafe",
+      "start": "2026-10-29T19:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Jones et al",
+      "where": "K-HOUSE Room K",
+      "start": "2026-10-29T21:30",
+      "end": "",
+      "url": "",
+      "description": "Jazz."
+    },
+    {
+      "title": "Bossa Nova Night",
+      "where": "Tres Leches, Collegetown",
+      "start": "2026-10-29T22:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Spooky Visions, Raindrop Collector, and Nailgaze",
+      "where": "Nocturnal Cafe",
+      "start": "2026-10-30T18:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Spooky Tales Showcase",
+      "where": "Opus Ithaca School of Music",
+      "start": "2026-10-30T18:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Kevin Kinsella and Sim Redmond",
+      "where": "The Cherry Arts",
+      "start": "2026-10-30T19:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "An Evening of Carnatic Music",
+      "where": "Willard Straight Hall, Cornell University",
+      "start": "2026-10-30T19:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Twelfth Night: Mad Love, Mad Music",
+      "where": "Kiplinger Theatre, Schwartz Center, Cornell",
+      "start": "2026-10-30T19:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "RAED, followed by the Medicinals",
+      "where": "Bike Bar Ithaca",
+      "start": "2026-10-30T20:30",
+      "end": "",
+      "url": "",
+      "description": "The Medicinals at 10:00 PM."
+    },
+    {
+      "title": "Fall Creek Brass Band",
+      "where": "Liquid State Brewing Company",
+      "start": "2026-10-30T20:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Kabaret K: A Samhain Celebration",
+      "where": "K-HOUSE Room K",
+      "start": "2026-10-30T21:00",
+      "end": "",
+      "url": "",
+      "description": "DJs V. Perilous and Zen Voodoo."
+    },
+    {
+      "title": "DJs Juno and ha-MEEN",
+      "where": "Personal Best Brewing",
+      "start": "2026-10-30T21:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Scaffolding, Turnpike, Granny Smith, and Gecko",
+      "where": "Lot 10",
+      "start": "2026-10-30T22:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Shakespeare Twelfth Night: Mad Love, Mad Music",
+      "where": "Kiplinger Theatre, Schwartz Center, Cornell",
+      "start": "2026-10-31T14:00",
+      "end": null,
+      "url": null,
+      "description": ""
+    },
+    {
+      "title": "Mosaic Foundation",
+      "where": "K-HOUSE Room K",
+      "start": "2026-10-31T18:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Reveria, Evil Sex Witch, Raindrop Collector, Spoff the Spaceman, and Cottonmouth",
+      "where": "Stewart Little Co-op",
+      "start": "2026-10-31T19:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Shakespeare Twelfth Night: Mad Love, Mad Music",
+      "where": "Kiplinger Theatre, Schwartz Center, Cornell",
+      "start": "2026-10-31T19:30",
+      "end": null,
+      "url": null,
+      "description": ""
+    },
+    {
+      "title": "The Dart Brothers Halloween show",
+      "where": "Bike Bar Ithaca",
+      "start": "2026-10-31T20:00",
+      "end": "",
+      "url": "",
+      "description": "No cover."
+    },
+    {
+      "title": "5th Annual Halloween Dance Party",
+      "where": "Liquid State Brewing Company",
+      "start": "2026-10-31T21:00",
+      "end": "",
+      "url": "",
+      "description": "DJs Tuggle and Logs."
+    },
+    {
+      "title": "BUMP Halloween Dance",
+      "where": "K-HOUSE Room K",
+      "start": "2026-10-31T22:00",
+      "end": "",
+      "url": "",
+      "description": "DJs ha-MEEN and Anthony Mansfield."
+    },
+    {
+      "title": "Jerry Bigs World Famous Band, Turnpike, Granny Smith, and Gecko",
+      "where": "Lot 10",
+      "start": "2026-10-31T22:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Dorothy Cotton Jubilee Singers: Gratefulness",
+      "where": "Ford Hall, Ithaca College",
+      "start": "2026-11-01T16:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Quartet Novalis",
+      "where": "Liquid State Brewing Company",
+      "start": "2026-11-01T18:00",
+      "end": "",
+      "url": "",
+      "description": "Classical night."
+    }
+  ]
 }
