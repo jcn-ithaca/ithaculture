@@ -83,6 +83,13 @@ def parse_clock(text):
     return hour, int(m.group(2) or 0)
 
 
+def clip(text, limit):
+    """Cut long text at a word boundary and mark the cut."""
+    if len(text) <= limit:
+        return text
+    return text[:limit].rsplit(" ", 1)[0].rstrip(" ,.;:-") + "…"
+
+
 def event(venue, title, start, *, end=None, all_day=False, url=None,
           description="", kind="event"):
     return {
@@ -92,7 +99,7 @@ def event(venue, title, start, *, end=None, all_day=False, url=None,
         "end": end.isoformat() if end else None,
         "all_day": all_day,
         "url": url,
-        "description": " ".join(description.split())[:300],
+        "description": clip(" ".join(description.split()), 800),
         "kind": kind,
     }
 

@@ -97,6 +97,7 @@ function render() {
     if (films.size) section.append(filmCard(films));
     main.append(section);
   }
+  addMoreToggles();
 }
 
 function venueLink(name) {
@@ -113,8 +114,35 @@ function eventCard(e) {
     el("div", { class: "title" }, title),
     el("div", { class: "meta" },
       venueLink(e.venue),
-      e.description ? ` · ${e.description}` : null));
+      e.description && e.description.length <= SHORT_DESC ? ` · ${e.description}` : null),
+    e.description && e.description.length > SHORT_DESC
+      ? el("div", { class: "desc clamp" }, el("span", { class: "desc-text" }, e.description))
+      : null);
 }
+
+// Short descriptions ("at South Hill Cider") stay on the venue line. Longer
+// ones get their own line, clipped to two lines, with a "More" toggle that
+// appears only when the text actually overflows at the current width.
+const SHORT_DESC = 60;
+
+function addMoreToggles() {
+  for (const box of document.querySelectorAll(".desc.clamp")) {
+    const text = box.querySelector(".desc-text");
+    let btn = box.querySelector(".more");
+    const overflows = box.classList.contains("open") || text.scrollHeight > text.clientHeight + 1;
+    if (!overflows) { btn?.remove(); continue; }
+    if (btn) continue;
+    btn = el("button", { type: "button", class: "more", "aria-expanded": "false" }, "More ›");
+    btn.addEventListener("click", () => {
+      const open = box.classList.toggle("open");
+      btn.textContent = open ? "Less ‹" : "More ›";
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    box.append(btn);
+  }
+}
+let resizeTimer;
+window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(addMoreToggles, 150); });
 
 // One collapsible line per day: the summary counts films and showtimes,
 // and opening it lists each film with its times (each links to tickets).

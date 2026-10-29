@@ -103,6 +103,14 @@ a { color: inherit; }
 .ev .title a { text-decoration: none; }
 .ev .title a:hover { text-decoration: underline; }
 .ev .meta { grid-column: 2; font-size: 0.9rem; color: var(--muted); }
+.ev .desc { grid-column: 2; font-size: 0.9rem; color: var(--muted); }
+.desc .desc-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+.desc.open .desc-text { display: block; -webkit-line-clamp: unset; line-clamp: none; overflow: visible; }
+.desc .more {
+  font: inherit; font-size: 0.85rem; color: var(--accent);
+  background: none; border: 0; padding: 2px 0 0; cursor: pointer;
+}
+.desc .more:hover { text-decoration: underline; }
 .ev .venue { color: var(--venue); font-weight: 600; }
 a.venue { text-decoration: none; }
 a.venue:hover { text-decoration: underline; }
