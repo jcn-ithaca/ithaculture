@@ -10,6 +10,7 @@ const VENUE_COLORS = {
   "Ithaca Children's Garden": "--v-icg",
   "Brewer's Kitchen & Taproom": "--v-brewers",
   "Table for One Trivia": "--v-t41",
+  "Hopshire": "--v-hopshire",
   "Misc": "--v-muse",
 };
 const TZ = "America/New_York";

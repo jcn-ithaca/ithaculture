@@ -358,29 +358,36 @@ HANGAR_API = "https://hangartheatre.org/wp-json/tribe/events/v1/events"
 
 
 def scrape_hangar():
-    """The site runs The Events Calendar, whose REST API returns structured
-    events. Multi-day shows come back as all-day ranges with performance
-    times only in the description."""
+    return tribe_events("Hangar Theatre", HANGAR_API, "hangar")
+
+
+def tribe_events(venue, api, name, skip=None):
+    """Sites running The Events Calendar (WordPress) have a REST API that
+    returns structured events. Multi-day events come back as all-day ranges
+    with times only in the description. `skip` is a regex; events whose
+    title matches it are left out."""
     today = now().date()
     horizon = today + dt.timedelta(days=DAYS_AHEAD)
     # No end_date: the API drops events that end after it, which hides long runs.
-    url = f"{HANGAR_API}?per_page=50&start_date={today.isoformat()}"
+    url = f"{api}?per_page=50&start_date={today.isoformat()}"
     items, page = [], 1
     while url:
-        data = fetch(url, f"hangar-{page}.json").json()
+        data = fetch(url, f"{name}-{page}.json").json()
         items.extend(data.get("events", []))
         url = data.get("next_rest_url")
         page += 1
     out = []
     for e in items:
         title = html.unescape(e["title"])
+        if skip and re.search(skip, title, re.I):
+            continue
         desc = BeautifulSoup(e.get("description") or "", "html.parser").get_text(" ")
         start = dt.datetime.fromisoformat(e["start_date"]).replace(tzinfo=TZ)
         end = dt.datetime.fromisoformat(e["end_date"]).replace(tzinfo=TZ)
         if start.date() > horizon:
             continue
         if not e.get("all_day"):
-            out.append(event("Hangar Theatre", title, start,
+            out.append(event(venue, title, start,
                              end=end if end > start else None,
                              url=e.get("url"), description=desc))
             continue
@@ -389,14 +396,23 @@ def scrape_hangar():
             # Short runs: list the show on each day it plays.
             for i in range(days):
                 d = dt.datetime.combine(start.date() + dt.timedelta(i), dt.time(0, 0), TZ)
-                out.append(event("Hangar Theatre", title, d, all_day=True,
+                out.append(event(venue, title, d, all_day=True,
                                  url=e.get("url"), description=desc))
         else:
             # Long runs (classes, residencies): one entry on the first day.
             span = f"Runs {start:%b %-d} – {end:%b %-d}. "
-            out.append(event("Hangar Theatre", title, start, all_day=True,
+            out.append(event(venue, title, start, all_day=True,
                              url=e.get("url"), description=span + desc))
     return out
+
+
+HOPSHIRE_URL = "https://hopshire.com/hopshire-events/"
+HOPSHIRE_API = "https://hopshire.com/wp-json/tribe/events/v1/events"
+
+
+def scrape_hopshire():
+    # Yoga classes and "Kitchen OPEN" hours aren't events worth listing.
+    return tribe_events("Hopshire", HOPSHIRE_API, "hopshire", skip=r"\b(yoga|kitchen)\b")
 
 
 # --- State Theatre ----------------------------------------------------------
@@ -468,7 +484,7 @@ VISIT_RSS = "https://www.visitithaca.com/event/rss/"
 # Venues we already scrape directly are skipped to avoid duplicates.
 VISIT_SKIP = ("bike bar", "liquid state", "k-house", "khouse", "cinemapolis",
               "hangar", "state theatre", "state theater", "state of ithaca",
-              "brewers kitchen", "brewer's kitchen", "brewer’s kitchen")
+              "brewers kitchen", "brewer's kitchen", "brewer’s kitchen", "hopshire")
 
 
 def visit_detail(url):
@@ -535,6 +551,7 @@ MUSE_VENUES = {
     "K-HOUSE": ("k-house", "khouse"),
     "Cinemapolis": ("cinemapolis",),
     "Hangar Theatre": ("hangar",),
+    "Hopshire": ("hopshire",),
     "State Theatre": ("state theatre", "state theater", "state of ithaca"),
     "Brewer's Kitchen & Taproom": ("brewers kitchen", "brewer's kitchen", "brewer’s kitchen"),
     "Trees Up Tompkins": ("trees up",),
@@ -890,6 +907,7 @@ VENUES = [
     ("K-HOUSE", KHOUSE_URL, scrape_khouse),
     ("Cinemapolis", CINEMAPOLIS_URL, scrape_cinemapolis),
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
+    ("Hopshire", HOPSHIRE_URL, scrape_hopshire),
     ("State Theatre", STATE_URL, scrape_state),
     ("Brewer's Kitchen & Taproom", BREWERS_URL, scrape_brewers),
     ("Table for One Trivia", T41_URL, scrape_t41),

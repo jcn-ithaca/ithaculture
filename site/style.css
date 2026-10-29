@@ -17,6 +17,7 @@
   --v-icg: #c0398a;
   --v-brewers: #9a5a1a;
   --v-t41: #3a6ea5;
+  --v-hopshire: #6b8e23;
   --v-muse: #b53a4a;
 }
 @media (prefers-color-scheme: dark) {
@@ -39,6 +40,7 @@
     --v-icg: #f08cc8;
     --v-brewers: #e8a860;
     --v-t41: #8ab8f0;
+    --v-hopshire: #b5d16a;
     --v-muse: #ff8f9c;
   }
 }
