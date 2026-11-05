@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T15:28:00Z",
+  "updated": "2026-11-05T15:15:36Z",
   "emails": [
     {
       "id": "1a175b8c05a34490",
@@ -20,24 +20,29 @@
       "id": "1a19c8ecf945c057",
       "subject": "Muse: Ithaca nightlife this week (Nov 2-8)",
       "date": "2026-11-02T13:59:26Z"
+    },
+    {
+      "id": "1a1ac02f443d3cf1",
+      "subject": "Muse: Ithaca nightlife this weekend (Nov 5-8)",
+      "date": "2026-11-05T14:00:37Z"
     }
   ],
   "events": [
     {
-      "title": "Trivia Night",
-      "where": "Ithaca 5 & Dime",
-      "start": "2026-11-03T20:30",
-      "end": "",
+      "title": "Thursday Night Social Group Run",
+      "where": "Bike Bar Ithaca",
+      "start": "2026-11-05T17:30",
+      "end": "2026-11-05T20:30",
       "url": "",
-      "description": "Weekly trivia night; free to play."
+      "description": "Group run, then drinks after."
     },
     {
-      "title": "Posture with Timothy and Wise Bones",
-      "where": "Liquid State Brewing",
+      "title": "London McDaniel & Lava — Jazz & Blues Night",
+      "where": "Ithaca 5 & Dime",
       "start": "2026-11-05T19:00",
-      "end": "",
+      "end": "2026-11-05T21:00",
       "url": "",
-      "description": ""
+      "description": "619 W State St."
     },
     {
       "title": "Jessica Kirson",
@@ -48,44 +53,148 @@
       "description": "Comedy."
     },
     {
-      "title": "Jazz Night",
-      "where": "Ithaca 5 & Dime",
-      "start": "2026-11-05T19:00",
-      "end": "2026-11-05T21:00",
-      "url": "",
-      "description": "Weekly jazz night."
-    },
-    {
-      "title": "1-800-Bitch and Freeway Art",
+      "title": "Posture, Timothy, Wise Bones",
       "where": "Liquid State Brewing",
-      "start": "2026-11-06",
+      "start": "2026-11-05T19:00",
       "end": "",
       "url": "",
-      "description": "Time not listed; check the venue page."
+      "description": ""
+    },
+    {
+      "title": "Delaques",
+      "where": "The Nocturnal Cafe",
+      "start": "2026-11-05T20:00",
+      "end": "2026-11-05T22:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Gallery Night music: Gould Girls, Space Duzzt, Virginia, Jonas Heimbecker",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-06T17:00",
+      "end": "2026-11-06T20:00",
+      "url": "",
+      "description": "Gallery Night; generally free."
+    },
+    {
+      "title": "Gallery Night music: The Road Taken",
+      "where": "CSMA Gallery",
+      "start": "2026-11-06T17:00",
+      "end": "2026-11-06T20:00",
+      "url": "",
+      "description": "Gallery Night; generally free."
+    },
+    {
+      "title": "Gallery Night music: Skeleton Hands and the Brat Dondada",
+      "where": "MACRE",
+      "start": "2026-11-06T17:00",
+      "end": "2026-11-06T20:00",
+      "url": "",
+      "description": "Gallery Night; generally free."
+    },
+    {
+      "title": "Busking for Justice: Bear Fox & Lydia Garrison",
+      "where": "Cafe DeWitt",
+      "start": "2026-11-06T17:30",
+      "end": "2026-11-06T19:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "1-800-Bitch & Freeway Art, with Overtired and Shodemon",
+      "where": "Liquid State Brewing",
+      "start": "2026-11-06T18:00",
+      "end": "",
+      "url": "",
+      "description": ""
     },
     {
       "title": "Battle of the Dad Bands",
       "where": "Hangar Theatre",
       "start": "2026-11-06T18:30",
+      "end": "2026-11-06T22:00",
+      "url": "",
+      "description": "Benefit; $25."
+    },
+    {
+      "title": "Singing Notes and Slinging Jokes",
+      "where": "330 W State St",
+      "start": "2026-11-06T19:00",
+      "end": "2026-11-06T21:00",
+      "url": "",
+      "description": "Comedy."
+    },
+    {
+      "title": "Dal Niente",
+      "where": "Barnes Hall, Cornell University",
+      "start": "2026-11-06T19:30",
       "end": "",
       "url": "",
       "description": ""
     },
     {
-      "title": "Stucky Ensemble-in-Residence Dal Niente concert",
-      "where": "Barnes Hall, Cornell University",
+      "title": "Turnpike, Delia-H, Giana D'Agostino Band",
+      "where": "The Nocturnal Cafe",
       "start": "2026-11-06T19:30",
       "end": "",
       "url": "",
-      "description": "Free."
+      "description": ""
     },
     {
-      "title": "Sophistafunk with DJ Proper Philth and Noah Fense",
+      "title": "Noisevember: Diagram A, Noise Nomads, Human Kindness, Lickspite, Magic Eye",
+      "where": "Angry Mom Records",
+      "start": "2026-11-06T20:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "DJ Dray",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-06T22:00",
+      "end": "",
+      "url": "",
+      "description": "House music."
+    },
+    {
+      "title": "The Merrill Trio",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-07T19:00",
+      "end": "2026-11-07T21:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "International Uilleann Piping Day concert: Kara Doyle, Tim Benson, Six Mile Craic",
+      "where": "Quaker Meeting House",
+      "start": "2026-11-07T19:00",
+      "end": "",
+      "url": "",
+      "description": "120 Third St; free."
+    },
+    {
+      "title": "Mighty Flowers & Jamaican Clash",
+      "where": "Altitude Dispensary",
+      "start": "2026-11-07T19:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Sophistafunk with Proper Philth & Noah Fense",
       "where": "Liquid State Brewing",
       "start": "2026-11-07T19:00",
       "end": "",
       "url": "",
       "description": ""
+    },
+    {
+      "title": "The Figs & Debutante",
+      "where": "Willard Straight Hall Memorial Room, Cornell University",
+      "start": "2026-11-07T19:00",
+      "end": "",
+      "url": "",
+      "description": "Benefit."
     },
     {
       "title": "Brotality, Praun, Triple Think, Necrotize",
@@ -99,6 +208,54 @@
       "title": "Charlie Sings Judy",
       "where": "Hangar Theatre",
       "start": "2026-11-07T19:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "The Driftwood Trio — IPEI 30th anniversary celebration",
+      "where": "Hangar Theatre",
+      "start": "2026-11-08T15:00",
+      "end": "2026-11-08T17:00",
+      "url": "",
+      "description": "Free."
+    },
+    {
+      "title": "Six Mile Craic — monthly Irish Session",
+      "where": "Liquid State Brewing",
+      "start": "2026-11-08T16:00",
+      "end": "2026-11-08T19:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Nathan Laube",
+      "where": "St. Luke Lutheran Church, Collegetown",
+      "start": "2026-11-08T16:00",
+      "end": "",
+      "url": "",
+      "description": "Organ."
+    },
+    {
+      "title": "Hank Roberts, Chad Lieberman, Michael Bates",
+      "where": "Argos Warehouse",
+      "start": "2026-11-08T18:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Boss Tenors (early set)",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-08T18:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Boss Tenors (late set)",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-08T20:00",
       "end": "",
       "url": "",
       "description": ""
