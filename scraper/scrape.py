@@ -1078,6 +1078,57 @@ SLIDES_SKIP_VENUES = {MUSE_VENUE, "Visit Ithaca"}
 ROUTINE_RE = re.compile(r"\b(trivia|bingo|open mic|book club|karaoke|jam|closed|meeting|roundtable|flight night|dj night)\b", re.I)
 GENERIC_IMAGE_RE = re.compile(r"logo|favicon|placeholder|default|site-?icon|blank|spacer", re.I)
 
+# Official performer videos. A scheduled Claude task searches YouTube nightly
+# for the coming week's performers and writes data/videos.json:
+# {"updated": ..., "videos": [{"venue", "title", "date" ("YYYY-MM-DD"),
+# "performer", "youtube_id", "channel", "channel_url", "note"}], "checked":
+# [{"venue", "title", "date"}]}. It only lists a video from the performer's
+# own channel. Here each one is checked again with YouTube's oEmbed endpoint:
+# it must still be public and embeddable and its uploader must be the channel
+# the task named, or it's ignored and the slide keeps its picture.
+VIDEOS_FILE = pathlib.Path(__file__).resolve().parent.parent / "data" / "videos.json"
+YOUTUBE_ID_RE = re.compile(r"^[A-Za-z0-9_-]{11}$")
+
+
+def title_key(venue, title, date):
+    return (venue, re.sub(r"[^a-z0-9]+", " ", title.lower()).strip(), date)
+
+
+def channel_key(text):
+    return re.sub(r"[^a-z0-9]+", "", (text or "").lower().replace("vevo", "").replace("official", ""))
+
+
+def load_videos():
+    """Videos from data/videos.json that YouTube confirms, keyed by title_key."""
+    if not VIDEOS_FILE.exists():
+        return {}
+    out = {}
+    for v in json.loads(VIDEOS_FILE.read_text()).get("videos", []):
+        vid = v.get("youtube_id") or ""
+        if not YOUTUBE_ID_RE.match(vid) or not v.get("channel"):
+            continue
+        try:
+            r = requests.get("https://www.youtube.com/oembed", timeout=20, headers={"User-Agent": UA},
+                             params={"url": f"https://www.youtube.com/watch?v={vid}", "format": "json"})
+            if r.status_code != 200:
+                print(f"  video {vid} for {v.get('title')}: not embeddable ({r.status_code})", file=sys.stderr)
+                continue
+            meta = r.json()
+        except Exception as ex:
+            print(f"  video {vid} for {v.get('title')}: check failed ({ex})", file=sys.stderr)
+            continue
+        by_name = channel_key(meta.get("author_name")) == channel_key(v["channel"])
+        by_url = bool(v.get("channel_url")) and (meta.get("author_url") or "").rstrip("/").lower() \
+            == v["channel_url"].rstrip("/").lower().replace("://youtube.com", "://www.youtube.com")
+        if not (by_name or by_url):
+            print(f"  video {vid} for {v.get('title')}: uploader {meta.get('author_name')!r} "
+                  f"is not {v['channel']!r}", file=sys.stderr)
+            continue
+        out[title_key(v["venue"], v["title"], v["date"])] = {
+            "id": vid, "channel": meta.get("author_name") or v["channel"],
+            "title": meta.get("title") or "", "thumb": meta.get("thumbnail_url")}
+    return out
+
 
 def page_image(soup, base):
     """The share picture a page declares (og:image or twitter:image), if any."""
@@ -1091,13 +1142,13 @@ def page_image(soup, base):
 
 
 def slide_candidates(events, venue_pages):
-    """Upcoming non-film events with a page of their own, soonest first,
-    one entry per show."""
+    """Upcoming non-film events with a page of their own or a checked video,
+    soonest first, one entry per show. Shows with a video come first."""
     today = now().date()
     last = today + dt.timedelta(days=SLIDES_DAYS)
     seen, out = set(), []
     for e in events:
-        if e["kind"] == "film" or e["venue"] in SLIDES_SKIP_VENUES:
+        if e["kind"] == "film" or (e["venue"] in SLIDES_SKIP_VENUES and not e.get("video")):
             continue
         if not (today <= dt.date.fromisoformat(e["start"][:10]) <= last):
             continue
@@ -1106,17 +1157,19 @@ def slide_candidates(events, venue_pages):
             continue
         page = (e.get("url") or "").split("#")[0].rstrip("/")
         own_page = page and page not in venue_pages and requests.compat.urlparse(page).path.strip("/")
-        if not (e.get("image") or own_page):
+        if not (e.get("image") or own_page or e.get("video")):
             continue
         seen.add(key)
         out.append(e)
     # Stable sort: soonest first within each group.
-    return sorted(out, key=lambda e: bool(ROUTINE_RE.search(e["title"])))
+    return sorted(out, key=lambda e: (not e.get("video"), bool(ROUTINE_RE.search(e["title"]))))
 
 
 def image_for(e):
     if e.get("image"):
         return e["image"]
+    if e["venue"] in SLIDES_SKIP_VENUES or not e.get("url"):
+        return None
     soup = BeautifulSoup(fetch(e["url"], attempts=2).text, "html.parser")
     return page_image(soup, e["url"])
 
@@ -1141,8 +1194,33 @@ def load_picture(url):
     return img, digest
 
 
+def video_picture(video):
+    """The video's own thumbnail, for a show with no picture of its own."""
+    for url in (f"https://i.ytimg.com/vi/{video['id']}/maxresdefault.jpg", video.get("thumb"),
+                f"https://i.ytimg.com/vi/{video['id']}/hqdefault.jpg"):
+        if not url:
+            continue
+        try:
+            pic, digest = load_picture(url)
+        except Exception:
+            continue
+        if pic is not None:
+            return url, pic, digest
+    return None, None, None
+
+
 def build_slides(events, out_dir):
     venue_pages = {u.rstrip("/") for _, u, _ in VENUES if u}
+    try:
+        videos = load_videos()
+    except Exception:
+        traceback.print_exc()
+        videos = {}
+    for e in events:
+        v = videos.get(title_key(e["venue"], e["title"], e["start"][:10]))
+        if v:
+            e["video"] = v
+    print(f"slideshow: {len(videos)} checked videos, {sum(1 for e in events if e.get('video'))} matched to events")
     candidates = slide_candidates(events, venue_pages)
     # The venue home page's share picture is the site default; don't use it.
     home_images = {}
@@ -1150,25 +1228,26 @@ def build_slides(events, out_dir):
     for e in candidates:
         if len(found) >= SLIDES_MAX * 3:
             break
+        src = pic = digest = None
         try:
             src = image_for(e)
             if not src or GENERIC_IMAGE_RE.search(requests.compat.urlparse(src).path):
-                continue
+                src = None
             venue_url = next((u for n, u, _ in VENUES if n == e["venue"]), None)
-            if venue_url and e["venue"] not in home_images:
+            if src and venue_url and e["venue"] not in home_images:
                 try:
                     home = BeautifulSoup(fetch(venue_url, attempts=1).text, "html.parser")
                     home_images[e["venue"]] = page_image(home, venue_url)
                 except requests.RequestException:
                     home_images[e["venue"]] = None
-            if src == home_images.get(e["venue"]):
-                continue
-            pic, digest = load_picture(src)
-            if pic is None:
-                continue
-            found.append((e, src, pic, digest))
+            if src and src != home_images.get(e["venue"]):
+                pic, digest = load_picture(src)
         except Exception as ex:
             print(f"  slides: no picture for {e['venue']} / {e['title']} ({ex})", file=sys.stderr)
+        if pic is None and e.get("video"):
+            src, pic, digest = video_picture(e["video"])
+        if pic is not None:
+            found.append((e, src, pic, digest))
 
     # A picture used for two different shows is a placeholder, not a performer.
     by_digest, by_src = {}, {}
@@ -1198,10 +1277,32 @@ def build_slides(events, out_dir):
         src, pic = pics[id(e)]
         name = f"slides/{i}.jpg"
         pic.save(out_dir / name, "JPEG", quality=80, optimize=True, progressive=True)
-        slides.append({"image": name, "source": src, "title": e["title"], "venue": e["venue"],
-                       "start": e["start"], "all_day": e["all_day"], "url": e.get("url")})
-        print(f"  slide {i}: {e['start'][:16]}  {e['venue']}  {e['title']}  <- {src}")
+        slide = {"image": name, "source": src, "title": e["title"], "venue": e["venue"],
+                 "start": e["start"], "all_day": e["all_day"], "url": e.get("url")}
+        if e.get("video"):
+            slide["video"] = {k: e["video"][k] for k in ("id", "channel", "title")}
+        slides.append(slide)
+        video = f"  + video {e['video']['id']} ({e['video']['channel']})" if e.get("video") else ""
+        print(f"  slide {i}: {e['start'][:16]}  {e['venue']}  {e['title']}  <- {src}{video}")
     return slides
+
+
+def write_upcoming(events, path):
+    """A short list of the coming week's shows (no films) for the scheduled
+    task that looks for performer videos; events.json is too long to read."""
+    today = now().date()
+    last = today + dt.timedelta(days=SLIDES_DAYS + 1)
+    seen, shows = set(), []
+    for e in events:
+        date = e["start"][:10]
+        key = title_key(e["venue"], e["title"], date)
+        if e["kind"] == "film" or key in seen or not (today <= dt.date.fromisoformat(date) <= last):
+            continue
+        seen.add(key)
+        shows.append({"venue": e["venue"], "title": e["title"], "date": date, "start": e["start"],
+                      "url": e.get("url"),
+                      "description": (e.get("description") or "")[:200]})
+    path.write_text(json.dumps({"generated_at": now().isoformat(timespec="seconds"), "shows": shows}, indent=1))
 
 
 def write_ics(events, path):
@@ -1276,9 +1377,11 @@ def main():
     print(f"slideshow: {len(slides)} pictures")
     for e in events:
         e.pop("image", None)
+        e.pop("video", None)
     data = {"generated_at": now().isoformat(timespec="seconds"),
             "venues": venues, "events": events, "slides": slides}
     (out_dir / "events.json").write_text(json.dumps(data, indent=1))
+    write_upcoming(events, out_dir / "upcoming.json")
     write_ics(events, out_dir / "ithaculture.ics")
     for e in events:
         print(f"  {e['start'][:16]}  {e['venue']:<20}  {e['title']}")

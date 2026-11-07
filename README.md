@@ -35,6 +35,25 @@ websites every morning and published at
   are kept for a week as the `raw-pages` artifact, for fixing a scraper when a
   venue redesigns its site.
 
+## Slideshow and performer videos
+
+On screens at least 900px wide the page shows a slideshow of the coming
+week's performers, using pictures from each event's own page on the venue's
+site (`build_slides()` in the scraper).
+
+A scheduled Claude task runs nightly at about 3:40am Eastern. It reads
+`upcoming.json` from the live site (a short list of the coming week's shows),
+searches YouTube for each performer's official channel, and commits
+`data/videos.json`. It only lists a video when it is confident the channel is
+the performer's own; otherwise the slide keeps its picture. Shows it searched
+without a confident match are recorded under `checked` so they aren't searched
+again. The scraper checks each video again with YouTube's oEmbed endpoint: it
+must still be public and embeddable, and its uploader must be the channel the
+task named. A show with a checked video goes to the front of the slideshow
+(using the video's thumbnail when the venue has no picture), and the video
+plays muted over the picture for 30 seconds while its slide is showing. Videos
+never load on phones or for visitors who prefer reduced motion.
+
 ## Run locally
 
 ```sh
