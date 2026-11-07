@@ -243,10 +243,14 @@ function renderMeta() {
 // screens. The pictures come from the venues' own event pages (see
 // build_slides in the scraper). It follows the venue filter, skips shows that
 // are over, and is only built when the column is visible, so phones never
-// download the pictures.
+// download the pictures. A slide can also carry a performer's official
+// YouTube video (picked by a scheduled task and checked by the scraper): it
+// plays muted over the picture while that slide is showing, and is never
+// loaded on phones or for visitors who ask for reduced motion.
 const WIDE = window.matchMedia("(min-width: 900px)");
 const CALM = window.matchMedia("(prefers-reduced-motion: reduce)");
 const SLIDE_MS = 8000;
+const VIDEO_SLIDE_MS = 30000;
 let slideTimer = null;
 let slideIndex = 0;
 let slideKey = "";
@@ -275,25 +279,60 @@ function showSlide(i) {
   slides.forEach((s, n) => {
     s.classList.toggle("on", n === slideIndex);
     s.setAttribute("aria-hidden", String(n !== slideIndex));
-    s.querySelectorAll("a").forEach((a) => { a.tabIndex = n === slideIndex ? 0 : -1; });
+    s.querySelectorAll("a, iframe").forEach((a) => { a.tabIndex = n === slideIndex ? 0 : -1; });
+    setVideo(s, n === slideIndex);
   });
   box.querySelectorAll(".slide-nav button").forEach((b, n) =>
     b.setAttribute("aria-current", String(n === slideIndex)));
 }
 
+// The video player only exists while its slide is showing, so videos don't
+// play (or download) in the background.
+function setVideo(slide, on) {
+  const id = slide.dataset.video;
+  if (!id) return;
+  const pic = slide.querySelector(".pic");
+  const player = pic.querySelector("iframe");
+  if (!on || CALM.matches || !WIDE.matches) {
+    if (player) player.remove();
+    pic.classList.remove("playing");
+    return;
+  }
+  if (player) return;
+  pic.classList.add("playing");
+  const params = new URLSearchParams({
+    autoplay: "1", mute: "1", playsinline: "1", loop: "1", playlist: id,
+    controls: "1", rel: "0", modestbranding: "1",
+  });
+  pic.append(el("iframe", {
+    class: "video",
+    src: `https://www.youtube-nocookie.com/embed/${id}?${params}`,
+    title: slide.dataset.videoTitle,
+    allow: "autoplay; encrypted-media; picture-in-picture",
+    referrerpolicy: "strict-origin-when-cross-origin",
+    allowfullscreen: "",
+  }));
+}
+
 function startSlides() {
-  clearInterval(slideTimer);
+  clearTimeout(slideTimer);
   slideTimer = null;
   const box = document.getElementById("slideshow");
+  const slides = box.querySelectorAll(".slide");
+  slides.forEach((s, n) => setVideo(s, n === slideIndex && !document.hidden));
   if (CALM.matches || document.hidden || box.matches(":hover, :focus-within")) return;
-  if (box.querySelectorAll(".slide").length > 1) slideTimer = setInterval(() => showSlide(slideIndex + 1), SLIDE_MS);
+  if (slides.length < 2) return;
+  const wait = slides[slideIndex] && slides[slideIndex].dataset.video ? VIDEO_SLIDE_MS : SLIDE_MS;
+  slideTimer = setTimeout(() => { showSlide(slideIndex + 1); startSlides(); }, wait);
 }
 
 function renderSlides() {
   const box = document.getElementById("slideshow");
   if (!data || !WIDE.matches) {
-    clearInterval(slideTimer);
+    clearTimeout(slideTimer);
+    box.querySelectorAll(".slide").forEach((s) => setVideo(s, false));
     box.hidden = true;
+    slideKey = "";
     return;
   }
   const list = currentSlides();
@@ -310,14 +349,20 @@ function renderSlides() {
       ? el("a", { class: cls, href: s.url, target: "_blank", rel: "noopener" }, ...kids)
       : el("span", { class: cls }, ...kids);
     const lazy = i < 2 ? "eager" : "lazy";
-    frame.append(el("figure", { class: "slide", style: venueStyle(s.venue) },
+    const fig = el("figure", { class: "slide", style: venueStyle(s.venue) },
       link("pic",
         el("img", { class: "fill", src: s.image, alt: "", loading: lazy }),
         el("img", { class: "main", src: s.image, alt: s.title, loading: lazy })),
       el("figcaption", {},
         el("div", { class: "when" }, slideWhen(s)),
         link("title", s.title),
-        el("div", { class: "venue" }, s.venue))));
+        el("div", { class: "venue" }, s.venue)));
+    if (s.video) {
+      fig.dataset.video = s.video.id;
+      fig.dataset.videoTitle = `${s.video.title || s.title} (video from ${s.video.channel})`;
+      fig.querySelector("figcaption").append(el("div", { class: "source" }, `Video: ${s.video.channel} on YouTube`));
+    }
+    frame.append(fig);
     const dot = el("button", { type: "button", "aria-label": `Show ${s.title}` });
     dot.addEventListener("click", () => { showSlide(i); startSlides(); });
     nav.append(dot);
@@ -329,7 +374,7 @@ function renderSlides() {
 
 {
   const box = document.getElementById("slideshow");
-  for (const ev of ["mouseenter", "focusin"]) box.addEventListener(ev, () => { clearInterval(slideTimer); slideTimer = null; });
+  for (const ev of ["mouseenter", "focusin"]) box.addEventListener(ev, () => { clearTimeout(slideTimer); slideTimer = null; });
   box.addEventListener("mouseleave", startSlides);
   box.addEventListener("focusout", () => setTimeout(startSlides, 0));
   document.addEventListener("visibilitychange", startSlides);

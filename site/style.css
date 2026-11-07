@@ -155,6 +155,10 @@ footer { padding-bottom: 40px; font-size: 0.85rem; color: var(--muted); border-t
 /* A blurred copy fills the frame so posters of any shape show uncropped. */
 .slide .pic .fill { position: absolute; inset: -20px; width: calc(100% + 40px); height: calc(100% + 40px); object-fit: cover; filter: blur(18px) brightness(0.6); }
 .slide .pic .main { position: relative; width: 100%; height: 100%; object-fit: contain; display: block; }
+/* A performer video plays over the picture; the picture shows until it loads. */
+.slide .pic .video { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; background: #000; }
+.slide .pic.playing .main { visibility: hidden; }
+.slide figcaption .source { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 .slide figcaption { padding: 10px 12px 12px; border-top: 4px solid var(--venue, var(--line)); }
 .slide figcaption .when { font-size: 0.85rem; color: var(--muted); }
 .slide figcaption .title { font-weight: 600; display: block; text-decoration: none; }
