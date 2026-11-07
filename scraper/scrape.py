@@ -17,6 +17,7 @@ import re
 import sys
 import time
 import traceback
+import urllib.parse
 import xml.etree.ElementTree as ET
 from zoneinfo import ZoneInfo
 
@@ -1098,11 +1099,17 @@ def scrape_h4d():
         where_tag = art.select_one(".eventlist-meta-address")
         where = ""
         if where_tag:
+            street = ""
             for a in where_tag.select("a"):
+                q = urllib.parse.parse_qs(urllib.parse.urlparse(a.get("href", "")).query).get("q")
+                street = street or (q[0].split(" Ithaca")[0].strip() if q else "")
                 a.decompose()
             where = " ".join(where_tag.get_text(" ").split())
-        excerpt = art.select_one(".eventlist-excerpt")
-        desc = " ".join((excerpt.get_text(" ") if excerpt else "").split())
+            if street and street.lower() not in where.lower():
+                where = f"{where}, {street}" if where else street
+        # The band and caller are in the listing's description.
+        body = art.select_one(".eventlist-excerpt") or art.select_one(".eventlist-description")
+        desc = " ".join((body.get_text(" ") if body else "").split())
         if where:
             desc = f"at {where}. {desc}".strip()
         img = None

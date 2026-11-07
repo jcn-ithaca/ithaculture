@@ -22,6 +22,8 @@ jobs:
               print(json.dumps(e))
           html = (scrape.DEBUG_DIR / "hands4dancers.html").read_text()
           i = html.find("eventlist-event")
-          print("---- markup sample ----")
-          print(html[i-200:i+4000])
+          from bs4 import BeautifulSoup
+          for e in scrape.scrape_h4d():
+              e.pop("image", None)
+              print("og image:", scrape.image_for(e))
           PY
