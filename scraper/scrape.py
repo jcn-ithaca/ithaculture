@@ -1111,7 +1111,7 @@ def scrape_h4d():
         body = art.select_one(".eventlist-excerpt") or art.select_one(".eventlist-description")
         desc = " ".join((body.get_text(" ") if body else "").split())
         if where:
-            desc = f"at {where}. {desc}".strip()
+            desc = f"at {where.rstrip('.')}. {desc}".strip()
         img = None
         tag = art.select_one(".eventlist-column-thumbnail img") or art.find("img")
         if tag:
