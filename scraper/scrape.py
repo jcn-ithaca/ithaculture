@@ -484,7 +484,9 @@ VISIT_RSS = "https://www.visitithaca.com/event/rss/"
 # Venues we already scrape directly are skipped to avoid duplicates.
 VISIT_SKIP = ("bike bar", "liquid state", "k-house", "khouse", "cinemapolis",
               "hangar", "state theatre", "state theater", "state of ithaca",
-              "brewers kitchen", "brewer's kitchen", "brewer’s kitchen", "hopshire")
+              "brewers kitchen", "brewer's kitchen", "brewer’s kitchen", "hopshire",
+              "cherry arts", "cherry artspace", "cherry performance space", "cherry gallery",
+              "102 cherry st", "130 cherry st")
 
 
 def visit_detail(url):
@@ -552,6 +554,7 @@ MUSE_VENUES = {
     "Cinemapolis": ("cinemapolis",),
     "Hangar Theatre": ("hangar",),
     "Hopshire": ("hopshire",),
+    "The Cherry Arts": ("cherry arts", "cherry artspace", "cherry performance space", "cherry gallery"),
     "State Theatre": ("state theatre", "state theater", "state of ithaca"),
     "Brewer's Kitchen & Taproom": ("brewers kitchen", "brewer's kitchen", "brewer’s kitchen"),
     "Trees Up Tompkins": ("trees up",),
@@ -901,6 +904,133 @@ def t41_next_game():
     return out
 
 
+# --- The Cherry Arts --------------------------------------------------------
+
+CHERRY_URL = "https://thecherry.org/"
+# The season page is renamed each year (2026-27-arts-performance), so it's
+# found from the home page's links, with this as the fallback.
+CHERRY_SEASON = "https://thecherry.org/2026-27-arts-performance/"
+CHERRY_SEASON_RE = re.compile(r"arts-performance|cherry-music|season", re.I)
+_MON = r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?"
+# Ticket links on a show page read "Fri Nov 13 7:30PM".
+CHERRY_PERF_RE = re.compile(r"\b(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*\.?,?\s+" + _MON + r"\s+(\d{1,2})\b")
+# "November 13-22, 2026", "November 6 - December 13, 2026", "December 4, 2026".
+CHERRY_RANGE_RE = re.compile(
+    r"\b" + _MON + r"\s+(\d{1,2})(?:\s*[-–—]\s*(?:" + _MON + r"\s+)?(\d{1,2}))?,?\s+(20\d\d)\b")
+
+
+def cherry_show_links():
+    pages = []
+    try:
+        soup = BeautifulSoup(fetch(CHERRY_URL, "cherry.html").text, "html.parser")
+        for a in soup.find_all("a", href=True):
+            href = a["href"].split("#")[0]
+            if "thecherry.org" in href and CHERRY_SEASON_RE.search(href) and href not in pages:
+                pages.append(href)
+    except requests.RequestException as e:
+        print(f"The Cherry Arts: home page failed ({e})", file=sys.stderr)
+    if not any("arts-performance" in u for u in pages):
+        pages.append(CHERRY_SEASON)
+    links = []
+    for n, page in enumerate(pages):
+        try:
+            soup = BeautifulSoup(fetch(page, f"cherry-season-{n}.html").text, "html.parser")
+        except requests.RequestException as e:
+            print(f"The Cherry Arts: skipped {page} ({e})", file=sys.stderr)
+            continue
+        for a in soup.select('a[href*="/cherry-events/"]'):
+            href = a["href"].split("#")[0].split("?")[0]
+            if href not in links:
+                links.append(href)
+    return links
+
+
+def scrape_cherry():
+    """The season pages link each show's page (/cherry-events/<slug>/). A show
+    page lists its performances as OvationTix links ("Fri Nov 13 7:30PM");
+    shows without those (gallery exhibitions, one-offs) only give a date
+    range, which becomes all-day entries the way Hangar's runs do."""
+    links = cherry_show_links()
+    if not links:
+        raise ValueError("no show pages linked from the season pages")
+    today = now().date()
+    horizon = today + dt.timedelta(days=DAYS_AHEAD)
+    out = []
+    for url in links:
+        time.sleep(1)
+        try:
+            soup = BeautifulSoup(fetch(url).text, "html.parser")
+        except requests.RequestException as e:
+            print(f"The Cherry Arts: skipped {url} ({e})", file=sys.stderr)
+            continue
+        h1 = soup.find("h1")
+        title = h1.get_text(" ", strip=True) if h1 else ""
+        if not title:
+            og = soup.find("meta", property="og:title")
+            title = (og.get("content") if og else (soup.title.string if soup.title else "")) or ""
+            title = re.split(r"\s+[|–-]\s+", title)[0]
+        if not title:
+            continue
+        meta = soup.find("meta", attrs={"name": "description"}) or soup.find("meta", property="og:description")
+        desc = (meta.get("content") or "") if meta else ""
+
+        perfs = set()
+        for a in soup.select('a[href*="ovationtix.com"]'):
+            if "/performance/" not in a["href"]:
+                continue
+            text = " ".join(a.get_text(" ").split())
+            m = CHERRY_PERF_RE.search(text)
+            clock = parse_clock(text[m.end():]) if m else None
+            if not m or not clock:
+                continue
+            date = infer_year(MONTHS[m.group(1).lower()], int(m.group(2)), today)
+            start = dt.datetime.combine(date, dt.time(*clock), TZ)
+            if start.date() > horizon or start in perfs:
+                continue
+            perfs.add(start)
+            out.append(event("The Cherry Arts", title, start, url=a["href"], description=desc))
+        if perfs:
+            continue
+
+        # Look for the run's dates in the page body, below the title.
+        body = soup.find("main") or soup.find("article") or soup.body or soup
+        text = " ".join(body.get_text(" ").split())
+        if title in text:
+            text = text[text.index(title):]
+        m = CHERRY_RANGE_RE.search(text)
+        if not m:
+            print(f"The Cherry Arts: no dates found on {url}", file=sys.stderr)
+            continue
+        m1, d1, m2, d2, year = m.groups()
+        year = int(year)
+        end_month = MONTHS[(m2 or m1).lower()[:3]]
+        start_month = MONTHS[m1.lower()[:3]]
+        try:
+            first = dt.date(year - (start_month > end_month), start_month, int(d1))
+            last = dt.date(year, end_month, int(d2 or d1))
+        except ValueError:
+            continue
+        if last < today or first > horizon:
+            continue
+        days = (last - first).days + 1
+        clock = parse_clock(text[m.end():m.end() + 40])
+        if days == 1 and clock:
+            out.append(event("The Cherry Arts", title, dt.datetime.combine(first, dt.time(*clock), TZ),
+                             url=url, description=desc))
+        elif days <= 7:
+            for i in range(days):
+                d = first + dt.timedelta(i)
+                out.append(event("The Cherry Arts", title, dt.datetime.combine(d, dt.time(0), TZ),
+                                 all_day=True, url=url, description=desc))
+        else:
+            # Exhibitions run for weeks: one entry on the opening day, or
+            # today once it has opened, so a running show stays listed.
+            span = f"Runs {first:%b %-d} – {last:%b %-d}. "
+            out.append(event("The Cherry Arts", title, dt.datetime.combine(max(first, today), dt.time(0), TZ),
+                             all_day=True, url=url, description=span + desc))
+    return out
+
+
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
     ("Liquid State Brewing", LIQUID_URL, scrape_liquid),
@@ -908,6 +1038,7 @@ VENUES = [
     ("Cinemapolis", CINEMAPOLIS_URL, scrape_cinemapolis),
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
     ("Hopshire", HOPSHIRE_URL, scrape_hopshire),
+    ("The Cherry Arts", CHERRY_URL, scrape_cherry),
     ("State Theatre", STATE_URL, scrape_state),
     ("Brewer's Kitchen & Taproom", BREWERS_URL, scrape_brewers),
     ("Table for One Trivia", T41_URL, scrape_t41),

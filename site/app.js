@@ -11,6 +11,7 @@ const VENUE_COLORS = {
   "Brewer's Kitchen & Taproom": "--v-brewers",
   "Table for One Trivia": "--v-t41",
   "Hopshire": "--v-hopshire",
+  "The Cherry Arts": "--v-cherry",
   "Misc": "--v-muse",
 };
 const TZ = "America/New_York";
