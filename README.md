@@ -15,6 +15,7 @@ websites every morning and published at
 | Hangar Theatre | The Events Calendar REST API at https://hangartheatre.org/wp-json/tribe/events/v1/events |
 | Hopshire | The Events Calendar REST API at https://hopshire.com/wp-json/tribe/events/v1/events (yoga and "Kitchen OPEN" entries left out) |
 | The Cherry Arts | Show pages linked from the season page (https://thecherry.org/2026-27-arts-performance/); performance times from their OvationTix ticket links, otherwise the run dates as all-day entries |
+| Hands Four Dancers of Ithaca | Contra dances on the Squarespace events page https://www.hands4dancers.org/upcoming-dances (also lists past dances, so only coming ones are kept; times from each listing's Google Calendar link; the dance's location goes in the description) |
 | State Theatre | Event list on https://stateofithaca.org/events/ (titles link to Tixr) |
 | Brewer's Kitchen & Taproom | Event data embedded in https://brewersithaca.com/template-page (a Toast Sites page; times are UTC in the data) |
 | Table for One Trivia | The "Upcoming games" list on https://www.t41trivia.com/play/, plus the home page's "Next Game" panel as a backup |

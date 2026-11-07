@@ -12,6 +12,7 @@ const VENUE_COLORS = {
   "Table for One Trivia": "--v-t41",
   "Hopshire": "--v-hopshire",
   "The Cherry Arts": "--v-cherry",
+  "Hands Four Dancers": "--v-h4d",
   "Misc": "--v-muse",
 };
 const TZ = "America/New_York";

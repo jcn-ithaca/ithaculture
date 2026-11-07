@@ -496,7 +496,7 @@ VISIT_SKIP = ("bike bar", "liquid state", "k-house", "khouse", "cinemapolis",
               "hangar", "state theatre", "state theater", "state of ithaca",
               "brewers kitchen", "brewer's kitchen", "brewer’s kitchen", "hopshire",
               "cherry arts", "cherry artspace", "cherry performance space", "cherry gallery",
-              "102 cherry st", "130 cherry st")
+              "102 cherry st", "130 cherry st", "hands four", "hands 4", "hfdi")
 
 
 def visit_detail(url):
@@ -569,6 +569,7 @@ MUSE_VENUES = {
     "Brewer's Kitchen & Taproom": ("brewers kitchen", "brewer's kitchen", "brewer’s kitchen"),
     "Trees Up Tompkins": ("trees up",),
     "Ithaca Children's Garden": ("children's garden", "childrens garden", "children’s garden"),
+    "Hands Four Dancers": ("hands four", "hands 4", "hfdi"),
 }
 
 
@@ -1042,6 +1043,80 @@ def scrape_cherry():
     return out
 
 
+# --- Hands Four Dancers of Ithaca -------------------------------------------
+
+H4D_URL = "https://www.hands4dancers.org/upcoming-dances"
+# A Squarespace events page that also keeps every past dance, so it's
+# filtered by date. (robots.txt disallows ?format=json/ical, so the HTML is
+# read.) Dances move around town (LACS, CSMA, Stewart Park), so the place goes
+# in the description.
+GCAL_DATES_RE = re.compile(r"dates=(\d{8}T\d{6}Z)(?:%2F|/)(\d{8}T\d{6}Z)")
+
+
+def h4d_times(art):
+    """(start, end) for one listing: from its Google Calendar link (UTC), or
+    else from the date and 24-hour times Squarespace prints."""
+    for a in art.select('a[href*="google.com/calendar"]'):
+        m = GCAL_DATES_RE.search(a["href"])
+        if m:
+            s, e = (dt.datetime.strptime(x, "%Y%m%dT%H%M%SZ").replace(tzinfo=dt.timezone.utc).astimezone(TZ)
+                    for x in m.groups())
+            return s, e
+    date_tag = art.select_one("time.event-date[datetime]") or art.find("time", attrs={"datetime": True})
+    if not date_tag:
+        return None, None
+    day = dt.date.fromisoformat(date_tag["datetime"][:10])
+    start_tag = art.select_one(".event-time-12hr-start") or art.select_one(".event-time-12hr")
+    end_tag = art.select_one(".event-time-12hr-end")
+    clock = parse_clock(start_tag.get_text(" ")) if start_tag else None
+    if not clock:
+        return dt.datetime.combine(day, dt.time(0), TZ), None
+    start = dt.datetime.combine(day, dt.time(*clock), TZ)
+    end_clock = parse_clock(end_tag.get_text(" ")) if end_tag else None
+    end_day = dt.date.fromisoformat(end_tag["datetime"][:10]) if end_tag and end_tag.get("datetime") else day
+    end = dt.datetime.combine(end_day, dt.time(*end_clock), TZ) if end_clock else None
+    return start, end
+
+
+def scrape_h4d():
+    soup = BeautifulSoup(fetch(H4D_URL, "hands4dancers.html").text, "html.parser")
+    arts = soup.select("article.eventlist-event") or soup.select("article[class*=eventlist]")
+    if not arts:
+        raise ValueError("no event list on the page")
+    today = now().date()
+    horizon = today + dt.timedelta(days=DAYS_AHEAD)
+    out = []
+    for art in arts:
+        link = art.select_one(".eventlist-title a[href]") or art.select_one("h1 a[href], h2 a[href]")
+        if not link:
+            continue
+        title = link.get_text(" ", strip=True)
+        start, end = h4d_times(art)
+        if not title or not start or start.date() < today or start.date() > horizon:
+            continue
+        url = requests.compat.urljoin(H4D_URL, link["href"])
+        where_tag = art.select_one(".eventlist-meta-address")
+        where = ""
+        if where_tag:
+            for a in where_tag.select("a"):
+                a.decompose()
+            where = " ".join(where_tag.get_text(" ").split())
+        excerpt = art.select_one(".eventlist-excerpt")
+        desc = " ".join((excerpt.get_text(" ") if excerpt else "").split())
+        if where:
+            desc = f"at {where}. {desc}".strip()
+        img = None
+        tag = art.select_one(".eventlist-column-thumbnail img") or art.find("img")
+        if tag:
+            src = tag.get("data-src") or tag.get("data-image") or tag.get("src")
+            if src and not src.startswith("data:"):
+                img = requests.compat.urljoin(H4D_URL, src)
+        all_day = start.time() == dt.time(0) and end is None
+        out.append(event("Hands Four Dancers", title, start, end=end, all_day=all_day,
+                         url=url, description=desc, image=img))
+    return out
+
+
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
     ("Liquid State Brewing", LIQUID_URL, scrape_liquid),
@@ -1050,6 +1125,7 @@ VENUES = [
     ("Hangar Theatre", HANGAR_URL, scrape_hangar),
     ("Hopshire", HOPSHIRE_URL, scrape_hopshire),
     ("The Cherry Arts", CHERRY_URL, scrape_cherry),
+    ("Hands Four Dancers", H4D_URL, scrape_h4d),
     ("State Theatre", STATE_URL, scrape_state),
     ("Brewer's Kitchen & Taproom", BREWERS_URL, scrape_brewers),
     ("Table for One Trivia", T41_URL, scrape_t41),
