@@ -1070,6 +1070,8 @@ SLIDES_PER_VENUE = 2
 SLIDE_WIDTH = 900
 # Roundups link to other people's pages, so their pictures can't be vouched for.
 SLIDES_SKIP_VENUES = {MUSE_VENUE, "Visit Ithaca"}
+# Recurring house nights go to the back of the queue behind named performers.
+ROUTINE_RE = re.compile(r"\b(trivia|bingo|open mic|book club|karaoke|jam|closed|meeting|roundtable|flight night|dj night)\b", re.I)
 GENERIC_IMAGE_RE = re.compile(r"logo|favicon|placeholder|default|site-?icon|blank|spacer", re.I)
 
 
@@ -1104,7 +1106,8 @@ def slide_candidates(events, venue_pages):
             continue
         seen.add(key)
         out.append(e)
-    return out
+    # Stable sort: soonest first within each group.
+    return sorted(out, key=lambda e: bool(ROUTINE_RE.search(e["title"])))
 
 
 def image_for(e):

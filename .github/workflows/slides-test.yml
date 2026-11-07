@@ -19,3 +19,22 @@ jobs:
           name: site-preview
           path: site/
           retention-days: 3
+      - name: Probe State Theatre event images
+        run: |
+          python - <<'PY'
+          import requests
+          from bs4 import BeautifulSoup
+          s = BeautifulSoup(requests.get("https://stateofithaca.org/events/", headers={"User-Agent": "Mozilla/5.0 (compatible; ithaculture/1.0)"}, timeout=30).text, "html.parser")
+          seen = set()
+          for a in s.find_all("a", href=True):
+              if "tixr.com/groups/stateofithaca/events/" not in a["href"] or a["href"] in seen:
+                  continue
+              seen.add(a["href"])
+              img = a.find("img")
+              prev = a.find_previous("img")
+              nxt = a.find_next("img")
+              print(a["href"][-40:], "| text:", a.get_text(" ", strip=True)[:40])
+              print("   inside:", img and (img.get("src"), img.get("data-src"), img.get("srcset", "")[:80]))
+              print("   prev:", prev and (prev.get("src"), prev.get("data-src"), prev.get("alt")))
+              print("   next:", nxt and (nxt.get("src"), nxt.get("data-src"), nxt.get("alt")))
+          PY
