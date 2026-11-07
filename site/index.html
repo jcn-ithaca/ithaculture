@@ -13,6 +13,7 @@
   <p class="tagline">What's on in Ithaca, gathered from venue websites every morning.</p>
 </header>
 <div class="layout">
+<div class="listings">
   <div class="toolbar">
     <details class="menu" id="venue-menu">
       <summary>Venues: <span class="menu-state">All</span></summary>
@@ -34,6 +35,11 @@
     <span id="updated"></span>
   </p>
   <main id="agenda"><p class="empty">Loading events…</p></main>
+</div>
+<aside class="slideshow" id="slideshow" aria-label="Coming up: pictures from venue event pages" hidden>
+  <div class="slides" aria-live="off"></div>
+  <div class="slide-nav"></div>
+</aside>
 </div>
 <footer>
   <p id="sources"></p>

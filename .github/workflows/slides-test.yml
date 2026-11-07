@@ -1,0 +1,21 @@
+name: Slideshow test (temporary, no deploy)
+on:
+  push:
+    branches: [claude/project-thread-ep8ekp]
+permissions:
+  contents: read
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r scraper/requirements.txt
+      - run: python scraper/scrape.py --out site
+      - uses: actions/upload-artifact@v5
+        with:
+          name: site-preview
+          path: site/
+          retention-days: 3

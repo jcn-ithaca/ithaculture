@@ -68,6 +68,7 @@ let active = new Set();
 let activeDays = new Set(WEEKDAYS);
 
 function render() {
+  renderSlides();
   const main = document.getElementById("agenda");
   main.replaceChildren();
   const events = data.events.filter((e) => active.has(e.venue) && activeDays.has(weekday(new Date(e.start))));
@@ -236,6 +237,104 @@ function renderMeta() {
     sources.append(v.url ? el("a", { href: v.url, target: "_blank", rel: "noopener" }, v.name) : v.name);
     if (!v.ok) sources.append(el("span", { class: "warn" }, " (couldn't be read today)"));
   });
+}
+
+// Slideshow of coming performers and events, in a right-hand column on wide
+// screens. The pictures come from the venues' own event pages (see
+// build_slides in the scraper). It follows the venue filter, skips shows that
+// are over, and is only built when the column is visible, so phones never
+// download the pictures.
+const WIDE = window.matchMedia("(min-width: 900px)");
+const CALM = window.matchMedia("(prefers-reduced-motion: reduce)");
+const SLIDE_MS = 8000;
+let slideTimer = null;
+let slideIndex = 0;
+let slideKey = "";
+
+function slideWhen(s) {
+  const d = new Date(s.start);
+  const day = dayKey(d) === dayKey(new Date()) ? "Today"
+    : d.toLocaleDateString("en-US", { timeZone: TZ, weekday: "long", month: "short", day: "numeric" });
+  return s.all_day ? day : `${day} · ${timeLabel(d)}`;
+}
+
+function currentSlides() {
+  const now = Date.now();
+  return (data.slides || []).filter((s) => {
+    if (!active.has(s.venue)) return false;
+    const start = new Date(s.start).getTime();
+    return s.all_day ? dayKey(new Date(s.start)) >= dayKey(new Date()) : start + 3 * 3600e3 > now;
+  });
+}
+
+function showSlide(i) {
+  const box = document.getElementById("slideshow");
+  const slides = box.querySelectorAll(".slide");
+  if (!slides.length) return;
+  slideIndex = (i + slides.length) % slides.length;
+  slides.forEach((s, n) => {
+    s.classList.toggle("on", n === slideIndex);
+    s.setAttribute("aria-hidden", String(n !== slideIndex));
+    s.querySelectorAll("a").forEach((a) => { a.tabIndex = n === slideIndex ? 0 : -1; });
+  });
+  box.querySelectorAll(".slide-nav button").forEach((b, n) =>
+    b.setAttribute("aria-current", String(n === slideIndex)));
+}
+
+function startSlides() {
+  clearInterval(slideTimer);
+  slideTimer = null;
+  const box = document.getElementById("slideshow");
+  if (CALM.matches || document.hidden || box.matches(":hover, :focus-within")) return;
+  if (box.querySelectorAll(".slide").length > 1) slideTimer = setInterval(() => showSlide(slideIndex + 1), SLIDE_MS);
+}
+
+function renderSlides() {
+  const box = document.getElementById("slideshow");
+  if (!data || !WIDE.matches) {
+    clearInterval(slideTimer);
+    box.hidden = true;
+    return;
+  }
+  const list = currentSlides();
+  const key = list.map((s) => s.image).join("|");
+  if (key === slideKey && !box.hidden) return;
+  slideKey = key;
+  box.hidden = !list.length;
+  const frame = box.querySelector(".slides");
+  const nav = box.querySelector(".slide-nav");
+  frame.replaceChildren();
+  nav.replaceChildren();
+  list.forEach((s, i) => {
+    const link = (cls, ...kids) => s.url
+      ? el("a", { class: cls, href: s.url, target: "_blank", rel: "noopener" }, ...kids)
+      : el("span", { class: cls }, ...kids);
+    const lazy = i < 2 ? "eager" : "lazy";
+    frame.append(el("figure", { class: "slide", style: venueStyle(s.venue) },
+      link("pic",
+        el("img", { class: "fill", src: s.image, alt: "", loading: lazy }),
+        el("img", { class: "main", src: s.image, alt: s.title, loading: lazy })),
+      el("figcaption", {},
+        el("div", { class: "when" }, slideWhen(s)),
+        link("title", s.title),
+        el("div", { class: "venue" }, s.venue))));
+    const dot = el("button", { type: "button", "aria-label": `Show ${s.title}` });
+    dot.addEventListener("click", () => { showSlide(i); startSlides(); });
+    nav.append(dot);
+  });
+  nav.hidden = list.length < 2;
+  showSlide(0);
+  startSlides();
+}
+
+{
+  const box = document.getElementById("slideshow");
+  for (const ev of ["mouseenter", "focusin"]) box.addEventListener(ev, () => { clearInterval(slideTimer); slideTimer = null; });
+  box.addEventListener("mouseleave", startSlides);
+  box.addEventListener("focusout", () => setTimeout(startSlides, 0));
+  document.addEventListener("visibilitychange", startSlides);
+  WIDE.addEventListener("change", renderSlides);
+  CALM.addEventListener("change", startSlides);
 }
 
 fetch("events.json", { cache: "no-cache" })

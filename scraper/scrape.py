@@ -91,8 +91,8 @@ def clip(text, limit):
 
 
 def event(venue, title, start, *, end=None, all_day=False, url=None,
-          description="", kind="event"):
-    return {
+          description="", kind="event", image=None):
+    ev = {
         "venue": venue,
         "title": " ".join(title.split()),
         "start": start.isoformat(),
@@ -102,6 +102,10 @@ def event(venue, title, start, *, end=None, all_day=False, url=None,
         "description": clip(" ".join(description.split()), 800),
         "kind": kind,
     }
+    if image:
+        # Only used to pick slideshow pictures; removed before events.json is written.
+        ev["image"] = image
+    return ev
 
 
 # --- Bike Bar ---------------------------------------------------------------
@@ -386,10 +390,12 @@ def tribe_events(venue, api, name, skip=None):
         end = dt.datetime.fromisoformat(e["end_date"]).replace(tzinfo=TZ)
         if start.date() > horizon:
             continue
+        img = e.get("image") or {}
+        img = img.get("url") if isinstance(img, dict) else None
         if not e.get("all_day"):
             out.append(event(venue, title, start,
                              end=end if end > start else None,
-                             url=e.get("url"), description=desc))
+                             url=e.get("url"), description=desc, image=img))
             continue
         days = (end.date() - start.date()).days + 1
         if days <= 7:
@@ -402,7 +408,7 @@ def tribe_events(venue, api, name, skip=None):
             # Long runs (classes, residencies): one entry on the first day.
             span = f"Runs {start:%b %-d} – {end:%b %-d}. "
             out.append(event(venue, title, start, all_day=True,
-                             url=e.get("url"), description=span + desc))
+                             url=e.get("url"), description=span + desc, image=img))
     return out
 
 
@@ -973,6 +979,7 @@ def scrape_cherry():
             continue
         meta = soup.find("meta", attrs={"name": "description"}) or soup.find("meta", property="og:description")
         desc = (meta.get("content") or "") if meta else ""
+        img = page_image(soup, url)
 
         perfs = set()
         for a in soup.select('a[href*="ovationtix.com"]'):
@@ -988,7 +995,7 @@ def scrape_cherry():
             if start.date() > horizon or start in perfs:
                 continue
             perfs.add(start)
-            out.append(event("The Cherry Arts", title, start, url=a["href"], description=desc))
+            out.append(event("The Cherry Arts", title, start, url=a["href"], description=desc, image=img))
         if perfs:
             continue
 
@@ -1016,18 +1023,18 @@ def scrape_cherry():
         clock = parse_clock(text[m.end():m.end() + 40])
         if days == 1 and clock:
             out.append(event("The Cherry Arts", title, dt.datetime.combine(first, dt.time(*clock), TZ),
-                             url=url, description=desc))
+                             url=url, description=desc, image=img))
         elif days <= 7:
             for i in range(days):
                 d = first + dt.timedelta(i)
                 out.append(event("The Cherry Arts", title, dt.datetime.combine(d, dt.time(0), TZ),
-                                 all_day=True, url=url, description=desc))
+                                 all_day=True, url=url, description=desc, image=img))
         else:
             # Exhibitions run for weeks: one entry on the opening day, or
             # today once it has opened, so a running show stays listed.
             span = f"Runs {first:%b %-d} – {last:%b %-d}. "
             out.append(event("The Cherry Arts", title, dt.datetime.combine(max(first, today), dt.time(0), TZ),
-                             all_day=True, url=url, description=span + desc))
+                             all_day=True, url=url, description=span + desc, image=img))
     return out
 
 
@@ -1047,6 +1054,147 @@ VENUES = [
     ("Trees Up Tompkins", TUT_URL, scrape_trees_up),
     ("Ithaca Children's Garden", ICG_URL, scrape_icg),
 ]
+
+
+# --- Slideshow --------------------------------------------------------------
+
+# On wide screens the page shows a slideshow of pictures of the coming days'
+# performers and events. Pictures only come from an event's own page on the
+# venue's site (or the venue's own API), never from a search, and a picture
+# is dropped when it looks like a site-wide default rather than this event's:
+# a logo, the venue home page's share image, or the same picture on two
+# different events. They're saved, shrunk, into site/slides/.
+SLIDES_MAX = 8
+SLIDES_DAYS = 7
+SLIDES_PER_VENUE = 2
+SLIDE_WIDTH = 900
+# Roundups link to other people's pages, so their pictures can't be vouched for.
+SLIDES_SKIP_VENUES = {MUSE_VENUE, "Visit Ithaca"}
+GENERIC_IMAGE_RE = re.compile(r"logo|favicon|placeholder|default|site-?icon|blank|spacer", re.I)
+
+
+def page_image(soup, base):
+    """The share picture a page declares (og:image or twitter:image), if any."""
+    for attrs in ({"property": "og:image"}, {"name": "og:image"},
+                  {"property": "og:image:secure_url"}, {"name": "twitter:image"},
+                  {"property": "twitter:image"}):
+        tag = soup.find("meta", attrs=attrs)
+        if tag and tag.get("content", "").strip():
+            return requests.compat.urljoin(base, tag["content"].strip())
+    return None
+
+
+def slide_candidates(events, venue_pages):
+    """Upcoming non-film events with a page of their own, soonest first,
+    one entry per show."""
+    today = now().date()
+    last = today + dt.timedelta(days=SLIDES_DAYS)
+    seen, out = set(), []
+    for e in events:
+        if e["kind"] == "film" or e["venue"] in SLIDES_SKIP_VENUES:
+            continue
+        if not (today <= dt.date.fromisoformat(e["start"][:10]) <= last):
+            continue
+        key = (e["venue"], e["title"].lower())
+        if key in seen:
+            continue
+        page = (e.get("url") or "").split("#")[0].rstrip("/")
+        own_page = page and page not in venue_pages and requests.compat.urlparse(page).path.strip("/")
+        if not (e.get("image") or own_page):
+            continue
+        seen.add(key)
+        out.append(e)
+    return out
+
+
+def image_for(e):
+    if e.get("image"):
+        return e["image"]
+    soup = BeautifulSoup(fetch(e["url"], attempts=2).text, "html.parser")
+    return page_image(soup, e["url"])
+
+
+def load_picture(url):
+    """Download a picture and return it as a resized RGB Pillow image, or None
+    when it's too small or oddly shaped to be a performer or event photo."""
+    from PIL import Image
+    import io
+    r = fetch(url, attempts=2)
+    if not r.headers.get("content-type", "image/").startswith("image/") or len(r.content) > 15_000_000:
+        return None, None
+    img = Image.open(io.BytesIO(r.content))
+    img.load()
+    w, h = img.size
+    if w < 400 or h < 250 or not (0.5 <= w / h <= 2.6):
+        return None, None
+    digest = hashlib.sha1(img.convert("RGB").resize((16, 16)).tobytes()).hexdigest()
+    img = img.convert("RGB")
+    if w > SLIDE_WIDTH:
+        img = img.resize((SLIDE_WIDTH, round(h * SLIDE_WIDTH / w)), Image.LANCZOS)
+    return img, digest
+
+
+def build_slides(events, out_dir):
+    venue_pages = {u.rstrip("/") for _, u, _ in VENUES if u}
+    candidates = slide_candidates(events, venue_pages)
+    # The venue home page's share picture is the site default; don't use it.
+    home_images = {}
+    found = []  # (event, image url, picture, digest)
+    for e in candidates:
+        if len(found) >= SLIDES_MAX * 3:
+            break
+        try:
+            src = image_for(e)
+            if not src or GENERIC_IMAGE_RE.search(requests.compat.urlparse(src).path):
+                continue
+            venue_url = next((u for n, u, _ in VENUES if n == e["venue"]), None)
+            if venue_url and e["venue"] not in home_images:
+                try:
+                    home = BeautifulSoup(fetch(venue_url, attempts=1).text, "html.parser")
+                    home_images[e["venue"]] = page_image(home, venue_url)
+                except requests.RequestException:
+                    home_images[e["venue"]] = None
+            if src == home_images.get(e["venue"]):
+                continue
+            pic, digest = load_picture(src)
+            if pic is None:
+                continue
+            found.append((e, src, pic, digest))
+        except Exception as ex:
+            print(f"  slides: no picture for {e['venue']} / {e['title']} ({ex})", file=sys.stderr)
+
+    # A picture used for two different shows is a placeholder, not a performer.
+    by_digest, by_src = {}, {}
+    for e, src, _, digest in found:
+        by_digest.setdefault(digest, set()).add(e["title"].lower())
+        by_src.setdefault(src, set()).add(e["title"].lower())
+    found = [f for f in found if len(by_digest[f[3]]) == 1 and len(by_src[f[1]]) == 1]
+
+    # Soonest first, but at most two per venue unless there's room to spare.
+    picked, counts = [], {}
+    for e, *_ in found:
+        if len(picked) < SLIDES_MAX and counts.get(e["venue"], 0) < SLIDES_PER_VENUE:
+            picked.append(e)
+            counts[e["venue"]] = counts.get(e["venue"], 0) + 1
+    for e, *_ in found:
+        if len(picked) < SLIDES_MAX and e not in picked:
+            picked.append(e)
+    picked.sort(key=lambda e: e["start"])
+    pics = {id(e): (src, pic) for e, src, pic, _ in found}
+
+    slide_dir = out_dir / "slides"
+    slide_dir.mkdir(exist_ok=True)
+    for old in slide_dir.glob("*.jpg"):
+        old.unlink()
+    slides = []
+    for i, e in enumerate(picked, 1):
+        src, pic = pics[id(e)]
+        name = f"slides/{i}.jpg"
+        pic.save(out_dir / name, "JPEG", quality=80, optimize=True, progressive=True)
+        slides.append({"image": name, "source": src, "title": e["title"], "venue": e["venue"],
+                       "start": e["start"], "all_day": e["all_day"], "url": e.get("url")})
+        print(f"  slide {i}: {e['start'][:16]}  {e['venue']}  {e['title']}  <- {src}")
+    return slides
 
 
 def write_ics(events, path):
@@ -1113,8 +1261,16 @@ def main():
     events = [e for e in events if dt.datetime.fromisoformat(e["start"]).date() >= today]
     events = drop_roundup_duplicates(events, [MUSE_VENUE, "Visit Ithaca"])
     events.sort(key=lambda e: (e["start"], e["venue"], e["title"]))
+    try:
+        slides = build_slides(events, out_dir)
+    except Exception:
+        traceback.print_exc()
+        slides = []
+    print(f"slideshow: {len(slides)} pictures")
+    for e in events:
+        e.pop("image", None)
     data = {"generated_at": now().isoformat(timespec="seconds"),
-            "venues": venues, "events": events}
+            "venues": venues, "events": events, "slides": slides}
     (out_dir / "events.json").write_text(json.dumps(data, indent=1))
     write_ics(events, out_dir / "ithaculture.ics")
     for e in events:
