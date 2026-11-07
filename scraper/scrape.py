@@ -435,8 +435,12 @@ def scrape_state():
     soup = BeautifulSoup(fetch(STATE_URL, "state.html").text, "html.parser")
     today = now().date()
     horizon = today + dt.timedelta(days=DAYS_AHEAD)
-    titles = []
+    titles, images = [], {}
     for a in soup.find_all("a", href=True):
+        # Each event also has its poster linked to the same Tixr page.
+        img = a.find("img") if STATE_TIX in a["href"] else None
+        if img and img.get("src") and a["href"] not in images:
+            images[a["href"]] = requests.compat.urljoin(STATE_URL, img["src"])
         text = a.get_text(" ", strip=True)
         if STATE_TIX in a["href"] and text and text.upper() not in {"TICKETS", "BUY TICKETS"}:
             if not titles or titles[-1][0] != a["href"]:
@@ -478,7 +482,7 @@ def scrape_state():
         if doors and show:
             extra.append(f"Doors {dt.time(*doors):%-I:%M %p}")
         out.append(event("State Theatre", title, start, url=href,
-                         description=" · ".join(extra)))
+                         description=" · ".join(extra), image=images.get(href)))
     if not dated:
         raise RuntimeError(f"found {len(titles)} events but could not read any dates")
     return out
