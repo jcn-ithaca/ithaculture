@@ -1138,7 +1138,7 @@ ARGOS_DATE_RE = re.compile(
     r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+(\d{1,2})(?:st|nd|rd|th)?\b", re.I)
 ARGOS_WEEKLY_RE = re.compile(r"^(?:every\s+)?(mon|tues|wednes|thurs|fri|satur|sun)days?\b", re.I)
 ARGOS_WEEKDAYS = ["mon", "tues", "wednes", "thurs", "fri", "satur", "sun"]
-ARGOS_ROOMS = ("argos warehouse", "bar argos")
+ARGOS_ROOM_RE = re.compile(r"argos warehouse|bar argos|argos grove", re.I)
 ARGOS_STOP_RE = re.compile(r"more info|^\w+\s+events$|^weekly events$", re.I)
 ARGOS_WEEKLY_WEEKS = 4
 CLOCK = r"(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)?"
@@ -1152,7 +1152,7 @@ def argos_times(text, date):
     def at(h, mi, ap, day=date):
         return dt.datetime.combine(day, dt.time(int(h) % 12 + (12 if ap[0] == "p" else 0), int(mi or 0)), TZ)
 
-    show = re.search(r"show\s*(?:at\s*)?" + CLOCK, t)
+    show = re.search(r"show:?\s*(?:at\s*)?" + CLOCK, t)
     if show and show.group(3):
         return at(*show.groups()), None
     m = re.search(CLOCK + r"\s*(?:-|–|—|to)\s*(?:(midnight)|" + CLOCK + ")", t)
@@ -1180,13 +1180,36 @@ def argos_details(lines):
     when, room, rest = [], None, []
     for t in lines:
         low = t.lower()
-        if re.search(r"\d\s*(?:[ap]\.?m|-|–)|midnight|doors|show", low) and not when:
+        r = ARGOS_ROOM_RE.search(t)
+        if len(t) < 40 and re.search(r"\d\s*(?:[ap]\.?m|-|–)|midnight|doors|show", low):
             when.append(t)
-        elif any(r in low for r in ARGOS_ROOMS) and len(t) < 40:
-            room = re.sub(r"^location:\s*", "", t, flags=re.I)
+        elif r and len(t) < 40:
+            room = room or r.group(0).title().replace("Bar Argos", "Bar Argos")
         else:
             rest.append(t)
     return " ".join(when), room, rest
+
+
+def argos_case(text):
+    """The page types titles in lower case; capitalize them for the list."""
+    if text != text.lower():
+        return text
+    return " ".join("DJ" if w == "dj" else w[:1].upper() + w[1:] for w in text.split(" "))
+
+
+def argos_lines(soup):
+    """Visible text lines. Wix leaves zero-width spaces on blank lines and
+    sometimes wraps a word onto its own line ('Performanc' / 'e')."""
+    out = []
+    for t in soup.get_text("\n").split("\n"):
+        t = " ".join(t.replace("\u200b", " ").replace("\ufeff", " ").split())
+        if not t or t in ("|", "·"):
+            continue
+        if out and len(t) <= 2 and t.isalpha() and t.islower() and out[-1][-1:].isalpha():
+            out[-1] += t
+            continue
+        out.append(t)
+    return out
 
 
 def scrape_argos():
@@ -1205,8 +1228,7 @@ def scrape_argos():
         src = img.get("src") or ""
         m = re.match(r"(https://static\.wixstatic\.com/media/[^/]+)", src)
         img.replace_with(soup.new_string(f"\nIMG {m.group(1)}\n" if m else "\n"))
-    lines = [" ".join(t.split()) for t in soup.get_text("\n").split("\n")]
-    lines = [t for t in lines if t and t not in ("|", "·")]
+    lines = argos_lines(soup)
     images = {n: t[4:] for n, t in enumerate(lines) if t.startswith("IMG ")}
     today = now().date()
     horizon = today + dt.timedelta(days=DAYS_AHEAD)
@@ -1217,13 +1239,25 @@ def scrape_argos():
     for idx, n in enumerate(starts):
         # Title lines: just above the date, back to the previous block's end.
         head = []
-        for t in reversed([t for t in lines[max(0, n - 4):n] if not t.startswith("IMG ")][-3:]):
-            if ARGOS_STOP_RE.search(t) or ARGOS_DATE_RE.search(t):
+        for t in reversed([t for t in lines[max(0, n - 6):n] if not t.startswith("IMG ")][-5:]):
+            if ARGOS_STOP_RE.search(t) or ARGOS_DATE_RE.search(t) or ARGOS_WEEKLY_RE.match(t):
                 break
             head.insert(0, t)
-        if not head:
+        # "rain tempos &" / "jennie lowe sterns" is one name; "With" / "Michael
+        # Bates & Chad Lieberman" is one line.
+        joined = []
+        for t in head:
+            if joined and (re.search(r"(&|,|\band|\bwith)$", joined[-1], re.I)):
+                joined[-1] += " " + t
+            else:
+                joined.append(t)
+        if not joined:
             continue
-        title, subtitle = head[0], head[1:]
+        title = joined[0]
+        for t in joined[1:3]:
+            title += (" " if t.lower().startswith("with ") else ": ") + t
+        title = re.sub(r"\bWith\b", "with", " ".join(argos_case(p) for p in title.split(": ")))
+        title = title[:1].upper() + title[1:]
         # Detail lines: after the date, up to MORE INFO or the next block's title.
         nxt = starts[idx + 1] if idx + 1 < len(starts) else len(lines)
         body, url, image = [], None, None
@@ -1243,7 +1277,7 @@ def scrape_argos():
                 break
             body.append(t)
         when, room, rest = argos_details(body[:6])
-        desc_parts = subtitle + ([f"at {room}"] if room else []) + rest
+        desc_parts = ([f"at {room}"] if room else []) + rest
         desc = " · ".join(p.strip(" |") for p in desc_parts if p.strip(" |"))
         if ARGOS_DATE_RE.search(lines[n]):
             dates = [infer_year(MONTHS[m.group(1).lower()[:3]], int(m.group(2)), today)]
