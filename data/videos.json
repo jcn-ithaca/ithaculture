@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T22:40:00Z",
+ "updated": "2026-11-08T08:43:24Z",
  "videos": [
   {
    "venue": "State Theatre",
@@ -10,7 +10,208 @@
    "channel": "Sammy Rae",
    "channel_url": "https://www.youtube.com/@SammyRae",
    "note": "Boogie All By Yourself (Official Video), on the band's own channel"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "JIMKATA",
+   "date": "2026-11-13",
+   "performer": "Jimkata",
+   "youtube_id": "V2oM_EJbgc4",
+   "channel": "Jimkata",
+   "channel_url": "https://www.youtube.com/@jimkatamusic",
+   "note": "Jimkata - Wait For You (Official Video); jimkata.com links this channel"
+  },
+  {
+   "venue": "State Theatre",
+   "title": "Punch Brothers",
+   "date": "2026-11-14",
+   "performer": "Punch Brothers",
+   "youtube_id": "SxaPbOEm070",
+   "channel": "Punch Brothers",
+   "channel_url": "https://www.youtube.com/@punchbrothers",
+   "note": "Punch Brothers - \"Movement and Location\" [Official Video]; punchbrothers.com links the band's YouTube channel, name matches exactly"
+  },
+  {
+   "venue": "State Theatre",
+   "title": "BenDeLaCreme Presents: The Jinkx & DeLa Holiday Show",
+   "date": "2026-11-15",
+   "performer": "BenDeLaCreme",
+   "youtube_id": "WcHwXFYA8Fo",
+   "channel": "BenDeLaCreme",
+   "channel_url": "https://www.youtube.com/@bendelacreme",
+   "note": "The Jinkx & DeLa Holiday Show 2025 Tour - Official Trailer; on presenter BenDeLaCreme's own channel, tour site lists this Ithaca date"
   }
  ],
- "checked": []
+ "checked": [
+  {
+   "venue": "Misc",
+   "title": "The Driftwood Trio — IPEI 30th anniversary celebration",
+   "date": "2026-11-08"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Irish Sessions with Six Mile Craic!",
+   "date": "2026-11-08"
+  },
+  {
+   "venue": "Misc",
+   "title": "Nathan Laube",
+   "date": "2026-11-08"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "10th Anniversary Festival of the Juget-Sinclair French Romantic organ concert",
+   "date": "2026-11-08"
+  },
+  {
+   "venue": "Misc",
+   "title": "Hank Roberts, Chad Lieberman, Michael Bates",
+   "date": "2026-11-08"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Boss Tenors",
+   "date": "2026-11-08"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Comedy Open Mic!",
+   "date": "2026-11-09"
+  },
+  {
+   "venue": "Hangar Theatre",
+   "title": "Fundamentals of Acting",
+   "date": "2026-11-10"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "Brewed for Suspsense Book Club",
+   "date": "2026-11-10"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "DJ Bingo-Every Tuesday",
+   "date": "2026-11-10"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "EZ Listening",
+   "date": "2026-11-10"
+  },
+  {
+   "venue": "Trees Up Tompkins",
+   "title": "Baker Park",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "MYSTERY FLIGHT NIGHT",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "Plant Bingo- Wednesday 11/11",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Trivia Night!",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Bike Bar",
+   "title": "High Horse/Bluegrass",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Trivia Night w/ Bob Proehl!",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "State Theatre",
+   "title": "Warren Miller's 'Days Off'",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Reggae Underground",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Brewhouse Blues Jam",
+   "date": "2026-11-12"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Agatha Haag & Sticky Boovy",
+   "date": "2026-11-12"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Astronomy On Tap!",
+   "date": "2026-11-12"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Live Music – The Soul Benders",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "ICSDEA Private Party",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Dog Poop Attack",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "Virginia Davis Live — Saturday 11/14",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Bike Bar",
+   "title": "DJ Gourd /funk, soul and breaks",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Call Your Girlfriend: A Dance Party for Femmes & Friends",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Eric Carlin's Half Dead: Cornell '77 Revisited",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Hangar Theatre",
+   "title": "Whiskey Tango Sideshow",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Dog Poop Attack",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Dolly Fest",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Hangar Theatre",
+   "title": "E Collector Card Show",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Dog Poop Attack",
+   "date": "2026-11-15"
+  }
+ ]
 }
