@@ -20,6 +20,7 @@
   --v-hopshire: #6b8e23;
   --v-cherry: #8b1e3f;
   --v-h4d: #b0601f;
+  --v-argos: #546478;
   --v-muse: #b53a4a;
 }
 @media (prefers-color-scheme: dark) {
@@ -45,6 +46,7 @@
     --v-hopshire: #b5d16a;
     --v-cherry: #f2879f;
     --v-h4d: #f0a66a;
+    --v-argos: #a9b8cc;
     --v-muse: #ff8f9c;
   }
 }
