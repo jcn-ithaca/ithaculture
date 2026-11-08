@@ -1253,11 +1253,10 @@ def scrape_argos():
                 joined.append(t)
         if not joined:
             continue
-        title = joined[0]
+        title = argos_case(joined[0])
         for t in joined[1:3]:
-            title += (" " if t.lower().startswith("with ") else ": ") + t
-        title = re.sub(r"\bWith\b", "with", " ".join(argos_case(p) for p in title.split(": ")))
-        title = title[:1].upper() + title[1:]
+            title += (" " if t.lower().startswith("with ") else ": ") + argos_case(t)
+        title = re.sub(r"(?<=.)\bWith\b", "with", title)
         # Detail lines: after the date, up to MORE INFO or the next block's title.
         nxt = starts[idx + 1] if idx + 1 < len(starts) else len(lines)
         body, url, image = [], None, None
