@@ -13,6 +13,7 @@ const VENUE_COLORS = {
   "Hopshire": "--v-hopshire",
   "The Cherry Arts": "--v-cherry",
   "Hands Four Dancers": "--v-h4d",
+  "Argos Inn": "--v-argos",
   "Misc": "--v-muse",
 };
 const TZ = "America/New_York";

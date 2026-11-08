@@ -497,7 +497,8 @@ VISIT_SKIP = ("bike bar", "liquid state", "k-house", "khouse", "cinemapolis",
               "hangar", "state theatre", "state theater", "state of ithaca",
               "brewers kitchen", "brewer's kitchen", "brewer’s kitchen", "hopshire",
               "cherry arts", "cherry artspace", "cherry performance space", "cherry gallery",
-              "102 cherry st", "130 cherry st", "hands four", "hands 4", "hfdi")
+              "102 cherry st", "130 cherry st", "hands four", "hands 4", "hfdi",
+              "argos inn", "argos warehouse", "bar argos", "408 e state")
 
 
 def visit_detail(url):
@@ -571,6 +572,7 @@ MUSE_VENUES = {
     "Trees Up Tompkins": ("trees up",),
     "Ithaca Children's Garden": ("children's garden", "childrens garden", "children’s garden"),
     "Hands Four Dancers": ("hands four", "hands 4", "hfdi"),
+    "Argos Inn": ("argos inn", "argos warehouse", "bar argos"),
 }
 
 
@@ -1123,6 +1125,145 @@ def scrape_h4d():
                          url=url, description=desc, image=img))
     return out
 
+# --- Argos Inn ---------------------------------------------------------------
+
+ARGOS_URL = "https://www.argosinn.com/public-events"
+# A Wix page with the shows typed in as free text, no feed and no event pages:
+# a title (and sometimes a subtitle), then "Sunday, November 8th", a time
+# like "6PM-8PM" or "Doors 7pm, Show 7:30pm", the room, the price, and a
+# "MORE INFO HERE" link to the performer, Facebook or Eventbrite. A weekly
+# section lists "Jazz Trio Performance" on "Wednesdays".
+ARGOS_DATE_RE = re.compile(
+    r"\b(?:Mon|Tues?|Wed(?:nes)?|Thu(?:rs)?|Fri|Sat(?:ur)?|Sun)(?:day)?\.?,?\s+"
+    r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+(\d{1,2})(?:st|nd|rd|th)?\b", re.I)
+ARGOS_WEEKLY_RE = re.compile(r"^(?:every\s+)?(mon|tues|wednes|thurs|fri|satur|sun)days?\b", re.I)
+ARGOS_WEEKDAYS = ["mon", "tues", "wednes", "thurs", "fri", "satur", "sun"]
+ARGOS_ROOMS = ("argos warehouse", "bar argos")
+ARGOS_STOP_RE = re.compile(r"more info|^\w+\s+events$|^weekly events$", re.I)
+ARGOS_WEEKLY_WEEKS = 4
+CLOCK = r"(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)?"
+
+
+def argos_times(text, date):
+    """(start, end) from 'Doors 7pm, Show 7:30pm', '6PM-8PM', '8PM-Midnight',
+    '5:30 - 7:30pm'. The start borrows am/pm from the end when it has none."""
+    t = text.lower().replace("noon", "12pm")
+
+    def at(h, mi, ap, day=date):
+        return dt.datetime.combine(day, dt.time(int(h) % 12 + (12 if ap[0] == "p" else 0), int(mi or 0)), TZ)
+
+    show = re.search(r"show\s*(?:at\s*)?" + CLOCK, t)
+    if show and show.group(3):
+        return at(*show.groups()), None
+    m = re.search(CLOCK + r"\s*(?:-|–|—|to)\s*(?:(midnight)|" + CLOCK + ")", t)
+    if m:
+        h1, m1, ap1, midnight, h2, m2, ap2 = m.groups()
+        ap_end = "pm" if midnight else ap2
+        ap_start = ap1 or ap_end
+        if ap_start:
+            start = at(h1, m1, ap_start)
+            if midnight:
+                end = dt.datetime.combine(date + dt.timedelta(days=1), dt.time(0), TZ)
+            else:
+                end = at(h2, m2, ap_end) if ap_end else None
+                if end and end <= start:
+                    end += dt.timedelta(days=1)
+            return start, end
+    clock = parse_clock(text)
+    if clock:
+        return dt.datetime.combine(date, dt.time(*clock), TZ), None
+    return None, None
+
+
+def argos_details(lines):
+    """Pull the time text, room and the rest (price etc.) out of a block's lines."""
+    when, room, rest = [], None, []
+    for t in lines:
+        low = t.lower()
+        if re.search(r"\d\s*(?:[ap]\.?m|-|–)|midnight|doors|show", low) and not when:
+            when.append(t)
+        elif any(r in low for r in ARGOS_ROOMS) and len(t) < 40:
+            room = re.sub(r"^location:\s*", "", t, flags=re.I)
+        else:
+            rest.append(t)
+    return " ".join(when), room, rest
+
+
+def scrape_argos():
+    soup = BeautifulSoup(fetch(ARGOS_URL, "argos.html").text, "html.parser")
+    for tag in soup(["script", "style", "noscript", "header", "footer", "nav"]):
+        tag.decompose()
+    # Remember where each MORE INFO link goes, keyed by its position in the text.
+    links = []
+    for a in soup.find_all("a", href=True):
+        if "more info" in a.get_text(" ").lower():
+            links.append(a["href"])
+            a.replace_with(soup.new_string("\nMORE INFO\n"))
+    # Keep each poster in place too; it goes on the slideshow. Wix serves a
+    # blurred thumbnail, and the original is the URL cut after the media id.
+    for img in soup.find_all("img"):
+        src = img.get("src") or ""
+        m = re.match(r"(https://static\.wixstatic\.com/media/[^/]+)", src)
+        img.replace_with(soup.new_string(f"\nIMG {m.group(1)}\n" if m else "\n"))
+    lines = [" ".join(t.split()) for t in soup.get_text("\n").split("\n")]
+    lines = [t for t in lines if t and t not in ("|", "·")]
+    images = {n: t[4:] for n, t in enumerate(lines) if t.startswith("IMG ")}
+    today = now().date()
+    horizon = today + dt.timedelta(days=DAYS_AHEAD)
+    out, link_no = [], 0
+    starts = [n for n, t in enumerate(lines) if ARGOS_DATE_RE.search(t) or ARGOS_WEEKLY_RE.match(t)]
+    if not starts:
+        raise ValueError("no dated events found on the page")
+    for idx, n in enumerate(starts):
+        # Title lines: just above the date, back to the previous block's end.
+        head = []
+        for t in reversed([t for t in lines[max(0, n - 4):n] if not t.startswith("IMG ")][-3:]):
+            if ARGOS_STOP_RE.search(t) or ARGOS_DATE_RE.search(t):
+                break
+            head.insert(0, t)
+        if not head:
+            continue
+        title, subtitle = head[0], head[1:]
+        # Detail lines: after the date, up to MORE INFO or the next block's title.
+        nxt = starts[idx + 1] if idx + 1 < len(starts) else len(lines)
+        body, url, image = [], None, None
+        m = ARGOS_DATE_RE.search(lines[n]) or ARGOS_WEEKLY_RE.match(lines[n])
+        tail = lines[n][m.end():].strip(" |,-–")
+        if tail:
+            body.append(tail)
+        for k, t in enumerate(lines[n + 1:nxt], start=n + 1):
+            if k in images:
+                image = image or images[k]
+                continue
+            if t == "MORE INFO":
+                url = links[link_no] if link_no < len(links) else None
+                link_no += 1
+                break
+            if ARGOS_STOP_RE.search(t):
+                break
+            body.append(t)
+        when, room, rest = argos_details(body[:6])
+        desc_parts = subtitle + ([f"at {room}"] if room else []) + rest
+        desc = " · ".join(p.strip(" |") for p in desc_parts if p.strip(" |"))
+        if ARGOS_DATE_RE.search(lines[n]):
+            dates = [infer_year(MONTHS[m.group(1).lower()[:3]], int(m.group(2)), today)]
+        else:
+            wd = ARGOS_WEEKDAYS.index(m.group(1).lower())
+            first = today + dt.timedelta(days=(wd - today.weekday()) % 7)
+            dates = [first + dt.timedelta(weeks=w) for w in range(ARGOS_WEEKLY_WEEKS)]
+        for date in dates:
+            if not date or date < today or date > horizon:
+                continue
+            start, end = argos_times(when, date)
+            ev_url = url or ARGOS_URL
+            if start:
+                out.append(event("Argos Inn", title, start, end=end, url=ev_url, description=desc,
+                                 image=image))
+            else:
+                out.append(event("Argos Inn", title, dt.datetime.combine(date, dt.time(0), TZ),
+                                 all_day=True, url=ev_url, description=desc, image=image))
+    return out
+
 
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
@@ -1133,6 +1274,7 @@ VENUES = [
     ("Hopshire", HOPSHIRE_URL, scrape_hopshire),
     ("The Cherry Arts", CHERRY_URL, scrape_cherry),
     ("Hands Four Dancers", H4D_URL, scrape_h4d),
+    ("Argos Inn", ARGOS_URL, scrape_argos),
     ("State Theatre", STATE_URL, scrape_state),
     ("Brewer's Kitchen & Taproom", BREWERS_URL, scrape_brewers),
     ("Table for One Trivia", T41_URL, scrape_t41),
