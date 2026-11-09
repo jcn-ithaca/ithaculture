@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T15:15:36Z",
+  "updated": "2026-11-09T15:19:00Z",
   "emails": [
     {
       "id": "1a175b8c05a34490",
@@ -25,237 +25,370 @@
       "id": "1a1ac02f443d3cf1",
       "subject": "Muse: Ithaca nightlife this weekend (Nov 5-8)",
       "date": "2026-11-05T14:00:37Z"
+    },
+    {
+      "id": "1a1c0a17d23ab0cb",
+      "subject": "Muse: Ithaca nightlife this week (Nov 9-15)",
+      "date": "2026-11-09T14:06:11Z"
     }
   ],
   "events": [
     {
-      "title": "Thursday Night Social Group Run",
-      "where": "Bike Bar Ithaca",
-      "start": "2026-11-05T17:30",
-      "end": "2026-11-05T20:30",
+      "title": "Afro-Cuban Percussion Class",
+      "where": "TreeHouse Studio & Lounge",
+      "start": "2026-11-09T18:00",
+      "end": "",
       "url": "",
-      "description": "Group run, then drinks after."
+      "description": "119 S Cayuga St."
     },
     {
-      "title": "London McDaniel & Lava — Jazz & Blues Night",
-      "where": "Ithaca 5 & Dime",
-      "start": "2026-11-05T19:00",
-      "end": "2026-11-05T21:00",
-      "url": "",
-      "description": "619 W State St."
-    },
-    {
-      "title": "Jessica Kirson",
+      "title": "Sammy Rae & The Friends with Melt",
       "where": "State Theatre of Ithaca",
-      "start": "2026-11-05T19:00",
+      "start": "2026-11-09T20:00",
       "end": "",
       "url": "",
-      "description": "Comedy."
+      "description": "Doors 7pm."
     },
     {
-      "title": "Posture, Timothy, Wise Bones",
-      "where": "Liquid State Brewing",
-      "start": "2026-11-05T19:00",
-      "end": "",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "Delaques",
-      "where": "The Nocturnal Cafe",
-      "start": "2026-11-05T20:00",
-      "end": "2026-11-05T22:00",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "Gallery Night music: Gould Girls, Space Duzzt, Virginia, Jonas Heimbecker",
+      "title": "EZ Listening: K-Medusa, The Corn, StepWriteRun, Unfinished Basements",
       "where": "K-HOUSE Room K",
-      "start": "2026-11-06T17:00",
-      "end": "2026-11-06T20:00",
-      "url": "",
-      "description": "Gallery Night; generally free."
-    },
-    {
-      "title": "Gallery Night music: The Road Taken",
-      "where": "CSMA Gallery",
-      "start": "2026-11-06T17:00",
-      "end": "2026-11-06T20:00",
-      "url": "",
-      "description": "Gallery Night; generally free."
-    },
-    {
-      "title": "Gallery Night music: Skeleton Hands and the Brat Dondada",
-      "where": "MACRE",
-      "start": "2026-11-06T17:00",
-      "end": "2026-11-06T20:00",
-      "url": "",
-      "description": "Gallery Night; generally free."
-    },
-    {
-      "title": "Busking for Justice: Bear Fox & Lydia Garrison",
-      "where": "Cafe DeWitt",
-      "start": "2026-11-06T17:30",
-      "end": "2026-11-06T19:00",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "1-800-Bitch & Freeway Art, with Overtired and Shodemon",
-      "where": "Liquid State Brewing",
-      "start": "2026-11-06T18:00",
+      "start": "2026-11-10T19:00",
       "end": "",
       "url": "",
       "description": ""
     },
     {
-      "title": "Battle of the Dad Bands",
-      "where": "Hangar Theatre",
-      "start": "2026-11-06T18:30",
-      "end": "2026-11-06T22:00",
+      "title": "Afro-Cuban Dance Class with Live Drumming",
+      "where": "TreeHouse Studio & Lounge",
+      "start": "2026-11-10T19:30",
+      "end": "",
       "url": "",
-      "description": "Benefit; $25."
+      "description": ""
     },
     {
-      "title": "Singing Notes and Slinging Jokes",
-      "where": "330 W State St",
-      "start": "2026-11-06T19:00",
-      "end": "2026-11-06T21:00",
-      "url": "",
-      "description": "Comedy."
-    },
-    {
-      "title": "Dal Niente",
+      "title": "After Eight (Cornell a cappella)",
       "where": "Barnes Hall, Cornell University",
-      "start": "2026-11-06T19:30",
+      "start": "2026-11-10T20:01",
       "end": "",
       "url": "",
       "description": ""
     },
     {
-      "title": "Turnpike, Delia-H, Giana D'Agostino Band",
-      "where": "The Nocturnal Cafe",
-      "start": "2026-11-06T19:30",
-      "end": "",
+      "title": "Trivia Night",
+      "where": "Ithaca 5 & Dime",
+      "start": "2026-11-10T20:30",
+      "end": "2026-11-10T22:00",
       "url": "",
-      "description": ""
+      "description": "619 W State St; free to play."
     },
     {
-      "title": "Noisevember: Diagram A, Noise Nomads, Human Kindness, Lickspite, Magic Eye",
-      "where": "Angry Mom Records",
-      "start": "2026-11-06T20:00",
-      "end": "",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "DJ Dray",
-      "where": "K-HOUSE Room K",
-      "start": "2026-11-06T22:00",
-      "end": "",
-      "url": "",
-      "description": "House music."
-    },
-    {
-      "title": "The Merrill Trio",
-      "where": "K-HOUSE Room K",
-      "start": "2026-11-07T19:00",
-      "end": "2026-11-07T21:00",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "International Uilleann Piping Day concert: Kara Doyle, Tim Benson, Six Mile Craic",
-      "where": "Quaker Meeting House",
-      "start": "2026-11-07T19:00",
-      "end": "",
-      "url": "",
-      "description": "120 Third St; free."
-    },
-    {
-      "title": "Mighty Flowers & Jamaican Clash",
-      "where": "Altitude Dispensary",
-      "start": "2026-11-07T19:00",
-      "end": "",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "Sophistafunk with Proper Philth & Noah Fense",
-      "where": "Liquid State Brewing",
-      "start": "2026-11-07T19:00",
-      "end": "",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "The Figs & Debutante",
-      "where": "Willard Straight Hall Memorial Room, Cornell University",
-      "start": "2026-11-07T19:00",
-      "end": "",
-      "url": "",
-      "description": "Benefit."
-    },
-    {
-      "title": "Brotality, Praun, Triple Think, Necrotize",
-      "where": "The Nocturnal Cafe",
-      "start": "2026-11-07T19:00",
-      "end": "",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "Charlie Sings Judy",
-      "where": "Hangar Theatre",
-      "start": "2026-11-07T19:30",
-      "end": "",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "The Driftwood Trio — IPEI 30th anniversary celebration",
-      "where": "Hangar Theatre",
-      "start": "2026-11-08T15:00",
-      "end": "2026-11-08T17:00",
+      "title": "Midday Music for Organ: Reflecting Bach",
+      "where": "Anabel Taylor Chapel, Cornell University",
+      "start": "2026-11-11T12:30",
+      "end": "2026-11-11T13:10",
       "url": "",
       "description": "Free."
     },
     {
-      "title": "Six Mile Craic — monthly Irish Session",
-      "where": "Liquid State Brewing",
-      "start": "2026-11-08T16:00",
-      "end": "2026-11-08T19:00",
+      "title": "Argos Grove",
+      "where": "Argos Inn",
+      "start": "2026-11-11T17:30",
+      "end": "2026-11-11T19:30",
+      "url": "",
+      "description": "Jazz; 408 E State St."
+    },
+    {
+      "title": "Warren Miller's Days Off",
+      "where": "State Theatre of Ithaca",
+      "start": "2026-11-11T19:00",
+      "end": "",
+      "url": "",
+      "description": "Ski film; doors 6pm."
+    },
+    {
+      "title": "High Horse",
+      "where": "Bike Bar Ithaca",
+      "start": "2026-11-11T19:00",
+      "end": "",
       "url": "",
       "description": ""
     },
     {
-      "title": "Nathan Laube",
+      "title": "Daniel Roth",
       "where": "St. Luke Lutheran Church, Collegetown",
-      "start": "2026-11-08T16:00",
+      "start": "2026-11-11T19:00",
       "end": "",
       "url": "",
       "description": "Organ."
     },
     {
-      "title": "Hank Roberts, Chad Lieberman, Michael Bates",
+      "title": "Musical Theater Open Mic Night",
+      "where": "Kitchen Theatre",
+      "start": "2026-11-11T19:00",
+      "end": "",
+      "url": "",
+      "description": "Sign-up 6:30pm."
+    },
+    {
+      "title": "DJs Ziggy and Double A (Reggae Underground)",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-11T22:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Agatha Haag and Sticky Boovy",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-12",
+      "end": "",
+      "url": "",
+      "description": "Evening; check venue page for time."
+    },
+    {
+      "title": "Dolly Fest",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-12",
+      "end": "",
+      "url": "",
+      "description": "Runs through the weekend; check venue page for times."
+    },
+    {
+      "title": "Jess Novak",
+      "where": "The Exchange Restaurant",
+      "start": "2026-11-12T18:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "It's Giving....Purple!",
       "where": "Argos Warehouse",
-      "start": "2026-11-08T18:00",
+      "start": "2026-11-12T20:00",
+      "end": "",
+      "url": "",
+      "description": "Reproductive justice benefit and dance party."
+    },
+    {
+      "title": "Dolly Fest",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-13",
+      "end": "",
+      "url": "",
+      "description": "Runs through the weekend; check venue page for times."
+    },
+    {
+      "title": "Queeraoke",
+      "where": "The Rhine House",
+      "start": "2026-11-13",
+      "end": "",
+      "url": "",
+      "description": "632 W Seneca St; check venue page for time."
+    },
+    {
+      "title": "Sweater Weather Swing",
+      "where": "Willard Straight Hall, Cornell University",
+      "start": "2026-11-13T18:15",
+      "end": "2026-11-13T22:00",
+      "url": "",
+      "description": "Live music and social dance; beginner lesson 6:15pm, dancing 7-10pm."
+    },
+    {
+      "title": "November Poetry Open Mic",
+      "where": "Community School of Music and Arts",
+      "start": "2026-11-13T18:30",
       "end": "",
       "url": "",
       "description": ""
     },
     {
-      "title": "Boss Tenors (early set)",
-      "where": "K-HOUSE Room K",
-      "start": "2026-11-08T18:30",
+      "title": "Next Stop Comedy",
+      "where": "360Aurora",
+      "start": "2026-11-13T19:00",
       "end": "",
       "url": "",
       "description": ""
     },
     {
-      "title": "Boss Tenors (late set)",
+      "title": "Cornell Chamber Orchestra: The Sound of Storytelling",
+      "where": "Bailey Hall, Cornell University",
+      "start": "2026-11-13T19:30",
+      "end": "",
+      "url": "",
+      "description": "Live score to the 1920 silent film Dr. Jekyll and Mr. Hyde."
+    },
+    {
+      "title": "The Dog Poop Attack",
+      "where": "102 Cherry St",
+      "start": "2026-11-13T19:30",
+      "end": "",
+      "url": "",
+      "description": "Theatre."
+    },
+    {
+      "title": "Jimkata",
+      "where": "Liquid State Brewing",
+      "start": "2026-11-13T20:00",
+      "end": "",
+      "url": "",
+      "description": "Doors 7pm."
+    },
+    {
+      "title": "Dolly Fest",
       "where": "K-HOUSE Room K",
-      "start": "2026-11-08T20:00",
+      "start": "2026-11-14",
+      "end": "",
+      "url": "",
+      "description": "Runs through the weekend; check venue page for times."
+    },
+    {
+      "title": "Tompkins County Workers' Center winter fundraiser launch party",
+      "where": "The Rhine House",
+      "start": "2026-11-14T16:00",
+      "end": "2026-11-14T21:00",
+      "url": "",
+      "description": "Music, food, activities."
+    },
+    {
+      "title": "ROP Rocks the Eagles!",
+      "where": "Ithaca Eagles Club",
+      "start": "2026-11-14T16:00",
+      "end": "2026-11-14T19:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "A Queen vs. Elton John Candlelight Experience (6pm sitting)",
+      "where": "First Presbyterian Church",
+      "start": "2026-11-14T18:00",
+      "end": "",
+      "url": "",
+      "description": "315 N Cayuga St."
+    },
+    {
+      "title": "November Contra Dance",
+      "where": "Willard Straight Hall, Cornell University",
+      "start": "2026-11-14T18:30",
+      "end": "2026-11-14T22:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Banda AL9 and The Burkharts",
+      "where": "The Nocturnal Cafe",
+      "start": "2026-11-14T19:30",
+      "end": "",
+      "url": "",
+      "description": "103 S Geneva St; doors 7pm."
+    },
+    {
+      "title": "Cornell Glee Club: Singing in the Air",
+      "where": "Sage Chapel, Cornell University",
+      "start": "2026-11-14T19:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Danish String Quartet",
+      "where": "Bailey Hall, Cornell University",
+      "start": "2026-11-14T19:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Whiskey Tango Sideshow",
+      "where": "Hangar Theatre",
+      "start": "2026-11-14T19:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Sweet Harmony",
+      "where": "First Unitarian Society",
+      "start": "2026-11-14T19:30",
+      "end": "",
+      "url": "",
+      "description": "306 N Aurora St."
+    },
+    {
+      "title": "Eric Carlin's Half Dead: Cornell '77 Revisited",
+      "where": "Liquid State Brewing",
+      "start": "2026-11-14T20:00",
+      "end": "",
+      "url": "",
+      "description": "Doors 7pm; $18."
+    },
+    {
+      "title": "A Queen vs. Elton John Candlelight Experience (8pm sitting)",
+      "where": "First Presbyterian Church",
+      "start": "2026-11-14T20:00",
+      "end": "",
+      "url": "",
+      "description": "315 N Cayuga St."
+    },
+    {
+      "title": "Punch Brothers",
+      "where": "State Theatre of Ithaca",
+      "start": "2026-11-14T20:00",
+      "end": "",
+      "url": "",
+      "description": "Doors 7pm."
+    },
+    {
+      "title": "Dolly Fest",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-15",
+      "end": "",
+      "url": "",
+      "description": "Runs through the weekend; check venue page for times."
+    },
+    {
+      "title": "Rain Tempos and Jennie Lowe Stearns with Kristen Bigness",
+      "where": "Argos Warehouse",
+      "start": "2026-11-15",
+      "end": "",
+      "url": "",
+      "description": "Check venue page for time."
+    },
+    {
+      "title": "Motherwort (Dolly Fest)",
+      "where": "K-HOUSE Room K",
+      "start": "2026-11-15T12:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Cornell Gamelan Ensemble",
+      "where": "Klarman Hall, Cornell University",
+      "start": "2026-11-15T15:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Reflections and Radiance: Cayuga Vocal Ensemble 50th anniversary",
+      "where": "First Presbyterian Church",
+      "start": "2026-11-15T16:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Cornell Jazz Ensemble with Alan Ferber",
+      "where": "Bailey Hall, Cornell University",
+      "start": "2026-11-15T19:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "The Jinkx and DeLa Holiday Show",
+      "where": "State Theatre of Ithaca",
+      "start": "2026-11-15T20:00",
       "end": "",
       "url": "",
       "description": ""
