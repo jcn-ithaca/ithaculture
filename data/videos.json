@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T08:43:24Z",
+ "updated": "2026-11-09T08:43:40Z",
  "videos": [
   {
    "venue": "State Theatre",
@@ -44,38 +44,13 @@
  ],
  "checked": [
   {
-   "venue": "Misc",
-   "title": "The Driftwood Trio — IPEI 30th anniversary celebration",
-   "date": "2026-11-08"
-  },
-  {
    "venue": "Liquid State Brewing",
-   "title": "Irish Sessions with Six Mile Craic!",
-   "date": "2026-11-08"
-  },
-  {
-   "venue": "Misc",
-   "title": "Nathan Laube",
-   "date": "2026-11-08"
+   "title": "Comedy Open Mic!",
+   "date": "2026-11-09"
   },
   {
    "venue": "Visit Ithaca",
-   "title": "10th Anniversary Festival of the Juget-Sinclair French Romantic organ concert",
-   "date": "2026-11-08"
-  },
-  {
-   "venue": "Misc",
-   "title": "Hank Roberts, Chad Lieberman, Michael Bates",
-   "date": "2026-11-08"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Boss Tenors",
-   "date": "2026-11-08"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Comedy Open Mic!",
+   "title": "Composition Premieres",
    "date": "2026-11-09"
   },
   {
@@ -139,6 +114,16 @@
    "date": "2026-11-11"
   },
   {
+   "venue": "Argos Inn",
+   "title": "Argos Grove: Jazz Trio Performance",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "10th Anniversary Festival of the Juget-Sinclair French Romantic Organ Concert 2!",
+   "date": "2026-11-11"
+  },
+  {
    "venue": "Hopshire",
    "title": "Brewhouse Blues Jam",
    "date": "2026-11-12"
@@ -151,6 +136,11 @@
   {
    "venue": "Liquid State Brewing",
    "title": "Astronomy On Tap!",
+   "date": "2026-11-12"
+  },
+  {
+   "venue": "Argos Inn",
+   "title": "Its Giving...purple: A reproductive justice dance party",
    "date": "2026-11-12"
   },
   {
@@ -212,6 +202,21 @@
    "venue": "The Cherry Arts",
    "title": "The Dog Poop Attack",
    "date": "2026-11-15"
+  },
+  {
+   "venue": "Argos Inn",
+   "title": "Rain Tempos & Jennie Lowe Sterns with Kristin Bigness",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Bluegrass Night!",
+   "date": "2026-11-16"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Q Standup Open Mic",
+   "date": "2026-11-16"
   }
  ]
 }
