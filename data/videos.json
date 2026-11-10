@@ -1,15 +1,15 @@
 {
- "updated": "2026-11-09T08:43:40Z",
+ "updated": "2026-11-10T08:44:55Z",
  "videos": [
   {
-   "venue": "State Theatre",
-   "title": "Sammy Rae & The Friends - the GET DOWN!",
-   "date": "2026-11-09",
-   "performer": "Sammy Rae & The Friends",
-   "youtube_id": "JqNMhxqznyQ",
-   "channel": "Sammy Rae",
-   "channel_url": "https://www.youtube.com/@SammyRae",
-   "note": "Boogie All By Yourself (Official Video), on the band's own channel"
+   "venue": "Misc",
+   "title": "Jess Novak",
+   "date": "2026-11-12",
+   "performer": "Jess Novak",
+   "youtube_id": "HEwh_oEtnU8",
+   "channel": "The Jess Novak Band",
+   "channel_url": "https://www.youtube.com/@jessnovakband",
+   "note": "The Jess Novak Band live at SteelStacks - \"With Me or Not\"; uploaded by the band's own channel (name matches the act), central-NY singer whose regional gigs fit this Ithaca date"
   },
   {
    "venue": "Liquid State Brewing",
@@ -32,6 +32,16 @@
    "note": "Punch Brothers - \"Movement and Location\" [Official Video]; punchbrothers.com links the band's YouTube channel, name matches exactly"
   },
   {
+   "venue": "Misc",
+   "title": "Danish String Quartet",
+   "date": "2026-11-14",
+   "performer": "Danish String Quartet",
+   "youtube_id": "XeYil8GwVhc",
+   "channel": "Danish String Quartet",
+   "channel_url": "https://www.youtube.com/@danishquartet",
+   "note": "Danish String Quartet plays 'Danny Boy'; danishquartet.com links youtube.com/danishquartet"
+  },
+  {
    "venue": "State Theatre",
    "title": "BenDeLaCreme Presents: The Jinkx & DeLa Holiday Show",
    "date": "2026-11-15",
@@ -43,16 +53,6 @@
   }
  ],
  "checked": [
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Comedy Open Mic!",
-   "date": "2026-11-09"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Composition Premieres",
-   "date": "2026-11-09"
-  },
   {
    "venue": "Hangar Theatre",
    "title": "Fundamentals of Acting",
@@ -71,6 +71,21 @@
   {
    "venue": "K-HOUSE",
    "title": "EZ Listening",
+   "date": "2026-11-10"
+  },
+  {
+   "venue": "Misc",
+   "title": "Afro-Cuban Dance Class with Live Drumming",
+   "date": "2026-11-10"
+  },
+  {
+   "venue": "Misc",
+   "title": "After Eight (Cornell a cappella)",
+   "date": "2026-11-10"
+  },
+  {
+   "venue": "Misc",
+   "title": "Trivia Night",
    "date": "2026-11-10"
   },
   {
@@ -124,6 +139,26 @@
    "date": "2026-11-11"
   },
   {
+   "venue": "Misc",
+   "title": "Midday Music for Organ: Reflecting Bach",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Misc",
+   "title": "Daniel Roth",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Misc",
+   "title": "Musical Theater Open Mic Night",
+   "date": "2026-11-11"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Legacy in Sound: Featuring the Next Generation of Music Educators and Performers",
+   "date": "2026-11-11"
+  },
+  {
    "venue": "Hopshire",
    "title": "Brewhouse Blues Jam",
    "date": "2026-11-12"
@@ -144,6 +179,16 @@
    "date": "2026-11-12"
   },
   {
+   "venue": "Misc",
+   "title": "Dolly Fest",
+   "date": "2026-11-12"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Dave Davies at South Hill Cider",
+   "date": "2026-11-12"
+  },
+  {
    "venue": "Hopshire",
    "title": "Live Music – The Soul Benders",
    "date": "2026-11-13"
@@ -156,6 +201,36 @@
   {
    "venue": "The Cherry Arts",
    "title": "The Dog Poop Attack",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "Dolly Fest",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "Queeraoke",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "Sweater Weather Swing",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "November Poetry Open Mic",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "Next Stop Comedy",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cornell Chamber Orchestra: The Sound of Storytelling",
    "date": "2026-11-13"
   },
   {
@@ -189,6 +264,51 @@
    "date": "2026-11-14"
   },
   {
+   "venue": "Misc",
+   "title": "Dolly Fest",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "ROP Rocks the Eagles!",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Tompkins County Workers' Center winter fundraiser launch party",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "A Queen vs. Elton John Candlelight Experience (6pm sitting)",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "November Contra Dance",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Banda AL9 and The Burkharts",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cornell Glee Club: Singing in the Air",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Sweet Harmony",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "A Queen vs. Elton John Candlelight Experience (8pm sitting)",
+   "date": "2026-11-14"
+  },
+  {
    "venue": "K-HOUSE",
    "title": "Dolly Fest",
    "date": "2026-11-15"
@@ -210,6 +330,26 @@
   },
   {
    "venue": "Liquid State Brewing",
+   "title": "Bingo!! A Beverly J. Martin Family Fundraiser",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cornell Gamelan Ensemble",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Misc",
+   "title": "Reflections and Radiance: Cayuga Vocal Ensemble 50th anniversary",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cornell Jazz Ensemble with Alan Ferber",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Liquid State Brewing",
    "title": "Bluegrass Night!",
    "date": "2026-11-16"
   },
@@ -217,6 +357,21 @@
    "venue": "K-HOUSE",
    "title": "Q Standup Open Mic",
    "date": "2026-11-16"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Moment of Truth Monthly Open Mic",
+   "date": "2026-11-17"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "DJ Bingo-Every Tuesday",
+   "date": "2026-11-17"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Story House Ithaca Presents: Presentation Night",
+   "date": "2026-11-17"
   }
  ]
 }
