@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T08:44:55Z",
+ "updated": "2026-11-11T08:46:30Z",
  "videos": [
   {
    "venue": "Misc",
@@ -53,41 +53,6 @@
   }
  ],
  "checked": [
-  {
-   "venue": "Hangar Theatre",
-   "title": "Fundamentals of Acting",
-   "date": "2026-11-10"
-  },
-  {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "Brewed for Suspsense Book Club",
-   "date": "2026-11-10"
-  },
-  {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "DJ Bingo-Every Tuesday",
-   "date": "2026-11-10"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "EZ Listening",
-   "date": "2026-11-10"
-  },
-  {
-   "venue": "Misc",
-   "title": "Afro-Cuban Dance Class with Live Drumming",
-   "date": "2026-11-10"
-  },
-  {
-   "venue": "Misc",
-   "title": "After Eight (Cornell a cappella)",
-   "date": "2026-11-10"
-  },
-  {
-   "venue": "Misc",
-   "title": "Trivia Night",
-   "date": "2026-11-10"
-  },
   {
    "venue": "Trees Up Tompkins",
    "title": "Baker Park",
@@ -186,6 +151,11 @@
   {
    "venue": "Visit Ithaca",
    "title": "Dave Davies at South Hill Cider",
+   "date": "2026-11-12"
+  },
+  {
+   "venue": "Table for One Trivia",
+   "title": "Trivia: What's Cooking?/MUSIC/Hair, a Parent",
    "date": "2026-11-12"
   },
   {
@@ -372,6 +342,31 @@
    "venue": "Liquid State Brewing",
    "title": "Story House Ithaca Presents: Presentation Night",
    "date": "2026-11-17"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "MYSTERY FLIGHT NIGHT",
+   "date": "2026-11-18"
+  },
+  {
+   "venue": "Argos Inn",
+   "title": "Argos Grove: Jazz Trio Performance",
+   "date": "2026-11-18"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Trivia Night!",
+   "date": "2026-11-18"
+  },
+  {
+   "venue": "Bike Bar",
+   "title": "Sea Shanties",
+   "date": "2026-11-18"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Reggae Underground",
+   "date": "2026-11-18"
   }
  ]
 }
