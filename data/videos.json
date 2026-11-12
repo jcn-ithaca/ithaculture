@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T08:46:30Z",
+ "updated": "2026-11-12T08:43:46Z",
  "videos": [
   {
    "venue": "Misc",
@@ -50,79 +50,19 @@
    "channel": "BenDeLaCreme",
    "channel_url": "https://www.youtube.com/@bendelacreme",
    "note": "The Jinkx & DeLa Holiday Show 2025 Tour - Official Trailer; on presenter BenDeLaCreme's own channel, tour site lists this Ithaca date"
-  }
- ],
- "checked": [
-  {
-   "venue": "Trees Up Tompkins",
-   "title": "Baker Park",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "MYSTERY FLIGHT NIGHT",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "Plant Bingo- Wednesday 11/11",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Hopshire",
-   "title": "Trivia Night!",
-   "date": "2026-11-11"
   },
   {
    "venue": "Bike Bar",
-   "title": "High Horse/Bluegrass",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Trivia Night w/ Bob Proehl!",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "State Theatre",
-   "title": "Warren Miller's 'Days Off'",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Reggae Underground",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Argos Inn",
-   "title": "Argos Grove: Jazz Trio Performance",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "10th Anniversary Festival of the Juget-Sinclair French Romantic Organ Concert 2!",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Misc",
-   "title": "Midday Music for Organ: Reflecting Bach",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Misc",
-   "title": "Daniel Roth",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Misc",
-   "title": "Musical Theater Open Mic Night",
-   "date": "2026-11-11"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Legacy in Sound: Featuring the Next Generation of Music Educators and Performers",
-   "date": "2026-11-11"
-  },
+   "title": "Drew Kiddoo & the blackouts",
+   "date": "2026-11-19",
+   "performer": "Drew Kiddoo and The Blackouts",
+   "youtube_id": "2n19NIGd4KM",
+   "channel": "Drew Kiddoo and The Blackouts",
+   "channel_url": "https://www.youtube.com/@akiddoo",
+   "note": "Drew Kiddoo and The Blackouts - Diggin' My Own Graveyard (Official Music Video); Ithaca-based country band whose FOCOMA artist profile links youtube.com/@akiddoo"
+  }
+ ],
+ "checked": [
   {
    "venue": "Hopshire",
    "title": "Brewhouse Blues Jam",
@@ -367,6 +307,41 @@
    "venue": "K-HOUSE",
    "title": "Reggae Underground",
    "date": "2026-11-18"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Vinyl Showcase",
+   "date": "2026-11-12"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Business Leaders of Colors Monthly Meeting",
+   "date": "2026-11-19"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Science & Suds",
+   "date": "2026-11-19"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Hold 1980",
+   "date": "2026-11-19"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "TRAMPOLINE: Dodged A Bullet",
+   "date": "2026-11-19"
+  },
+  {
+   "venue": "Argos Inn",
+   "title": "Max Childs & Louiston",
+   "date": "2026-11-19"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Dog Poop Attack",
+   "date": "2026-11-19"
   }
  ]
 }
