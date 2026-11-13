@@ -1,16 +1,6 @@
 {
- "updated": "2026-11-12T08:43:46Z",
+ "updated": "2026-11-13T08:43:20Z",
  "videos": [
-  {
-   "venue": "Misc",
-   "title": "Jess Novak",
-   "date": "2026-11-12",
-   "performer": "Jess Novak",
-   "youtube_id": "HEwh_oEtnU8",
-   "channel": "The Jess Novak Band",
-   "channel_url": "https://www.youtube.com/@jessnovakband",
-   "note": "The Jess Novak Band live at SteelStacks - \"With Me or Not\"; uploaded by the band's own channel (name matches the act), central-NY singer whose regional gigs fit this Ithaca date"
-  },
   {
    "venue": "Liquid State Brewing",
    "title": "JIMKATA",
@@ -60,44 +50,29 @@
    "channel": "Drew Kiddoo and The Blackouts",
    "channel_url": "https://www.youtube.com/@akiddoo",
    "note": "Drew Kiddoo and The Blackouts - Diggin' My Own Graveyard (Official Music Video); Ithaca-based country band whose FOCOMA artist profile links youtube.com/@akiddoo"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Live Music – Pocket Bandits",
+   "date": "2026-11-20",
+   "performer": "Pocket Bandits",
+   "youtube_id": "llJoHcrR12Q",
+   "channel": "Pocket Bandits",
+   "channel_url": "https://www.youtube.com/@PocketBanditsMusic",
+   "note": "Pocket Bandits - The Pocket Bandit [official video]; Ithaca funk-fusion trio, channel name and handle match the band's @pocketbanditsmusic profile (Sonicbids lists them as Ithaca, NY)"
+  },
+  {
+   "venue": "State Theatre",
+   "title": "The Wailin' Jennys",
+   "date": "2026-11-20",
+   "performer": "The Wailin' Jennys",
+   "youtube_id": "mEXJJ5nZ7ng",
+   "channel": "Red House Records",
+   "channel_url": "https://www.youtube.com/@RedHouseRecordsVideos",
+   "note": "The Wailin' Jennys - Wildflowers (Official Music Video); uploaded by their label Red House Records"
   }
  ],
  "checked": [
-  {
-   "venue": "Hopshire",
-   "title": "Brewhouse Blues Jam",
-   "date": "2026-11-12"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Agatha Haag & Sticky Boovy",
-   "date": "2026-11-12"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Astronomy On Tap!",
-   "date": "2026-11-12"
-  },
-  {
-   "venue": "Argos Inn",
-   "title": "Its Giving...purple: A reproductive justice dance party",
-   "date": "2026-11-12"
-  },
-  {
-   "venue": "Misc",
-   "title": "Dolly Fest",
-   "date": "2026-11-12"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Dave Davies at South Hill Cider",
-   "date": "2026-11-12"
-  },
-  {
-   "venue": "Table for One Trivia",
-   "title": "Trivia: What's Cooking?/MUSIC/Hair, a Parent",
-   "date": "2026-11-12"
-  },
   {
    "venue": "Hopshire",
    "title": "Live Music – The Soul Benders",
@@ -309,11 +284,6 @@
    "date": "2026-11-18"
   },
   {
-   "venue": "Visit Ithaca",
-   "title": "Vinyl Showcase",
-   "date": "2026-11-12"
-  },
-  {
    "venue": "K-HOUSE",
    "title": "Business Leaders of Colors Monthly Meeting",
    "date": "2026-11-19"
@@ -342,6 +312,111 @@
    "venue": "The Cherry Arts",
    "title": "The Dog Poop Attack",
    "date": "2026-11-19"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "MADD DADDY at South Hill Cider Community Concert Series",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "Noche Latina",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cornell Chamber Orchestra: Dr. Jekyll & Mr. Hyde",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "Fault Commission, Space Duzzt and Improvised Explosive Devices (Noisevember)",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "New Calypso",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Proper Philth",
+   "date": "2026-11-13"
+  },
+  {
+   "venue": "Misc",
+   "title": "Rock On Project",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Workers' Center winter fundraiser launch party",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Contra Callers Showcase Dance",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Djug Django swing dance party",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Banda AL9 & The Burkharts with Porch Couch and Perilous",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "NYS Baroque: Sweet Harmony",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Break the Silence benefit show",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "djGOURD",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cayuga Chamber Orchestra: Nielsen & Fauré",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cayuga Vocal Ensemble: 50th anniversary concert",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "STRAIGHT OUTTA BROOKLYN TAP TAKEOVER- 11/20 & 11/21",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Jeremiah Craig & Max Moses",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Hands Four Dancers",
+   "title": "An evening of Contra Dancing AND Swing Dancing",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Public Water Supply",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Dog Poop Attack",
+   "date": "2026-11-20"
   }
  ]
 }
