@@ -228,6 +228,33 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") document.querySelectorAll("details.menu[open]").forEach((m) => { m.open = false; });
 });
 
+// Subscribe menu: point every option at this site's own feed (so forks and
+// previews work too) and copy the feed URL for apps we don't list.
+(function setupSubscribe() {
+  const feed = new URL("ithaculture.ics", location.href);
+  if (feed.protocol !== "https:") return; // keep the published links when opened from a file
+  const https = feed.href;
+  const webcal = https.replace(/^https:/, "webcal:");
+  const enc = encodeURIComponent;
+  const links = {
+    google: "https://calendar.google.com/calendar/r?cid=" + enc(webcal),
+    apple: webcal,
+    outlook: "https://outlook.live.com/calendar/0/addfromweb?url=" + enc(https) + "&name=Ithaculture",
+    office: "https://outlook.office.com/calendar/0/addfromweb?url=" + enc(https) + "&name=Ithaculture",
+  };
+  document.querySelectorAll("#subscribe-menu [data-cal]").forEach((a) => { a.href = links[a.dataset.cal]; });
+  const input = document.getElementById("sub-url");
+  input.value = https;
+  input.addEventListener("focus", () => input.select());
+  const btn = document.getElementById("sub-copy-btn");
+  btn.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(https); }
+    catch { input.select(); document.execCommand("copy"); }
+    btn.textContent = "Copied";
+    setTimeout(() => { btn.textContent = "Copy"; }, 2000);
+  });
+})();
+
 function renderMeta() {
   const updated = new Date(data.generated_at);
   document.getElementById("updated").textContent =

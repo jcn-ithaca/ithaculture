@@ -137,6 +137,29 @@ details.filmday .films { margin: 8px 0 0 calc(5.5rem + 12px); display: grid; gap
 .empty { color: var(--muted); }
 .warn { color: var(--accent); }
 footer { padding-bottom: 40px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: 32px; }
+.actions { align-items: center; margin: 14px 0; }
+.subscribe summary { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.subscribe summary::before { content: "\1F4C5\FE0E  "; }
+.sub-panel { min-width: 280px; width: max-content; max-width: min(340px, calc(100vw - 32px)); color: var(--fg); }
+.sub-note { margin: 2px 4px 8px; font-size: 0.85rem; color: var(--muted); }
+.sub-opt {
+  display: block; padding: 8px 10px; border-radius: 6px; text-decoration: none;
+  font-weight: 600; font-size: 0.95rem;
+}
+.sub-opt small { font-weight: normal; color: var(--muted); margin-left: 4px; }
+.sub-opt:hover, .sub-opt:focus-visible { background: var(--bg); }
+.sub-copy { border-top: 1px solid var(--line); margin-top: 6px; padding: 8px 4px 4px; font-size: 0.85rem; color: var(--muted); }
+.sub-copy label { display: block; margin-bottom: 4px; }
+.sub-copy-row { display: flex; gap: 6px; }
+.sub-copy-row input {
+  flex: 1; min-width: 0; font: inherit; font-size: 0.8rem; padding: 4px 8px;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg);
+}
+.sub-copy-row button {
+  font: inherit; font-size: 0.8rem; padding: 4px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--fg); background: var(--fg); color: var(--bg);
+}
+.sub-download { display: block; padding: 6px 4px 2px; font-size: 0.8rem; color: var(--muted); }
 @media (max-width: 480px) {
   .ev, details.filmday summary { grid-template-columns: 4.5rem 1fr; }
   details.filmday .films { margin-left: 0; }
