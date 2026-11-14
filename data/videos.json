@@ -1,16 +1,6 @@
 {
- "updated": "2026-11-13T08:43:20Z",
+ "updated": "2026-11-14T08:42:55Z",
  "videos": [
-  {
-   "venue": "Liquid State Brewing",
-   "title": "JIMKATA",
-   "date": "2026-11-13",
-   "performer": "Jimkata",
-   "youtube_id": "V2oM_EJbgc4",
-   "channel": "Jimkata",
-   "channel_url": "https://www.youtube.com/@jimkatamusic",
-   "note": "Jimkata - Wait For You (Official Video); jimkata.com links this channel"
-  },
   {
    "venue": "State Theatre",
    "title": "Punch Brothers",
@@ -73,51 +63,6 @@
   }
  ],
  "checked": [
-  {
-   "venue": "Hopshire",
-   "title": "Live Music – The Soul Benders",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "ICSDEA Private Party",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "The Cherry Arts",
-   "title": "The Dog Poop Attack",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "Dolly Fest",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "Queeraoke",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "Sweater Weather Swing",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "November Poetry Open Mic",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "Next Stop Comedy",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "Cornell Chamber Orchestra: The Sound of Storytelling",
-   "date": "2026-11-13"
-  },
   {
    "venue": "Brewer's Kitchen & Taproom",
    "title": "Virginia Davis Live — Saturday 11/14",
@@ -314,36 +259,6 @@
    "date": "2026-11-19"
   },
   {
-   "venue": "Visit Ithaca",
-   "title": "MADD DADDY at South Hill Cider Community Concert Series",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "Noche Latina",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "Cornell Chamber Orchestra: Dr. Jekyll & Mr. Hyde",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "Fault Commission, Space Duzzt and Improvised Explosive Devices (Noisevember)",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "Misc",
-   "title": "New Calypso",
-   "date": "2026-11-13"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Proper Philth",
-   "date": "2026-11-13"
-  },
-  {
    "venue": "Misc",
    "title": "Rock On Project",
    "date": "2026-11-14"
@@ -417,6 +332,56 @@
    "venue": "The Cherry Arts",
    "title": "The Dog Poop Attack",
    "date": "2026-11-20"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Rev Ezra at South Hill Cider Community Concert Series",
+   "date": "2026-11-14"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Trivia Night w/ Bob Proehl!",
+   "date": "2026-11-18"
+  },
+  {
+   "venue": "Hangar Theatre",
+   "title": "Jester & Kester",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Dog Poop Attack",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "Rachel Beverly Live — Saturday 11/21",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Metal Night",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Bike Bar",
+   "title": "TiTi Chickapea w/ Hank Roberts and Richie Stearns",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Metasequoia's 4th Annual Community Food Drive",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Argos Inn",
+   "title": "Vinyl DJ Night: DJ Tuggle & DJ Kamal",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Don’s Annual B-Day Bash Featuring Get Off My Lawn, Motherwort and Secret Service Men",
+   "date": "2026-11-21"
   }
  ]
 }
