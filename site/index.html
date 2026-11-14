@@ -30,10 +30,27 @@
       </div>
     </details>
   </div>
-  <p class="actions">
-    <a href="ithaculture.ics">Subscribe (.ics)</a>
+  <div class="actions">
+    <details class="menu subscribe" id="subscribe-menu">
+      <summary>Add to your calendar</summary>
+      <div class="menu-panel sub-panel">
+        <p class="sub-note">Subscribe once and new listings show up in your calendar by themselves.</p>
+        <a class="sub-opt" data-cal="google" href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Fjcn-ithaca.github.io%2Fithaculture%2Fithaculture.ics" target="_blank" rel="noopener">Google Calendar</a>
+        <a class="sub-opt" data-cal="apple" href="webcal://jcn-ithaca.github.io/ithaculture/ithaculture.ics">Apple Calendar <small>iPhone, iPad, Mac</small></a>
+        <a class="sub-opt" data-cal="outlook" href="https://outlook.live.com/calendar/0/addfromweb?url=https%3A%2F%2Fjcn-ithaca.github.io%2Fithaculture%2Fithaculture.ics&amp;name=Ithaculture" target="_blank" rel="noopener">Outlook.com</a>
+        <a class="sub-opt" data-cal="office" href="https://outlook.office.com/calendar/0/addfromweb?url=https%3A%2F%2Fjcn-ithaca.github.io%2Fithaculture%2Fithaculture.ics&amp;name=Ithaculture" target="_blank" rel="noopener">Outlook <small>work or school (Microsoft 365)</small></a>
+        <div class="sub-copy">
+          <label for="sub-url">Other apps: paste this link</label>
+          <div class="sub-copy-row">
+            <input id="sub-url" type="text" readonly value="https://jcn-ithaca.github.io/ithaculture/ithaculture.ics">
+            <button type="button" id="sub-copy-btn">Copy</button>
+          </div>
+        </div>
+        <a class="sub-download" href="ithaculture.ics" download>Download a one-time .ics file</a>
+      </div>
+    </details>
     <span id="updated"></span>
-  </p>
+  </div>
   <main id="agenda"><p class="empty">Loading events…</p></main>
 </div>
 <aside class="slideshow" id="slideshow" aria-label="Coming up: pictures from venue event pages and performers' own videos" hidden>
