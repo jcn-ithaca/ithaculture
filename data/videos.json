@@ -1,16 +1,6 @@
 {
- "updated": "2026-11-14T08:42:55Z",
+ "updated": "2026-11-15T08:42:33Z",
  "videos": [
-  {
-   "venue": "State Theatre",
-   "title": "Punch Brothers",
-   "date": "2026-11-14",
-   "performer": "Punch Brothers",
-   "youtube_id": "SxaPbOEm070",
-   "channel": "Punch Brothers",
-   "channel_url": "https://www.youtube.com/@punchbrothers",
-   "note": "Punch Brothers - \"Movement and Location\" [Official Video]; punchbrothers.com links the band's YouTube channel, name matches exactly"
-  },
   {
    "venue": "State Theatre",
    "title": "BenDeLaCreme Presents: The Jinkx & DeLa Holiday Show",
@@ -53,81 +43,6 @@
   }
  ],
  "checked": [
-  {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "Virginia Davis Live — Saturday 11/14",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Bike Bar",
-   "title": "DJ Gourd /funk, soul and breaks",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Call Your Girlfriend: A Dance Party for Femmes & Friends",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Eric Carlin's Half Dead: Cornell '77 Revisited",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Hangar Theatre",
-   "title": "Whiskey Tango Sideshow",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "The Cherry Arts",
-   "title": "The Dog Poop Attack",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Dolly Fest",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "ROP Rocks the Eagles!",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Tompkins County Workers' Center winter fundraiser launch party",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "A Queen vs. Elton John Candlelight Experience (6pm sitting)",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "November Contra Dance",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Banda AL9 and The Burkharts",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Cornell Glee Club: Singing in the Air",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Sweet Harmony",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "A Queen vs. Elton John Candlelight Experience (8pm sitting)",
-   "date": "2026-11-14"
-  },
   {
    "venue": "K-HOUSE",
    "title": "Dolly Fest",
@@ -250,46 +165,6 @@
   },
   {
    "venue": "Misc",
-   "title": "Rock On Project",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Workers' Center winter fundraiser launch party",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Contra Callers Showcase Dance",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Djug Django swing dance party",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Banda AL9 & The Burkharts with Porch Couch and Perilous",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "NYS Baroque: Sweet Harmony",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "Break the Silence benefit show",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
-   "title": "djGOURD",
-   "date": "2026-11-14"
-  },
-  {
-   "venue": "Misc",
    "title": "Cayuga Chamber Orchestra: Nielsen & Fauré",
    "date": "2026-11-15"
   },
@@ -322,11 +197,6 @@
    "venue": "The Cherry Arts",
    "title": "The Dog Poop Attack",
    "date": "2026-11-20"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Rev Ezra at South Hill Cider Community Concert Series",
-   "date": "2026-11-14"
   },
   {
    "venue": "Liquid State Brewing",
@@ -372,6 +242,21 @@
    "venue": "K-HOUSE",
    "title": "Don’s Annual B-Day Bash Featuring Get Off My Lawn, Motherwort and Secret Service Men",
    "date": "2026-11-21"
+  },
+  {
+   "venue": "Hangar Theatre",
+   "title": "Jester & Kester",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Dog Poop Attack",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Brews and Biomedical Engineering",
+   "date": "2026-11-23"
   }
  ]
 }
