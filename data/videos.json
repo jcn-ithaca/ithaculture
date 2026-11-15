@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T08:42:33Z",
+ "updated": "2026-11-15T08:50:42Z",
  "videos": [
   {
    "venue": "State Theatre",
@@ -40,6 +40,16 @@
    "channel": "Red House Records",
    "channel_url": "https://www.youtube.com/@RedHouseRecordsVideos",
    "note": "The Wailin' Jennys - Wildflowers (Official Music Video); uploaded by their label Red House Records"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Distinguished Guest Artist Series: Renée Anne Louprette (CU Music)",
+   "date": "2026-11-17",
+   "performer": "Renée Anne Louprette",
+   "youtube_id": "Q2aVppxpqyI",
+   "channel": "Renée Anne Louprette",
+   "channel_url": "https://www.youtube.com/@reneeannelouprette4511",
+   "note": "Georg Böhm - Aus tiefer Not | Renée Anne Louprette, Organist; channel name is exactly the concert organist's (distinctive) name and its upload is her own organ performance"
   }
  ],
  "checked": [
@@ -257,6 +267,36 @@
    "venue": "Liquid State Brewing",
    "title": "Brews and Biomedical Engineering",
    "date": "2026-11-23"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Reflections and Radiance - CVE Celebrates 50 years!",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca Sunday Squares",
+   "date": "2026-11-15"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Piano and String Chamber Music",
+   "date": "2026-11-16"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Flute Ensemble",
+   "date": "2026-11-16"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Piano and Instrumental Duos",
+   "date": "2026-11-17"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Percussion Ensemble",
+   "date": "2026-11-17"
   }
  ]
 }
