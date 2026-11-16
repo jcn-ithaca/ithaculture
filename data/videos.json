@@ -1,16 +1,6 @@
 {
- "updated": "2026-11-15T08:50:42Z",
+ "updated": "2026-11-16T08:42:25Z",
  "videos": [
-  {
-   "venue": "State Theatre",
-   "title": "BenDeLaCreme Presents: The Jinkx & DeLa Holiday Show",
-   "date": "2026-11-15",
-   "performer": "BenDeLaCreme",
-   "youtube_id": "WcHwXFYA8Fo",
-   "channel": "BenDeLaCreme",
-   "channel_url": "https://www.youtube.com/@bendelacreme",
-   "note": "The Jinkx & DeLa Holiday Show 2025 Tour - Official Trailer; on presenter BenDeLaCreme's own channel, tour site lists this Ithaca date"
-  },
   {
    "venue": "Bike Bar",
    "title": "Drew Kiddoo & the blackouts",
@@ -53,46 +43,6 @@
   }
  ],
  "checked": [
-  {
-   "venue": "K-HOUSE",
-   "title": "Dolly Fest",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "Hangar Theatre",
-   "title": "E Collector Card Show",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "The Cherry Arts",
-   "title": "The Dog Poop Attack",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "Argos Inn",
-   "title": "Rain Tempos & Jennie Lowe Sterns with Kristin Bigness",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Bingo!! A Beverly J. Martin Family Fundraiser",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "Misc",
-   "title": "Cornell Gamelan Ensemble",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "Misc",
-   "title": "Reflections and Radiance: Cayuga Vocal Ensemble 50th anniversary",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "Misc",
-   "title": "Cornell Jazz Ensemble with Alan Ferber",
-   "date": "2026-11-15"
-  },
   {
    "venue": "Liquid State Brewing",
    "title": "Bluegrass Night!",
@@ -172,16 +122,6 @@
    "venue": "The Cherry Arts",
    "title": "The Dog Poop Attack",
    "date": "2026-11-19"
-  },
-  {
-   "venue": "Misc",
-   "title": "Cayuga Chamber Orchestra: Nielsen & Fauré",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "Misc",
-   "title": "Cayuga Vocal Ensemble: 50th anniversary concert",
-   "date": "2026-11-15"
   },
   {
    "venue": "Brewer's Kitchen & Taproom",
@@ -270,16 +210,6 @@
   },
   {
    "venue": "Visit Ithaca",
-   "title": "Reflections and Radiance - CVE Celebrates 50 years!",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca Sunday Squares",
-   "date": "2026-11-15"
-  },
-  {
-   "venue": "Visit Ithaca",
    "title": "Ithaca College Piano and String Chamber Music",
    "date": "2026-11-16"
   },
@@ -297,6 +227,26 @@
    "venue": "Visit Ithaca",
    "title": "Ithaca College Percussion Ensemble",
    "date": "2026-11-17"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "DJ Bingo-Every Tuesday",
+   "date": "2026-11-24"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "SingTrece's Anything Goes Open Mic",
+   "date": "2026-11-24"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Comedy Flops: Liquid Laughs",
+   "date": "2026-11-24"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Shjon's Birthday",
+   "date": "2026-11-24"
   }
  ]
 }
