@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T08:42:25Z",
+ "updated": "2026-11-16T08:46:42Z",
  "videos": [
   {
    "venue": "Bike Bar",
@@ -247,6 +247,16 @@
    "venue": "K-HOUSE",
    "title": "Shjon's Birthday",
    "date": "2026-11-24"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Woodwind Chamber Music",
+   "date": "2026-11-18"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Chamber Orchestra",
+   "date": "2026-11-18"
   }
  ]
 }
