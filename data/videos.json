@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T08:46:42Z",
+ "updated": "2026-11-17T08:43:20Z",
  "videos": [
   {
    "venue": "Bike Bar",
@@ -32,27 +32,37 @@
    "note": "The Wailin' Jennys - Wildflowers (Official Music Video); uploaded by their label Red House Records"
   },
   {
-   "venue": "Visit Ithaca",
-   "title": "Distinguished Guest Artist Series: Renée Anne Louprette (CU Music)",
+   "venue": "Misc",
+   "title": "Renée Anne Louprette: organ recital",
    "date": "2026-11-17",
    "performer": "Renée Anne Louprette",
    "youtube_id": "Q2aVppxpqyI",
    "channel": "Renée Anne Louprette",
    "channel_url": "https://www.youtube.com/@reneeannelouprette4511",
    "note": "Georg Böhm - Aus tiefer Not | Renée Anne Louprette, Organist; channel name is exactly the concert organist's (distinctive) name and its upload is her own organ performance"
+  },
+  {
+   "venue": "Misc",
+   "title": "Time for Three with the Cornell Symphony Orchestra",
+   "date": "2026-11-21",
+   "performer": "Time for Three",
+   "youtube_id": "VBC23vB5YcA",
+   "channel": "Time For Three",
+   "channel_url": "https://www.youtube.com/@officialtf3",
+   "note": "Time for Three - Stand By Me, Tobin Center for the Performing Arts; the trio's official site tf3.com links youtube.com/c/officialtf3"
+  },
+  {
+   "venue": "Misc",
+   "title": "Papa Muse album release show with Madd Daddy, Public Water Supply, Loveday and Max Moses",
+   "date": "2026-11-21",
+   "performer": "Papa Muse",
+   "youtube_id": "Wdo7WMt7FyQ",
+   "channel": "Papa Muse",
+   "channel_url": "https://www.youtube.com/@PapaMuseMusic",
+   "note": "Papa Muse Meaning Makers Official video; Ithaca, NY artist whose Bandcamp links youtube.com/papamuse, channel named Papa Muse with Ithaca show videos"
   }
  ],
  "checked": [
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Bluegrass Night!",
-   "date": "2026-11-16"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Q Standup Open Mic",
-   "date": "2026-11-16"
-  },
   {
    "venue": "K-HOUSE",
    "title": "Moment of Truth Monthly Open Mic",
@@ -210,16 +220,6 @@
   },
   {
    "venue": "Visit Ithaca",
-   "title": "Ithaca College Piano and String Chamber Music",
-   "date": "2026-11-16"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College Flute Ensemble",
-   "date": "2026-11-16"
-  },
-  {
-   "venue": "Visit Ithaca",
    "title": "Ithaca College Piano and Instrumental Duos",
    "date": "2026-11-17"
   },
@@ -257,6 +257,71 @@
    "venue": "Visit Ithaca",
    "title": "Ithaca College Chamber Orchestra",
    "date": "2026-11-18"
+  },
+  {
+   "venue": "Misc",
+   "title": "Tuesday Trivia Night",
+   "date": "2026-11-17"
+  },
+  {
+   "venue": "Table for One Trivia",
+   "title": "Trivia: Characteristic/MAP IT/Long and Short of It",
+   "date": "2026-11-17"
+  },
+  {
+   "venue": "Misc",
+   "title": "Tuesday Trivia",
+   "date": "2026-11-17"
+  },
+  {
+   "venue": "Misc",
+   "title": "Musical Theater Open Mic Night",
+   "date": "2026-11-18"
+  },
+  {
+   "venue": "Misc",
+   "title": "Open Mic Night",
+   "date": "2026-11-18"
+  },
+  {
+   "venue": "Table for One Trivia",
+   "title": "Trivia: Characteristic/MAP IT/Long and Short of It",
+   "date": "2026-11-19"
+  },
+  {
+   "venue": "Misc",
+   "title": "London McDaniel & Lava: Jazz & Blues Night",
+   "date": "2026-11-19"
+  },
+  {
+   "venue": "Misc",
+   "title": "CCHK Salon: Muses and Makers, Female Voices in Song",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Misc",
+   "title": "The Ilium Works album release show feat. Motherwort",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Misc",
+   "title": "Ithaca Tibetan Cultural Day",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Misc",
+   "title": "Kids Trivia (ages 4-12)",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Misc",
+   "title": "\"The Next Storm\"",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cornell Chorale Fall Concert: \"Seasons of Life\"",
+   "date": "2026-11-22"
   }
  ]
 }
