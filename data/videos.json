@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T08:43:20Z",
+ "updated": "2026-11-18T08:42:55Z",
  "videos": [
   {
    "venue": "Bike Bar",
@@ -33,16 +33,6 @@
   },
   {
    "venue": "Misc",
-   "title": "Renée Anne Louprette: organ recital",
-   "date": "2026-11-17",
-   "performer": "Renée Anne Louprette",
-   "youtube_id": "Q2aVppxpqyI",
-   "channel": "Renée Anne Louprette",
-   "channel_url": "https://www.youtube.com/@reneeannelouprette4511",
-   "note": "Georg Böhm - Aus tiefer Not | Renée Anne Louprette, Organist; channel name is exactly the concert organist's (distinctive) name and its upload is her own organ performance"
-  },
-  {
-   "venue": "Misc",
    "title": "Time for Three with the Cornell Symphony Orchestra",
    "date": "2026-11-21",
    "performer": "Time for Three",
@@ -63,21 +53,6 @@
   }
  ],
  "checked": [
-  {
-   "venue": "K-HOUSE",
-   "title": "Moment of Truth Monthly Open Mic",
-   "date": "2026-11-17"
-  },
-  {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "DJ Bingo-Every Tuesday",
-   "date": "2026-11-17"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Story House Ithaca Presents: Presentation Night",
-   "date": "2026-11-17"
-  },
   {
    "venue": "Brewer's Kitchen & Taproom",
    "title": "MYSTERY FLIGHT NIGHT",
@@ -219,16 +194,6 @@
    "date": "2026-11-23"
   },
   {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College Piano and Instrumental Duos",
-   "date": "2026-11-17"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College Percussion Ensemble",
-   "date": "2026-11-17"
-  },
-  {
    "venue": "Brewer's Kitchen & Taproom",
    "title": "DJ Bingo-Every Tuesday",
    "date": "2026-11-24"
@@ -257,21 +222,6 @@
    "venue": "Visit Ithaca",
    "title": "Ithaca College Chamber Orchestra",
    "date": "2026-11-18"
-  },
-  {
-   "venue": "Misc",
-   "title": "Tuesday Trivia Night",
-   "date": "2026-11-17"
-  },
-  {
-   "venue": "Table for One Trivia",
-   "title": "Trivia: Characteristic/MAP IT/Long and Short of It",
-   "date": "2026-11-17"
-  },
-  {
-   "venue": "Misc",
-   "title": "Tuesday Trivia",
-   "date": "2026-11-17"
   },
   {
    "venue": "Misc",
@@ -322,6 +272,46 @@
    "venue": "Misc",
    "title": "Cornell Chorale Fall Concert: \"Seasons of Life\"",
    "date": "2026-11-22"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College African Drumming and Dance Ensemble",
+   "date": "2026-11-19"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Piano and String Chamber Music",
+   "date": "2026-11-19"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Local First Fest – Holiday Shopping Market",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "MYSTERY FLIGHT NIGHT",
+   "date": "2026-11-25"
+  },
+  {
+   "venue": "Argos Inn",
+   "title": "Argos Grove: Jazz Trio Performance",
+   "date": "2026-11-25"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Trivia Night!",
+   "date": "2026-11-25"
+  },
+  {
+   "venue": "Bike Bar",
+   "title": "Mark Maynard & friends",
+   "date": "2026-11-25"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Reggae Underground",
+   "date": "2026-11-25"
   }
  ]
 }
