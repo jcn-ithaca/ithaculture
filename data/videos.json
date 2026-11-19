@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T08:42:09Z",
+ "updated": "2026-11-19T08:46:48Z",
  "videos": [
   {
    "venue": "Bike Bar",
@@ -277,6 +277,26 @@
    "venue": "Hopshire",
    "title": "Closed",
    "date": "2026-11-26"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Concert Band: After Dark",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Hesselink Cello Studio Recital",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Cheers Queers at The Rhine House",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Trivia Night w/ Bob Proehl!",
+   "date": "2026-11-25"
   }
  ]
 }
