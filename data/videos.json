@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T08:42:55Z",
+ "updated": "2026-11-19T08:42:09Z",
  "videos": [
   {
    "venue": "Bike Bar",
@@ -54,31 +54,6 @@
  ],
  "checked": [
   {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "MYSTERY FLIGHT NIGHT",
-   "date": "2026-11-18"
-  },
-  {
-   "venue": "Argos Inn",
-   "title": "Argos Grove: Jazz Trio Performance",
-   "date": "2026-11-18"
-  },
-  {
-   "venue": "Hopshire",
-   "title": "Trivia Night!",
-   "date": "2026-11-18"
-  },
-  {
-   "venue": "Bike Bar",
-   "title": "Sea Shanties",
-   "date": "2026-11-18"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Reggae Underground",
-   "date": "2026-11-18"
-  },
-  {
    "venue": "K-HOUSE",
    "title": "Business Leaders of Colors Monthly Meeting",
    "date": "2026-11-19"
@@ -132,11 +107,6 @@
    "venue": "The Cherry Arts",
    "title": "The Dog Poop Attack",
    "date": "2026-11-20"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Trivia Night w/ Bob Proehl!",
-   "date": "2026-11-18"
   },
   {
    "venue": "Hangar Theatre",
@@ -212,26 +182,6 @@
    "venue": "K-HOUSE",
    "title": "Shjon's Birthday",
    "date": "2026-11-24"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College Woodwind Chamber Music",
-   "date": "2026-11-18"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College Chamber Orchestra",
-   "date": "2026-11-18"
-  },
-  {
-   "venue": "Misc",
-   "title": "Musical Theater Open Mic Night",
-   "date": "2026-11-18"
-  },
-  {
-   "venue": "Misc",
-   "title": "Open Mic Night",
-   "date": "2026-11-18"
   },
   {
    "venue": "Table for One Trivia",
@@ -322,6 +272,11 @@
    "venue": "Visit Ithaca",
    "title": "Vinyl Showcase",
    "date": "2026-11-19"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Closed",
+   "date": "2026-11-26"
   }
  ]
 }
