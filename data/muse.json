@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T15:18:21Z",
+  "updated": "2026-11-19T15:16:33Z",
   "emails": [
     {
       "id": "1a175b8c05a34490",
@@ -40,94 +40,83 @@
       "id": "1a1e4aa86e5239f2",
       "subject": "Muse: Ithaca nightlife this week (Nov 16-22)",
       "date": "2026-11-16T14:02:23Z"
+    },
+    {
+      "id": "1a1f420fd1fb20c8",
+      "subject": "Muse: Ithaca nightlife this weekend (Nov 19-22)",
+      "date": "2026-11-19T14:06:05Z"
     }
   ],
   "events": [
     {
-      "title": "Bluegrass Night",
-      "where": "Liquid State Brewing",
-      "start": "2026-11-16T17:30",
-      "end": "2026-11-16T20:30",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "\"The Next Storm\" (community play)",
-      "where": "Kiplinger Theatre, Schwartz Center, Cornell",
-      "start": "2026-11-16T19:30",
-      "end": "",
-      "url": "",
-      "description": "$18 / $12 students, seniors, Cornell."
-    },
-    {
-      "title": "Tuesday Trivia Night",
-      "where": "Collegetown Bagels, 420 College Ave",
-      "start": "2026-11-17T18:00",
-      "end": "",
-      "url": "",
-      "description": "Free."
-    },
-    {
-      "title": "Renée Anne Louprette: organ recital",
-      "where": "Anabel Taylor Chapel, Cornell",
-      "start": "2026-11-17T19:30",
+      "title": "Dance & music classes with Adolfo Castillo",
+      "where": "TreeHouse Studio, 119 S Cayuga St",
+      "start": "2026-11-19T18:30",
       "end": "",
       "url": "",
       "description": ""
     },
     {
-      "title": "Tuesday Trivia",
-      "where": "Ithaca 5 & Dime",
-      "start": "2026-11-17T20:30",
-      "end": "2026-11-17T22:00",
-      "url": "",
-      "description": "Happy hour from 4pm."
-    },
-    {
-      "title": "Argos Grove (jazz)",
-      "where": "Argos Inn",
-      "start": "2026-11-18T17:30",
-      "end": "2026-11-18T19:30",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "Musical Theater Open Mic Night",
-      "where": "Kitchen Theatre",
-      "start": "2026-11-18T19:00",
-      "end": "",
-      "url": "",
-      "description": "Sign-up 6:30pm."
-    },
-    {
-      "title": "Open Mic Night",
-      "where": "Nocturnal Cafe",
-      "start": "2026-11-18T19:00",
-      "end": "2026-11-18T22:00",
-      "url": "",
-      "description": ""
-    },
-    {
-      "title": "Drew Kiddoo and the Blackouts",
-      "where": "Bike Bar Ithaca",
-      "start": "2026-11-19",
-      "end": "",
-      "url": "",
-      "description": "Time not listed; check the venue."
-    },
-    {
-      "title": "London McDaniel & Lava: Jazz & Blues Night",
-      "where": "Ithaca 5 & Dime",
+      "title": "Jazz & Blues Night with London McDaniel & Lava",
+      "where": "Ithaca 5 & Dime, 619 W State St",
       "start": "2026-11-19T19:00",
       "end": "2026-11-19T21:00",
       "url": "",
       "description": ""
     },
     {
-      "title": "The Dog Poop Attack (comedy play)",
-      "where": "102 Cherry St",
+      "title": "Drew Kiddoo & the Blackouts",
+      "where": "Bike Bar",
+      "start": "2026-11-19T19:00",
+      "end": "2026-11-19T22:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "TRAMPOLINE: Dodged a Bullet (storytelling)",
+      "where": "Liquid State",
+      "start": "2026-11-19T19:00",
+      "end": "2026-11-19T21:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Max Childs w/ Louiston",
+      "where": "Argos Warehouse, 416 E State St",
       "start": "2026-11-19T19:30",
       "end": "",
+      "url": "",
+      "description": "Doors 7pm. $10 advance / $15 door, 21+."
+    },
+    {
+      "title": "Punk & Poetry Night",
+      "where": "Nocturnal Cafe, 103 S Geneva St",
+      "start": "2026-11-19T19:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "The Dog Poop Attack (play)",
+      "where": "Cherry Arts, 102 Cherry St",
+      "start": "2026-11-19T19:30",
+      "end": "",
+      "url": "",
+      "description": "$15."
+    },
+    {
+      "title": "\"Butthole Surfers: The Hole Truth and Nothing Butt\" (documentary)",
+      "where": "Cinemapolis",
+      "start": "2026-11-19T20:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Muses & Makers: Flute & Lyre",
+      "where": "Johnson Museum of Art, Cornell",
+      "start": "2026-11-20T12:30",
+      "end": "2026-11-20T14:00",
       "url": "",
       "description": ""
     },
@@ -140,44 +129,76 @@
       "description": "Free."
     },
     {
-      "title": "The Ilium Works album release show feat. Motherwort",
-      "where": "Nocturnal Cafe",
+      "title": "Jeremiah Craig & Max Moses",
+      "where": "K-HOUSE, 121 W Martin Luther King Jr St",
       "start": "2026-11-20T18:00",
+      "end": "2026-11-20T20:00",
+      "url": "",
+      "description": "Second set 10pm-midnight."
+    },
+    {
+      "title": "The Ilium Works album release, with Rev Ezra & Motherwort",
+      "where": "Nocturnal Cafe",
+      "start": "2026-11-20T19:00",
       "end": "",
       "url": "",
       "description": ""
+    },
+    {
+      "title": "SingTrece presents \"Singing Notes and Slinging Jokes\"",
+      "where": "330 W State St",
+      "start": "2026-11-20T19:00",
+      "end": "2026-11-20T21:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Opus Ithaca Fall Faculty Fundraiser",
+      "where": "Opus Ithaca School of Music",
+      "start": "2026-11-20T19:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "The Contradictions (swing & contra dance)",
+      "where": "Lehman Alternative Community School",
+      "start": "2026-11-20T19:00",
+      "end": "2026-11-20T22:30",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "LIMINAL (dance series)",
+      "where": "Schwartz Center, Cornell",
+      "start": "2026-11-20T19:30",
+      "end": "",
+      "url": "",
+      "description": "Free."
     },
     {
       "title": "Public Water Supply",
-      "where": "Liquid State Brewing",
+      "where": "Liquid State",
       "start": "2026-11-20T20:00",
       "end": "",
+      "url": "",
+      "description": "Check venue page for exact time."
+    },
+    {
+      "title": "The Wailin' Jennys",
+      "where": "State Theatre, 107 W State St",
+      "start": "2026-11-20T20:00",
+      "end": "",
+      "url": "",
+      "description": "Check Tixr for ticket prices/availability."
+    },
+    {
+      "title": "Carl and Jack and Jer",
+      "where": "Ithaca 5 & Dime",
+      "start": "2026-11-20T21:00",
+      "end": "2026-11-20T23:00",
       "url": "",
       "description": ""
-    },
-    {
-      "title": "The Wailin’ Jennys",
-      "where": "State Theatre of Ithaca",
-      "start": "2026-11-20T20:00",
-      "end": "",
-      "url": "",
-      "description": "$55-$75."
-    },
-    {
-      "title": "Papa Muse album release show with Madd Daddy, Public Water Supply, Loveday and Max Moses",
-      "where": "Nocturnal Cafe",
-      "start": "2026-11-21",
-      "end": "",
-      "url": "",
-      "description": "Evening; exact time not listed, check the venue."
-    },
-    {
-      "title": "Jester & Kester",
-      "where": "Hangar Theatre",
-      "start": "2026-11-21",
-      "end": "",
-      "url": "",
-      "description": "Check Hangar for showtimes."
     },
     {
       "title": "Ithaca Tibetan Cultural Day",
@@ -196,6 +217,14 @@
       "description": ""
     },
     {
+      "title": "Jester & Kester (original musical)",
+      "where": "Hangar Theatre, 801 Taughannock Blvd",
+      "start": "2026-11-21T13:30",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
       "title": "Time for Three with the Cornell Symphony Orchestra",
       "where": "Bailey Hall, Cornell",
       "start": "2026-11-21T15:00",
@@ -204,17 +233,97 @@
       "description": ""
     },
     {
-      "title": "Metasequoia 4th Annual Community Food Drive with Kitestring, Bob Roberts Calamity and Notorious Stringbusters",
-      "where": "Liquid State Brewing",
+      "title": "Milonga de la Quebrada (tango, DJ Valentin)",
+      "where": "TreeHouse Studio, 119 S Cayuga St",
+      "start": "2026-11-21T15:00",
+      "end": "2026-11-21T19:00",
+      "url": "",
+      "description": "$10 before 4pm / $15 after."
+    },
+    {
+      "title": "Papa Muse \"Wear Vibrant Colors 2\" album party, with Madd Daddy, Public Water Supply, Loveday & Max Moses",
+      "where": "Nocturnal Cafe",
+      "start": "2026-11-21T18:30",
+      "end": "2026-11-21T23:30",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Jester & Kester (original musical)",
+      "where": "Hangar Theatre, 801 Taughannock Blvd",
       "start": "2026-11-21T19:00",
       "end": "",
       "url": "",
       "description": ""
     },
     {
-      "title": "Motherwort: Don Bazley's Birthday Bash",
+      "title": "Mostly Motown Chorus fall concert",
+      "where": "First Baptist Church",
+      "start": "2026-11-21T19:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Seed Bomb folk-punk show",
+      "where": "Ithaca Commons",
+      "start": "2026-11-21T19:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Ti-Ti Chickapea",
+      "where": "Bike Bar",
+      "start": "2026-11-21T19:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Metasequoia Community Food Drive, with Kitestring, Bob Roberts Calamity & Notorious Stringbusters",
+      "where": "Liquid State",
+      "start": "2026-11-21T19:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Noisevember",
+      "where": "Angry Mom Records",
+      "start": "2026-11-21T20:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Mark Maynard",
+      "where": "Ithaca 5 & Dime",
+      "start": "2026-11-21T20:00",
+      "end": "2026-11-21T22:00",
+      "url": "",
+      "description": "Free."
+    },
+    {
+      "title": "DJs Tuggle & Kamal Naeem (vinyl)",
+      "where": "Argos Warehouse, 416 E State St",
+      "start": "2026-11-21T20:00",
+      "end": "2026-11-22T00:00",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Don Bazley Birthday Bash, with Get Off My Lawn, Secret Service Me & Motherwort",
       "where": "K-HOUSE",
       "start": "2026-11-21T21:00",
+      "end": "",
+      "url": "",
+      "description": "Listings differ on time; check venue page."
+    },
+    {
+      "title": "OTD Holiday Pajama Scoreboard Crawl",
+      "where": "Liquid State",
+      "start": "2026-11-22T13:09",
       "end": "",
       "url": "",
       "description": ""
@@ -222,26 +331,34 @@
     {
       "title": "Jester & Kester",
       "where": "Hangar Theatre",
-      "start": "2026-11-22",
+      "start": "2026-11-22T13:30",
       "end": "",
       "url": "",
-      "description": "Check Hangar for showtimes."
+      "description": ""
     },
     {
-      "title": "\"The Next Storm\"",
-      "where": "Kiplinger Theatre, Schwartz Center, Cornell",
-      "start": "2026-11-22T19:30",
+      "title": "Nick Kendall improv & chamber music workshop",
+      "where": "Opus Ithaca School of Music",
+      "start": "2026-11-22T14:00",
       "end": "",
       "url": "",
-      "description": "$18 / $12."
+      "description": "Free."
     },
     {
-      "title": "Cornell Chorale Fall Concert: \"Seasons of Life\"",
+      "title": "Cornell Percussion Ensemble",
+      "where": "Lincoln Hall, Room B20, Cornell",
+      "start": "2026-11-22T15:00",
+      "end": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Cornell Chorale: \"Seasons of Life\"",
       "where": "Bailey Hall, Cornell",
       "start": "2026-11-22T19:30",
       "end": "",
       "url": "",
-      "description": ""
+      "description": "Free."
     }
   ]
 }
