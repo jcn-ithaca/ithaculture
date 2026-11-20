@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T08:43:09Z",
+ "updated": "2026-11-20T08:47:56Z",
  "videos": [
   {
    "venue": "Hopshire",
@@ -40,6 +40,16 @@
    "channel": "Papa Muse",
    "channel_url": "https://www.youtube.com/@PapaMuseMusic",
    "note": "Papa Muse Meaning Makers Official video; Ithaca, NY artist whose Bandcamp links youtube.com/papamuse, channel named Papa Muse with Ithaca show videos"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Frank Vignola & Vinnie Raniolo Jazz Guitar Concert",
+   "date": "2026-11-21",
+   "performer": "Frank Vignola & Vinny Raniolo",
+   "youtube_id": "zb5FBIwxe4k",
+   "channel": "Frank Vignola",
+   "channel_url": "https://www.youtube.com/@FrankVignolaGuitar",
+   "note": "Frank Vignola \"The Frank and Vinny Record\" - \"Sweet Chorus\"; uploaded by Frank Vignola's own channel (exact name, jazz guitar, the duo's own record with Vinny Raniolo)"
   }
  ],
  "checked": [
@@ -317,6 +327,11 @@
    "venue": "K-HOUSE",
    "title": "LSA DJ Night",
    "date": "2026-11-27"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Swingin' Contras, a hybrid social dance with the Contradictions!",
+   "date": "2026-11-20"
   }
  ]
 }
