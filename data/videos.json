@@ -1,16 +1,6 @@
 {
- "updated": "2026-11-19T08:46:48Z",
+ "updated": "2026-11-20T08:43:09Z",
  "videos": [
-  {
-   "venue": "Bike Bar",
-   "title": "Drew Kiddoo & the blackouts",
-   "date": "2026-11-19",
-   "performer": "Drew Kiddoo and The Blackouts",
-   "youtube_id": "2n19NIGd4KM",
-   "channel": "Drew Kiddoo and The Blackouts",
-   "channel_url": "https://www.youtube.com/@akiddoo",
-   "note": "Drew Kiddoo and The Blackouts - Diggin' My Own Graveyard (Official Music Video); Ithaca-based country band whose FOCOMA artist profile links youtube.com/@akiddoo"
-  },
   {
    "venue": "Hopshire",
    "title": "Live Music – Pocket Bandits",
@@ -43,7 +33,7 @@
   },
   {
    "venue": "Misc",
-   "title": "Papa Muse album release show with Madd Daddy, Public Water Supply, Loveday and Max Moses",
+   "title": "Papa Muse \"Wear Vibrant Colors 2\" album party, with Madd Daddy, Public Water Supply, Loveday & Max Moses",
    "date": "2026-11-21",
    "performer": "Papa Muse",
    "youtube_id": "Wdo7WMt7FyQ",
@@ -53,36 +43,6 @@
   }
  ],
  "checked": [
-  {
-   "venue": "K-HOUSE",
-   "title": "Business Leaders of Colors Monthly Meeting",
-   "date": "2026-11-19"
-  },
-  {
-   "venue": "Hopshire",
-   "title": "Science & Suds",
-   "date": "2026-11-19"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Hold 1980",
-   "date": "2026-11-19"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "TRAMPOLINE: Dodged A Bullet",
-   "date": "2026-11-19"
-  },
-  {
-   "venue": "Argos Inn",
-   "title": "Max Childs & Louiston",
-   "date": "2026-11-19"
-  },
-  {
-   "venue": "The Cherry Arts",
-   "title": "The Dog Poop Attack",
-   "date": "2026-11-19"
-  },
   {
    "venue": "Brewer's Kitchen & Taproom",
    "title": "STRAIGHT OUTTA BROOKLYN TAP TAKEOVER- 11/20 & 11/21",
@@ -184,16 +144,6 @@
    "date": "2026-11-24"
   },
   {
-   "venue": "Table for One Trivia",
-   "title": "Trivia: Characteristic/MAP IT/Long and Short of It",
-   "date": "2026-11-19"
-  },
-  {
-   "venue": "Misc",
-   "title": "London McDaniel & Lava: Jazz & Blues Night",
-   "date": "2026-11-19"
-  },
-  {
    "venue": "Misc",
    "title": "CCHK Salon: Muses and Makers, Female Voices in Song",
    "date": "2026-11-20"
@@ -222,16 +172,6 @@
    "venue": "Misc",
    "title": "Cornell Chorale Fall Concert: \"Seasons of Life\"",
    "date": "2026-11-22"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College African Drumming and Dance Ensemble",
-   "date": "2026-11-19"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College Piano and String Chamber Music",
-   "date": "2026-11-19"
   },
   {
    "venue": "Hopshire",
@@ -264,16 +204,6 @@
    "date": "2026-11-25"
   },
   {
-   "venue": "Visit Ithaca",
-   "title": "Pelotones Trio at South Hill Cider Community Concert Series",
-   "date": "2026-11-19"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Vinyl Showcase",
-   "date": "2026-11-19"
-  },
-  {
    "venue": "Hopshire",
    "title": "Closed",
    "date": "2026-11-26"
@@ -297,6 +227,96 @@
    "venue": "Liquid State Brewing",
    "title": "Trivia Night w/ Bob Proehl!",
    "date": "2026-11-25"
+  },
+  {
+   "venue": "Misc",
+   "title": "Muses & Makers: Flute & Lyre",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Misc",
+   "title": "Opus Ithaca Fall Faculty Fundraiser",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Misc",
+   "title": "SingTrece presents \"Singing Notes and Slinging Jokes\"",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Misc",
+   "title": "The Ilium Works album release, with Rev Ezra & Motherwort",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Misc",
+   "title": "LIMINAL (dance series)",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Misc",
+   "title": "Carl and Jack and Jer",
+   "date": "2026-11-20"
+  },
+  {
+   "venue": "Misc",
+   "title": "Milonga de la Quebrada (tango, DJ Valentin)",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Misc",
+   "title": "Mostly Motown Chorus fall concert",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Misc",
+   "title": "Seed Bomb folk-punk show",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Misc",
+   "title": "Ti-Ti Chickapea",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Misc",
+   "title": "Noisevember",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Misc",
+   "title": "Mark Maynard",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Misc",
+   "title": "OTD Holiday Pajama Scoreboard Crawl",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Misc",
+   "title": "Nick Kendall improv & chamber music workshop",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cornell Percussion Ensemble",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Misc",
+   "title": "Cornell Chorale: \"Seasons of Life\"",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Live Music – David Graybeard Band",
+   "date": "2026-11-27"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "LSA DJ Night",
+   "date": "2026-11-27"
   }
  ]
 }
