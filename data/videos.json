@@ -1,26 +1,6 @@
 {
- "updated": "2026-11-20T08:47:56Z",
+ "updated": "2026-11-21T08:42:05Z",
  "videos": [
-  {
-   "venue": "Hopshire",
-   "title": "Live Music – Pocket Bandits",
-   "date": "2026-11-20",
-   "performer": "Pocket Bandits",
-   "youtube_id": "llJoHcrR12Q",
-   "channel": "Pocket Bandits",
-   "channel_url": "https://www.youtube.com/@PocketBanditsMusic",
-   "note": "Pocket Bandits - The Pocket Bandit [official video]; Ithaca funk-fusion trio, channel name and handle match the band's @pocketbanditsmusic profile (Sonicbids lists them as Ithaca, NY)"
-  },
-  {
-   "venue": "State Theatre",
-   "title": "The Wailin' Jennys",
-   "date": "2026-11-20",
-   "performer": "The Wailin' Jennys",
-   "youtube_id": "mEXJJ5nZ7ng",
-   "channel": "Red House Records",
-   "channel_url": "https://www.youtube.com/@RedHouseRecordsVideos",
-   "note": "The Wailin' Jennys - Wildflowers (Official Music Video); uploaded by their label Red House Records"
-  },
   {
    "venue": "Misc",
    "title": "Time for Three with the Cornell Symphony Orchestra",
@@ -53,31 +33,6 @@
   }
  ],
  "checked": [
-  {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "STRAIGHT OUTTA BROOKLYN TAP TAKEOVER- 11/20 & 11/21",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Jeremiah Craig & Max Moses",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Hands Four Dancers",
-   "title": "An evening of Contra Dancing AND Swing Dancing",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Public Water Supply",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "The Cherry Arts",
-   "title": "The Dog Poop Attack",
-   "date": "2026-11-20"
-  },
   {
    "venue": "Hangar Theatre",
    "title": "Jester & Kester",
@@ -155,16 +110,6 @@
   },
   {
    "venue": "Misc",
-   "title": "CCHK Salon: Muses and Makers, Female Voices in Song",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Misc",
-   "title": "The Ilium Works album release show feat. Motherwort",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Misc",
    "title": "Ithaca Tibetan Cultural Day",
    "date": "2026-11-21"
   },
@@ -219,54 +164,9 @@
    "date": "2026-11-26"
   },
   {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College Concert Band: After Dark",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Hesselink Cello Studio Recital",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Cheers Queers at The Rhine House",
-   "date": "2026-11-20"
-  },
-  {
    "venue": "Liquid State Brewing",
    "title": "Trivia Night w/ Bob Proehl!",
    "date": "2026-11-25"
-  },
-  {
-   "venue": "Misc",
-   "title": "Muses & Makers: Flute & Lyre",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Misc",
-   "title": "Opus Ithaca Fall Faculty Fundraiser",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Misc",
-   "title": "SingTrece presents \"Singing Notes and Slinging Jokes\"",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Misc",
-   "title": "The Ilium Works album release, with Rev Ezra & Motherwort",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Misc",
-   "title": "LIMINAL (dance series)",
-   "date": "2026-11-20"
-  },
-  {
-   "venue": "Misc",
-   "title": "Carl and Jack and Jer",
-   "date": "2026-11-20"
   },
   {
    "venue": "Misc",
@@ -329,9 +229,14 @@
    "date": "2026-11-27"
   },
   {
-   "venue": "Visit Ithaca",
-   "title": "Swingin' Contras, a hybrid social dance with the Contradictions!",
-   "date": "2026-11-20"
+   "venue": "K-HOUSE",
+   "title": "Truth Decay & Jeremy and The Toe Beans",
+   "date": "2026-11-28"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Club QSpace: DJ Heathen Sinford & DJ Just Alex",
+   "date": "2026-11-28"
   }
  ]
 }
