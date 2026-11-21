@@ -14,6 +14,7 @@ const VENUE_COLORS = {
   "The Cherry Arts": "--v-cherry",
   "Hands Four Dancers": "--v-h4d",
   "Argos Inn": "--v-argos",
+  "Cornell Music": "--v-cornell",
   "Misc": "--v-muse",
 };
 const TZ = "America/New_York";

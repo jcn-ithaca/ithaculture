@@ -21,6 +21,7 @@
   --v-cherry: #8b1e3f;
   --v-h4d: #b0601f;
   --v-argos: #546478;
+  --v-cornell: #b31b1b;
   --v-muse: #b53a4a;
 }
 @media (prefers-color-scheme: dark) {
@@ -47,6 +48,7 @@
     --v-cherry: #f2879f;
     --v-h4d: #f0a66a;
     --v-argos: #a9b8cc;
+    --v-cornell: #ff7b72;
     --v-muse: #ff8f9c;
   }
 }

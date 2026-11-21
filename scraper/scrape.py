@@ -573,6 +573,8 @@ MUSE_VENUES = {
     "Ithaca Children's Garden": ("children's garden", "childrens garden", "children’s garden"),
     "Hands Four Dancers": ("hands four", "hands 4", "hfdi"),
     "Argos Inn": ("argos inn", "argos warehouse", "bar argos"),
+    "Cornell Music": ("bailey hall", "barnes hall", "lincoln hall", "sage chapel",
+                      "anabel taylor", "schwartz center", "statler auditorium"),
 }
 
 
@@ -1298,6 +1300,59 @@ def scrape_argos():
     return out
 
 
+CORNELL_URL = "https://events.cornell.edu/calendar/upcoming?order=date&event_types%5B%5D=4262"
+CORNELL_API = "https://events.cornell.edu/api/2/events"
+CORNELL_TYPE = 4262  # Localist event type "Music"
+# Cornell's events calendar runs on Localist, whose public JSON API is allowed
+# by robots.txt (the filtered calendar page is not). Each event can have several
+# instances (dates); each one in range becomes a listing.
+
+
+def blank(v):
+    return " ".join((v or "").split())
+
+
+def scrape_cornell():
+    today = now().date()
+    horizon = today + dt.timedelta(days=DAYS_AHEAD)
+    items, page = [], 1
+    while True:
+        url = (f"{CORNELL_API}?type={CORNELL_TYPE}&start={today.isoformat()}"
+               f"&days={DAYS_AHEAD}&pp=100&page={page}")
+        data = fetch(url, f"cornell-{page}.json").json()
+        items.extend(x["event"] for x in data.get("events", []))
+        pg = data.get("page") or {}
+        if not pg.get("next_page") or page >= 10:
+            break
+        page += 1
+        time.sleep(1)  # robots.txt crawl delay
+    out = []
+    for e in items:
+        if e.get("experience") == "virtual":
+            continue
+        where = ", ".join(x for x in (blank(e.get("location_name")), blank(e.get("room_number"))) if x)
+        desc = " · ".join(x for x in (f"at {where}" if where else "", blank(e.get("description_text"))) if x)
+        # The music department tags its titles "(CU Music)"; the venue says as much.
+        title = re.sub(r"\s*\(CU Music\)\s*$", "", blank(e.get("title")))
+        link = blank(e.get("localist_url")) or CORNELL_URL
+        image = blank(e.get("photo_url")) or None
+        for inst in e.get("event_instances") or []:
+            inst = inst.get("event_instance") or inst
+            start = dt.datetime.fromisoformat(inst["start"]).astimezone(TZ)
+            if not (today <= start.date() <= horizon):
+                continue
+            end = dt.datetime.fromisoformat(inst["end"]).astimezone(TZ) if inst.get("end") else None
+            if inst.get("all_day"):
+                start = dt.datetime.combine(start.date(), dt.time(0), TZ)
+                out.append(event("Cornell Music", title, start, all_day=True,
+                                 url=link, description=desc, image=image))
+            else:
+                out.append(event("Cornell Music", title, start,
+                                 end=end if end and end > start else None,
+                                 url=link, description=desc, image=image))
+    return out
+
+
 VENUES = [
     ("Bike Bar", BIKEBAR_URL, scrape_bikebar),
     ("Liquid State Brewing", LIQUID_URL, scrape_liquid),
@@ -1309,6 +1364,7 @@ VENUES = [
     ("Hands Four Dancers", H4D_URL, scrape_h4d),
     ("Argos Inn", ARGOS_URL, scrape_argos),
     ("State Theatre", STATE_URL, scrape_state),
+    ("Cornell Music", CORNELL_URL, scrape_cornell),
     ("Brewer's Kitchen & Taproom", BREWERS_URL, scrape_brewers),
     ("Table for One Trivia", T41_URL, scrape_t41),
     (MUSE_VENUE, None, scrape_muse),
