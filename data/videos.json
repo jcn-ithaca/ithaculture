@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T08:42:05Z",
+ "updated": "2026-11-21T08:48:53Z",
  "videos": [
   {
    "venue": "Misc",
@@ -237,6 +237,26 @@
    "venue": "K-HOUSE",
    "title": "Club QSpace: DJ Heathen Sinford & DJ Just Alex",
    "date": "2026-11-28"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Saltonstall Exhibition",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Jazz Lab and Jazz Reperatory Bands",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Contemporary Chamber Ensemble",
+   "date": "2026-11-21"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Bound for Glory Live with Richie & Rosie",
+   "date": "2026-11-22"
   }
  ]
 }
