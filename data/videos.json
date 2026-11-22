@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T08:42:50Z",
+ "updated": "2026-11-22T08:46:50Z",
  "videos": [],
  "checked": [
   {
@@ -145,6 +145,26 @@
   {
    "venue": "Cornell Music",
    "title": "Kim Studio Violin Recital",
+   "date": "2026-11-23"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Saltonstall Exhibition",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Jazz Vocal Ensemble",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca Sunday Squares",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Handbells and Steel Band",
    "date": "2026-11-23"
   }
  ]
