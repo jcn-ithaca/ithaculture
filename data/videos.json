@@ -1,78 +1,7 @@
 {
- "updated": "2026-11-21T08:48:53Z",
- "videos": [
-  {
-   "venue": "Misc",
-   "title": "Time for Three with the Cornell Symphony Orchestra",
-   "date": "2026-11-21",
-   "performer": "Time for Three",
-   "youtube_id": "VBC23vB5YcA",
-   "channel": "Time For Three",
-   "channel_url": "https://www.youtube.com/@officialtf3",
-   "note": "Time for Three - Stand By Me, Tobin Center for the Performing Arts; the trio's official site tf3.com links youtube.com/c/officialtf3"
-  },
-  {
-   "venue": "Misc",
-   "title": "Papa Muse \"Wear Vibrant Colors 2\" album party, with Madd Daddy, Public Water Supply, Loveday & Max Moses",
-   "date": "2026-11-21",
-   "performer": "Papa Muse",
-   "youtube_id": "Wdo7WMt7FyQ",
-   "channel": "Papa Muse",
-   "channel_url": "https://www.youtube.com/@PapaMuseMusic",
-   "note": "Papa Muse Meaning Makers Official video; Ithaca, NY artist whose Bandcamp links youtube.com/papamuse, channel named Papa Muse with Ithaca show videos"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Frank Vignola & Vinnie Raniolo Jazz Guitar Concert",
-   "date": "2026-11-21",
-   "performer": "Frank Vignola & Vinny Raniolo",
-   "youtube_id": "zb5FBIwxe4k",
-   "channel": "Frank Vignola",
-   "channel_url": "https://www.youtube.com/@FrankVignolaGuitar",
-   "note": "Frank Vignola \"The Frank and Vinny Record\" - \"Sweet Chorus\"; uploaded by Frank Vignola's own channel (exact name, jazz guitar, the duo's own record with Vinny Raniolo)"
-  }
- ],
+ "updated": "2026-11-22T08:42:50Z",
+ "videos": [],
  "checked": [
-  {
-   "venue": "Hangar Theatre",
-   "title": "Jester & Kester",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "The Cherry Arts",
-   "title": "The Dog Poop Attack",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "Rachel Beverly Live — Saturday 11/21",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Metal Night",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Bike Bar",
-   "title": "TiTi Chickapea w/ Hank Roberts and Richie Stearns",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Metasequoia's 4th Annual Community Food Drive",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Argos Inn",
-   "title": "Vinyl DJ Night: DJ Tuggle & DJ Kamal",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Don’s Annual B-Day Bash Featuring Get Off My Lawn, Motherwort and Secret Service Men",
-   "date": "2026-11-21"
-  },
   {
    "venue": "Hangar Theatre",
    "title": "Jester & Kester",
@@ -107,16 +36,6 @@
    "venue": "K-HOUSE",
    "title": "Shjon's Birthday",
    "date": "2026-11-24"
-  },
-  {
-   "venue": "Misc",
-   "title": "Ithaca Tibetan Cultural Day",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Misc",
-   "title": "Kids Trivia (ages 4-12)",
-   "date": "2026-11-21"
   },
   {
    "venue": "Misc",
@@ -170,36 +89,6 @@
   },
   {
    "venue": "Misc",
-   "title": "Milonga de la Quebrada (tango, DJ Valentin)",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Misc",
-   "title": "Mostly Motown Chorus fall concert",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Misc",
-   "title": "Seed Bomb folk-punk show",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Misc",
-   "title": "Ti-Ti Chickapea",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Misc",
-   "title": "Noisevember",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Misc",
-   "title": "Mark Maynard",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Misc",
    "title": "OTD Holiday Pajama Scoreboard Crawl",
    "date": "2026-11-22"
   },
@@ -239,24 +128,24 @@
    "date": "2026-11-28"
   },
   {
-   "venue": "The Cherry Arts",
-   "title": "The Saltonstall Exhibition",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College Jazz Lab and Jazz Reperatory Bands",
-   "date": "2026-11-21"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Ithaca College Contemporary Chamber Ensemble",
-   "date": "2026-11-21"
-  },
-  {
    "venue": "Visit Ithaca",
    "title": "Bound for Glory Live with Richie & Rosie",
    "date": "2026-11-22"
+  },
+  {
+   "venue": "Cornell Music",
+   "title": "Cornell Percussion Ensemble Concert",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Cornell Music",
+   "title": "Cornell Chorale Fall 2026 Concert - Seasons of Life",
+   "date": "2026-11-22"
+  },
+  {
+   "venue": "Cornell Music",
+   "title": "Kim Studio Violin Recital",
+   "date": "2026-11-23"
   }
  ]
 }
