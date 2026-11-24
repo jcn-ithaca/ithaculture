@@ -1312,6 +1312,30 @@ def blank(v):
     return " ".join((v or "").split())
 
 
+# The Music type also carries listings that aren't performances, such as a
+# symposium's call for papers. Drop those unless the title also names a show
+# ("lecture-recital" stays). Localist's own event types are checked too.
+CORNELL_NOT_SHOW = re.compile(
+    r"\b(call for (papers|proposals|submissions|scores)|deadline|symposium|conference|"
+    r"colloquium|lecture|seminar|workshop|panel|talk|book launch|info(rmation)? session|"
+    r"auditions?|applications?|registration|office hours|class|course|exhibit(ion)?)\b", re.I)
+CORNELL_SHOW = re.compile(
+    r"\b(concerts?|recitals?|performances?|showcase|ensemble|orchestra|choir|chorus|"
+    r"band|jazz|opera|carols|gamelan|sings?)\b", re.I)
+CORNELL_NOT_SHOW_TYPES = {"deadline", "lecture", "conference", "seminar", "workshop",
+                          "class", "meeting", "information session", "exhibition",
+                          "symposium", "colloquium", "panel", "talk"}
+
+
+def cornell_is_show(e, title):
+    types = {blank(t.get("name")).lower()
+             for t in ((e.get("filters") or {}).get("event_types") or []) if isinstance(t, dict)}
+    shows = bool(CORNELL_SHOW.search(title))
+    if types & CORNELL_NOT_SHOW_TYPES and not shows:
+        return False
+    return shows or not CORNELL_NOT_SHOW.search(title)
+
+
 def scrape_cornell():
     today = now().date()
     horizon = today + dt.timedelta(days=DAYS_AHEAD)
@@ -1334,6 +1358,9 @@ def scrape_cornell():
         desc = " · ".join(x for x in (f"at {where}" if where else "", blank(e.get("description_text"))) if x)
         # The music department tags its titles "(CU Music)"; the venue says as much.
         title = re.sub(r"\s*\(CU Music\)\s*$", "", blank(e.get("title")))
+        if not cornell_is_show(e, title):
+            print(f"  Cornell Music: skipping non-performance {title!r}")
+            continue
         link = blank(e.get("localist_url")) or CORNELL_URL
         image = blank(e.get("photo_url")) or None
         for inst in e.get("event_instances") or []:
