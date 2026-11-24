@@ -1,6 +1,17 @@
 {
- "updated": "2026-11-24T08:43:17Z",
- "videos": [],
+ "updated": "2026-11-24T08:48:02Z",
+ "videos": [
+  {
+   "venue": "State Theatre",
+   "title": "O Christmas Tea: A British Comedy",
+   "date": "2026-12-02",
+   "performer": "James & Jamesy",
+   "youtube_id": "-hfptIluoEE",
+   "channel": "James & Jamesy",
+   "channel_url": "https://www.youtube.com/@jamesandjamesy",
+   "note": "\"O Christmas Tea: A British Comedy | James & Jamesy – Official Trailer\". Channel name is exactly the duo's; handle @jamesandjamesy matches their Facebook/Instagram handles linked from the show's site ochristmastea.com (jamesandjamesy.com redirects there); same touring show."
+  }
+ ],
  "checked": [
   {
    "venue": "Brewer's Kitchen & Taproom",
@@ -176,6 +187,46 @@
    "venue": "Cornell Music",
    "title": "Arthur Siyun Li, piano",
    "date": "2026-12-01"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Saltonstall Exhibition",
+   "date": "2026-11-24"
+  },
+  {
+   "venue": "Cornell Music",
+   "title": "Midday Music for Organ: Tradition and Experimentation",
+   "date": "2026-12-02"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "MYSTERY FLIGHT NIGHT",
+   "date": "2026-12-02"
+  },
+  {
+   "venue": "Argos Inn",
+   "title": "Argos Grove: Jazz Trio Performance",
+   "date": "2026-12-02"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "OGFF Collaborators Meeting",
+   "date": "2026-12-02"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Trivia Night!",
+   "date": "2026-12-02"
+  },
+  {
+   "venue": "Cornell Music",
+   "title": "Student Chamber Music Recital",
+   "date": "2026-12-02"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Reggae Underground",
+   "date": "2026-12-02"
   }
  ]
 }
