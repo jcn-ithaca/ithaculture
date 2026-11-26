@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T08:46:23Z",
+ "updated": "2026-11-26T08:42:16Z",
  "videos": [
   {
    "venue": "State Theatre",
@@ -14,39 +14,9 @@
  ],
  "checked": [
   {
-   "venue": "Brewer's Kitchen & Taproom",
-   "title": "MYSTERY FLIGHT NIGHT",
-   "date": "2026-11-25"
-  },
-  {
-   "venue": "Argos Inn",
-   "title": "Argos Grove: Jazz Trio Performance",
-   "date": "2026-11-25"
-  },
-  {
-   "venue": "Hopshire",
-   "title": "Trivia Night!",
-   "date": "2026-11-25"
-  },
-  {
-   "venue": "Bike Bar",
-   "title": "Mark Maynard & friends",
-   "date": "2026-11-25"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "Reggae Underground",
-   "date": "2026-11-25"
-  },
-  {
    "venue": "Hopshire",
    "title": "Closed",
    "date": "2026-11-26"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Trivia Night w/ Bob Proehl!",
-   "date": "2026-11-25"
   },
   {
    "venue": "Hopshire",
@@ -97,16 +67,6 @@
    "venue": "Liquid State Brewing",
    "title": "Tru Bleu w/ 4 Word Days & Dirtroad Dandelions",
    "date": "2026-11-29"
-  },
-  {
-   "venue": "Misc",
-   "title": "Open Mic Night",
-   "date": "2026-11-25"
-  },
-  {
-   "venue": "Misc",
-   "title": "Scuba Jerry Giving Eve",
-   "date": "2026-11-25"
   },
   {
    "venue": "Misc",
@@ -169,9 +129,24 @@
    "date": "2026-12-02"
   },
   {
-   "venue": "The Cherry Arts",
-   "title": "The Saltonstall Exhibition",
-   "date": "2026-11-25"
+   "venue": "Cornell Music",
+   "title": "Student Voice Program Recitals",
+   "date": "2026-12-03"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Singer/Songwriter Night by Dan Forsyth",
+   "date": "2026-12-03"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Jones et al. : Jazz Quintet in Room K!",
+   "date": "2026-12-03"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Karaoke Night with Lil' B!",
+   "date": "2026-12-03"
   }
  ]
 }
