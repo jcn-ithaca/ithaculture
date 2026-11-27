@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T08:42:44Z",
+ "updated": "2026-11-27T08:53:13Z",
  "videos": [
   {
    "venue": "State Theatre",
@@ -182,6 +182,21 @@
    "venue": "The Cherry Arts",
    "title": "Fingerlakes Follies",
    "date": "2026-12-04"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "The Saltonstall Exhibition",
+   "date": "2026-11-27"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Opera Workshop",
+   "date": "2026-12-01"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca College Wind Ensemble",
+   "date": "2026-12-01"
   }
  ]
 }
