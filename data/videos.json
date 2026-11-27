@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T08:42:16Z",
+ "updated": "2026-11-27T08:42:44Z",
  "videos": [
   {
    "venue": "State Theatre",
@@ -13,11 +13,6 @@
   }
  ],
  "checked": [
-  {
-   "venue": "Hopshire",
-   "title": "Closed",
-   "date": "2026-11-26"
-  },
   {
    "venue": "Hopshire",
    "title": "Live Music – David Graybeard Band",
@@ -37,11 +32,6 @@
    "venue": "K-HOUSE",
    "title": "Club QSpace: DJ Heathen Sinford & DJ Just Alex",
    "date": "2026-11-28"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Vinyl Showcase",
-   "date": "2026-11-26"
   },
   {
    "venue": "Visit Ithaca",
@@ -147,6 +137,51 @@
    "venue": "Liquid State Brewing",
    "title": "Karaoke Night with Lil' B!",
    "date": "2026-12-03"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Ithaca Sunday Squares",
+   "date": "2026-11-29"
+  },
+  {
+   "venue": "Visit Ithaca",
+   "title": "Finger Lakes Fiddle Orchestra Concert",
+   "date": "2026-11-30"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "Trivia Night w/ Bob Proehl!",
+   "date": "2026-12-02"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Room K Grand Opening",
+   "date": "2026-12-04"
+  },
+  {
+   "venue": "K-HOUSE",
+   "title": "Ithaca Gallery Night: First Fridays @ K-HOUSE in Room K",
+   "date": "2026-12-04"
+  },
+  {
+   "venue": "Hopshire",
+   "title": "Live Music – The Elderly Brothers",
+   "date": "2026-12-04"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "'Twas The Night Before Krampus Puppet Open Mic",
+   "date": "2026-12-04"
+  },
+  {
+   "venue": "Cornell Music",
+   "title": "Bjerken Piano Studio Recital",
+   "date": "2026-12-04"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "Fingerlakes Follies",
+   "date": "2026-12-04"
   }
  ]
 }
