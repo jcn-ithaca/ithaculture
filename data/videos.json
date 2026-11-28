@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T08:53:13Z",
+ "updated": "2026-11-28T08:43:17Z",
  "videos": [
   {
    "venue": "State Theatre",
@@ -10,19 +10,19 @@
    "channel": "James & Jamesy",
    "channel_url": "https://www.youtube.com/@jamesandjamesy",
    "note": "\"O Christmas Tea: A British Comedy | James & Jamesy – Official Trailer\". Channel name is exactly the duo's; handle @jamesandjamesy matches their Facebook/Instagram handles linked from the show's site ochristmastea.com (jamesandjamesy.com redirects there); same touring show."
+  },
+  {
+   "venue": "State Theatre",
+   "title": "Christmas With the Celts",
+   "date": "2026-12-05",
+   "performer": "The Celts",
+   "youtube_id": "7SK29EnYq7k",
+   "channel": "THE CELTS",
+   "channel_url": "https://www.youtube.com/@TheCeltsMusic",
+   "note": "\"Christmas with The Celts\". Channel name is exactly the band's (Nashville-based, led by Ric Blair) and its uploads are this touring holiday show (also \"2021 Christmas with the Celts tour\"); oEmbed 200."
   }
  ],
  "checked": [
-  {
-   "venue": "Hopshire",
-   "title": "Live Music – David Graybeard Band",
-   "date": "2026-11-27"
-  },
-  {
-   "venue": "K-HOUSE",
-   "title": "LSA DJ Night",
-   "date": "2026-11-27"
-  },
   {
    "venue": "K-HOUSE",
    "title": "Truth Decay & Jeremy and The Toe Beans",
@@ -35,21 +35,6 @@
   },
   {
    "venue": "Visit Ithaca",
-   "title": "Oona & James Stringband Party at South Hill Cider",
-   "date": "2026-11-27"
-  },
-  {
-   "venue": "Visit Ithaca",
-   "title": "Winter Music Series",
-   "date": "2026-11-27"
-  },
-  {
-   "venue": "Liquid State Brewing",
-   "title": "Yet To Be Gold w/Richie Sterns",
-   "date": "2026-11-27"
-  },
-  {
-   "venue": "Visit Ithaca",
    "title": "MAQ at the South Hill Cider Community Concert Series",
    "date": "2026-11-28"
   },
@@ -57,11 +42,6 @@
    "venue": "Liquid State Brewing",
    "title": "Tru Bleu w/ 4 Word Days & Dirtroad Dandelions",
    "date": "2026-11-29"
-  },
-  {
-   "venue": "Misc",
-   "title": "The 1980 Underground Dance Party",
-   "date": "2026-11-27"
   },
   {
    "venue": "Misc",
@@ -184,11 +164,6 @@
    "date": "2026-12-04"
   },
   {
-   "venue": "The Cherry Arts",
-   "title": "The Saltonstall Exhibition",
-   "date": "2026-11-27"
-  },
-  {
    "venue": "Visit Ithaca",
    "title": "Ithaca College Opera Workshop",
    "date": "2026-12-01"
@@ -197,6 +172,36 @@
    "venue": "Visit Ithaca",
    "title": "Ithaca College Wind Ensemble",
    "date": "2026-12-01"
+  },
+  {
+   "venue": "Cornell Music",
+   "title": "Music and Digital Gameplay Concert",
+   "date": "2026-12-05"
+  },
+  {
+   "venue": "Liquid State Brewing",
+   "title": "KRAMPUSNACHT 2026!!!",
+   "date": "2026-12-05"
+  },
+  {
+   "venue": "Brewer's Kitchen & Taproom",
+   "title": "Adam Parker Live — Saturday 12/5",
+   "date": "2026-12-05"
+  },
+  {
+   "venue": "Hangar Theatre",
+   "title": "The Hangar Hobnob",
+   "date": "2026-12-05"
+  },
+  {
+   "venue": "Cornell Music",
+   "title": "Cornell Wind Symphony Concert",
+   "date": "2026-12-05"
+  },
+  {
+   "venue": "The Cherry Arts",
+   "title": "Fingerlakes Follies",
+   "date": "2026-12-05"
   }
  ]
 }
